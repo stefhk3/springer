@@ -1,0 +1,765 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{psfrag}
+\usepackage{url}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+\newcommand{\Bsep}{\: \mid \: }
+\newcommand{\Rule}[2]{\displaystyle{\frac{#1}{#2}}}
+\newcommand{\SF}[1]{\mathsf{#1}}
+\newcommand{\Act}{\mathsf{Act}}
+\newcommand{\Vis}{\mathsf{Vis}}
+\newcommand{\ActK}{\mathsf{ActK}}
+\newcommand{\Proc}{\mathsf{Proc}}
+\newcommand{\Var}{\mathsf{Var}}
+\newcommand{\Procc}{\mathsf{ProcC}}
+\newcommand{\Pred}{\mathsf{Pred}}
+\newcommand{\Std}{\mathsf{Std}}
+\newcommand{\rms}{\mathrm{S}}
+\newcommand{\rmrec}{\mathrm{rec}}
+\newcommand{\rmreck}{\mathrm{reck}}
+\newcommand{\rmreckR}{\mathrm{reckR}}
+\newcommand{\rma}{\mathrm{A}}
+\newcommand{\rmp}{\mathrm{P}}
+\newcommand{\rmf}{\mathrm{F}}
+\newcommand{\rmr}{\mathrm{R}}
+\newcommand{\rmfr}{\mathrm{FR}}
+\newcommand{\equivS}{\equiv_{\mathrm{S}}}
+\newcommand{\SigSA}{\Sigma_{\mathrm{SA}}}
+\newcommand{\ltran}[1]{\stackrel{#1}{\longrightarrow}}
+\newcommand{\tran}[1]{\stackrel{#1}{\rightarrow}}
+\newcommand{\Tran}[1]{\stackrel{#1}{\Rightarrow}}
+\newcommand{\nottran}[1]{\stackrel{#1}{\not\rightarrow}}
+\newcommand{\Rtran}[1]{\stackrel{#1}{\rightsquigarrow}}
+\newcommand{\notRtran}[1]{\stackrel{#1}{\not\rightsquigarrow}}
+\newcommand{\trans}[1]{\stackrel{#1}{\rightarrow}_{\mathrm{S}}}
+\newcommand{\Par}{\mid}
+\newcommand{\restrict}[1]{\!\setminus\!#1}
+\newcommand{\paral}{\; \vert \;}
+
+\newcommand{\mA}{\mathcal{A}}
+\newcommand{\mSA}{\mathcal{SA}}
+\newcommand{\mWA}{\mathcal{WA}}
+\newcommand{\mAK}{\mathcal{AK}}
+\newcommand{\aAK}{\mathcal{(A)K}}
+\newcommand{\umAK}{\underline{\mathcal{A}}\mathcal{K}}
+\newcommand{\un}[1]{\underline {#1}}
+\newcommand{\PI}{\mathcal{PI}}
+\newcommand{\rom}[1]{\mbox{\rm{#1}}}
+
+\newcommand{\Nil}{\mathbf{0}}
+\newcommand{\New}[1]{\nu#1\: }
+\newcommand{\Str}{\equiv}
+\newcommand{\stdpred}{\mathsf{std}}
+\newcommand{\std}[1]{\mathsf{std}(#1)}
+%
+\newcommand{\Bch}[2]{\mathsf{before}_{#1}(#2)}
+
+\newcommand{\keys}[1]{\mathsf{keys}(#1)}
+\newcommand{\kkey}[1]{\mathsf{k}(#1)}
+\newcommand{\key}[1]{[#1]}
+\newcommand{\Keys}{\mathcal{K}}
+\newcommand{\Subscripts}{\mathcal{S}}
+\newcommand{\freshpred}[1]{\mathsf{fsh}[#1]}
+\newcommand{\fresh}[2]{\mathsf{fsh}[#1](#2)}
+\newcommand{\freshsubscript}[2]{\mathsf{fshsubscript}[#1](#2)}
+\newcommand{\subscript}[1]{\mathsf{s}(#1)}
+
+\newcommand{\alphaconversionkey}[3]{\mathsf{\alpha keys}(#1,#2,#3)}
+\newcommand{\alphaconversionkeyk}[3]{\mathsf{\alpha k}(#1,#2,#3)}
+\newcommand{\alphaconversionsub}[3]{\mathsf{\alpha subscripts}(#1,#2,#3)}
+\newcommand{\alphaconversionsubs}[3]{\mathsf{\alpha s}(#1,#2,#3)}
+\newcommand{\alphaconversionsubsr}[3]{\mathsf{\alpha sr}(#1,#2,#3)}
+\newcommand{\alphaconversionsubsc}[3]{\mathsf{\alpha sc}(#1,#2,#3)}
+
+\newcommand{\ta}[1]{\mathsf{ta}(#1)}
+\newcommand{\action}[1]{\mathsf{act}(#1)}
+
+\newcommand{\intr}{\mbox{\ $\hat{}$\ }}
+%\newcommand{\intr}{\mbox{\; $\widehat{}$\;}}
+\newcommand{\sterm}{\mathsf{trm}}
+\newcommand{\Sterm}[1]{\sterm(#1)}
+\newcommand{\und}[1]{\underline{#1}}
+\newcommand{\sqc}{\mathop{\cdot}}
+\newcommand{\card}[1]{|#1|}
+\newcommand{\bydef}{\stackrel{\emph{def}}{=}}
+%
+\newcommand{\Angle}[1]{\langle #1 \rangle}
+\newcommand{\Tri}{\triangleright}
+\newcommand{\Hole}{\bullet}
+\newcommand{\rec}[1]{\mathrm{rec}\, #1}
+\newcommand{\Rec}[1]{\rec #1 .}
+\newcommand{\Rch}{\mathsf{Rch}}
+\newcommand{\prune}{\pi}
+\newcommand{\Prune}[1]{\prune(#1)}
+\newcommand{\Root}[1]{\mathsf{rt}(#1)}
+\newcommand{\hole}{\mbox{$[\ ]$}}
+
+\newcommand{\Bis}{\sim}
+\newcommand{\Biss}{\Bis_{\mathsf{S}}}
+\newcommand{\Bisf}{\Bis_{\mathsf{F}}}
+\newcommand{\Bisfr}{\Bis_{\mathsf{FR}}}
+%\newcommand{\Bisu}{\Bis_{\Un}}
+\newcommand{\Sim}{\mathcal{S}}
+\newcommand{\Rem}{\backslash}
+\newcommand{\sqeqt}{\sim}
+% rules:
+% static rule
+\newcommand{\one}{\mbox{(I)}}
+\newcommand{\onef}{\mbox{(1)}}
+\newcommand{\oner}{\mbox{(1R)}}
+% choice rule
+\newcommand{\two}{\mbox{(II)}}
+\newcommand{\twof}{\mbox{(2)}}
+\newcommand{\twor}{\mbox{(2R)}}
+% choice axiom
+\newcommand{\thr}{\mbox{(III)}}
+\newcommand{\thrf}{\mbox{(3)}}
+\newcommand{\thrr}{\mbox{(3R)}}
+\newcommand{\thrpf}{\mbox{(3\,$'$\!)}}
+\newcommand{\thrpr}{\mbox{(3\,$'$\!R)}}
+%
+%
+\newcommand{\Draft}[1]{}
+\newcommand{\Comment}[1]{}
+\newcommand{\Rev}[1]{{#1}^{-1}}
+\newcommand{\Stefan}[1]{{\bf S(} #1 {\bf )S}}
+\newcommand{\rulename}[1]{\textsf{#1}}
+
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\mN}{\mathcal{N}}
+\newcommand{\mM}{\mathcal{M}}
+\newcommand{\mP}{\mathcal{P}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\Q}{\mathbb{Q}^+}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\MolOxy}{\mathit{MolOxy}}
+\newcommand{\MolHy}{\mathit{MolHy}}
+\newcommand{\Uppaal}{{\scshape Uppaal}\,}
+
+\begin{document}
+%
+\title{Reversibility in chemical reactions\thanks{The author acknowledges partial support of COST Action IC1405 on Reversible Computation - extending horizons of computing.}}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Stefan Kuhn\orcidID{0000-0002-5990-4157}, Irek Ulidowski, Bogdan Aman, Gabriel Ciobanu}
+%
+\authorrunning{S. Kuhn et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{School of Computer Science and Informatics, De Montfort University, Leicester, UK\\
+Department of Informatics, University of Leicester\\
+Romanian Academy, Institute of Computer Science, Ia\c si\\
+A.I.Cuza University, Faculty of Computer Science, Ia\c si, Romania\\
+\email{stefan.kuhn@dmu.ac.uk}}
+%
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+We give an overview of some calculi which are able to model out-of-causal-order reversibility, as they appear for example in chemical reactions. We use the autoprotolysis of water as an example. We model this in various calculi to demonstrate their use.
+
+\keywords{Process calculi \and Reversibility \and Base Excision Repair \and Calculus of Covalent Bonding.}
+\end{abstract}
+%
+%
+%
+\section{Introduction}
+
+General introduction, what we wanted to do and did.
+
+\section{The autoprotolysis of water}
+
+Move general things from CCB section.
+
+\section{CCB}
+
+In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818} informally, concentrating on the new general 
+prefixing operator $(s;b).P$ which produces pairs of \emph{concerted} actions,
+while presenting an intuitive model of the autoprotolysis of water. We also use this to introduce some chemical concepts.
+
+\subsection{Modelling the autoprotolysis of water in CCB}
+\label{sec:simplemodel}
+
+We consider a reaction that transfers a hydrogen atom between two water molecules. Since the
+reaction takes place in water it is also known as \emph{autoprotolysis of water}. The reaction is shown 
+in Figure~\ref{fig:autoprotolysis}. Here, $O$ indicates an oxygen atom and $H$ a hydrogen atom. The lines indicate bonds. Charges on atoms are shown by $\oplus$ and $\ominus$. The meaning of the curved arrows and the dots will be explained in the next paragraph. The reaction is reversible and it takes place at a relatively 
+low rate, making pure water slightly conductive.
+
+\begin{figure}
+\centering
+\includegraphics[height=1.5cm]{autoprotolysis_corr3}
+\caption{Autoprotolysis of water.}
+\label{fig:autoprotolysis}
+\end{figure}
+
+In order to model this reaction we need to understand what it is that makes it happen.
+The main factor is that the oxygen in the water molecule is \emph{nucleophilic}, meaning it has the tendency to bond to another atomic nucleus, which would serve as an \emph{electrophile}. This is because oxygen has a high 
+electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pair} of two electrons each, which can form new bonds (lone pairs are shown in Figure~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
+to other atomic nuclei by forming bonds from its lone pairs. Since oxygen attracts electrons, the hydrogen atoms in water
+have a positive partial charge and oxygen a negative partial charge. The reaction
+starts with the oxygen (in one water molecule) being attracted by a hydrogen in another 
+water molecule due to their opposite
+charges (this attraction is called a \emph{hydrogen bond}). Due to the nucleophilicity of 
+the oxygen, a bond can form to the hydrogen. This bond is formed out of 
+the electrons of one of the lone pairs of the oxygen. The curved arrows in Figure~\ref{fig:autoprotolysis} indicate the movements of the electrons. Since a hydrogen atom cannot have more 
+than one bond 
+the creation of a new bond is compensated by breaking the existing hydrogen-oxygen bond (again indicated by a curved arrow). When this happens, both electrons, which form the hydrogen-oxygen bond, are left with oxygen. Since a hydrogen consists of one electron and one proton, it is only the proton that is transferred, so the process can be called a proton transfer as well as a hydrogen transfer. The forming of the new bond and the breaking of the old bond are \emph{concerted}, namely they happen together without a stable 
+intermediate configuration. As a result we have reached the state where one oxygen atom
+has three bonds to hydrogen atoms and is positively charged, represented on the right side of Figure~\ref{fig:autoprotolysis}. This molecule is called hydronium and can be written as $\mathrm{H_3O^+}$. And the other oxygen atom bonds to only one hydrogen and is negatively charged, having an 
+electron in surplus. This molecule is a hydroxide and can be written as $\mathrm{OH^-}$. 
+
+We notice the reaction is reversible: the oxygen, which has lost a hydrogen, can 
+pull back one of the hydrogens from the other molecule, the  $\mathrm{H_3O^+}$ molecule. This is the case since the negatively 
+charged oxygen is a strong nucleophile and the hydrogens in the $\mathrm{H_3O^+}$ molecule are 
+all positively charged. Therefore, any of the hydrogens 
+%(not just the one which moved in the first instance) 
+can be removed, making both oxygens formally uncharged, and restoring the two water 
+molecules. In Figure~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are correspondent electron movements when going from right to left. These are not given in line with usual conventions, but can be inferred.
+
+We shall model the hydrogen and oxygen atoms as processes $H$ and $O$ as follows, where 
+$h,o$ are actions representing the bonding capabilities of the atoms and $n,p$ 
+representing negative and positive charges, respectively. $H'$ and $O'$ are process constants.
+$$\begin{array}{lll}
+H & \bydef & (h;p).H'\\
+O & \bydef & (o,o,n).O'
+\end{array}$$
+We use a general prefixing construct $(s;b).P$ where $s$ is a sequence of actions or executed 
+actions, and $b$ is a \emph{weak} action. The prefixing operator must not used (as in the definition of $O$). In such a case at most one of the actions in the sequence can be a weak action. Informally, actions in $s$ can take place in any order 
+and $b$ can happen if
+all actions in $s$ have already taken place. Once $b$ takes place, it must be accompanied by
+undoing immediately one of the actions in $s$. The weak action in the sequence, as we shall see later, is important for rewriting operations.  
+
+We use a synchronisation function $\gamma$ which tells us which actions can combine to 
+produce bonds between atoms. We define $\gamma$ in the style of ACP (\cite{ACPBook}, \cite{BaetenBook}), 
+where actions $ho, np, nh, no$ represent the created bonds and the communication function is a partial function $\gamma: \mathcal A \times \mathcal A \rightarrow \mathcal A$. :
+
+$$\begin{array}{llllll}
+\gamma(h,o) & = & ho \qquad &
+\gamma(n,p) & = & np\\
+\gamma(n,h) & = & nh &
+\end{array}$$
+
+Each water molecule is a structure consisting of two hydrogen atoms and one oxygen atom 
+which are bonded appropriately. We shall use subscripts to name the individual copies of 
+atoms and actions; for example $H_1$ is a specific copy of hydrogen defined by $(h_1;p).H'_1$, 
+similarly for $O_1$ defined as $(o_1,o_2,n).O_1'$. The atoms are composed with 
+the parallel composition operator ``$\mid$'' using the communication keys
+(which are natural numbers) to combine actions into bonds. So a water molecule is modelled
+by the following process, where the key $1$ shows that $h_1$ of $H_1$ has bonded with
+$o_1$ of $O_1$ (correspondingly for key $2$). The restriction $\setminus\{h_1,h_2,o_1,o_2\} $ ensures that these actions cannot happen on their own, but only together with their partners, forming a bond.
+$$ ((h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1)
+  \setminus\{h_1,h_2,o_1,o_2\} $$
+The system of two water molecules in Figure~\ref{fig:autoprotolysis} is represented 
+by the parallel composition of two water processes, where the restriction $\setminus\{n,p\}$ represses actions $n,p$ from taking place separately
+by forcing them to combine into bonds (according to $\gamma$).
+%
+\begin{flalign*}
+&(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1)\setminus\{h_1,h_2,o_1,o_2\} \paral &&\\
+&( (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) \setminus\{h_3,h_4,o_3,o_4\} ) \setminus\{n,p\}&&
+\end{flalign*}
+%
+Following a general principle in process calculi in the style of CCB we can move the restritions to the outside. The rule used can be written as $(P \paral Q) \setminus L = P \setminus L \paral Q$ if the actions of $L$ are not used in $Q$. Applying this gives us a water molecule modelled as follows:
+%
+\begin{flalign*}
+&( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1) \paral (h_3[3];p).H'_3 \paral &&\\
+&(h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) ) \setminus\{h_1,h_2,o_1,o_2\}\setminus\{h_3,h_4,o_3,o_4\}\setminus\{n,p\}&&
+\end{flalign*}
+%
+Note the $\underline{h_i}$, $\underline{o_j}$, and $\underline{n}$ are not restricted:  this allows us to break bonds via concerted actions involving these actions. We will see an example of this in the next step.
+
+Notice that we leave out the restrictions to improve readability in the following description.
+
+Now actions $n$ in $O_1$ and $p$ in $H_3$ can combine (we use the new key $5$), representing a transfer of a proton from one atom 
+of oxygen ($O_2$ in our model) to another one ($O_1$ in our model). Since a hydrogen atom consists of a proton and an electron, and the electron stays in such a transfer, it can either be called a proton transfer or the transfer of a (positively charged) hydrogen atoms. We show the transfer from $O_2$ to $O_1$, where $\xrightarrow{}$
+is a transition relation denoting a reaction taking place, here a creation of a bond (changes highlighted in \textbf{bold}):
+\begin{flalign*}
+&(h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1) \paral &&\\
+&(h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2)&&\\
+&\xrightarrow{}&&\\
+&(h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n\boldsymbol{[5]}).O'_1 \paral (h_3[3];p\boldsymbol{[5]}).H'_3 &&\\
+&\paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2&&
+\end{flalign*}
+The creation of the bond with key $5$ forces us to break the bond with key $3$ (between $h_3$ and
+$o_3$) due to the property of the operator $(s;b).P$ discussed earlier:
+\begin{flalign*}
+&(h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1) \paral &&\\
+&(h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2)&&\\
+&\xrightarrow{}&&\\
+&(h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1 \paral (\boldsymbol{h_3};p[5]).H'_3 &&\\
+&\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3},o_4[4],n).O'_2&&
+\end{flalign*}
+These two reactions happen almost simultaneously so we represent them as a pair of 
+\emph{concerted actions}. In line with the convention in process calculi, where the action performed is written above the transition arrow, we write a pair of reactions above the transition arrow, to express the concerted actions. We enclose them in $\{\}$ to indicate concerted actions.
+\begin{flalign*}
+& (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1 \paral 
+(h_3[3];p).H'_3 &&\\
+&\paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) &&\\
+&\xrightarrow{\{ np[5], \underline{h_{3}o_{3}}[3]\}}&&\\
+&( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n\boldsymbol{[5]}).O'_1 \paral 
+(\boldsymbol{h_3};p\boldsymbol{[5]}).H'_3 &&\\
+&\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3},o_4[4],n).O'_2&&
+\end{flalign*}
+We have now arrived at the state on the right hand side in Figure~\ref{fig:autoprotolysis}.
+There are weak bonds between $n$ and $p$ (denoted by key $5$) and \emph{strong} bonds between $h_i$ and $o_j$ for
+all appropriate $i,j$. Since $H_3$ is weakly bonded to $O_1$ and its strong capability 
+$h_3$ has become available, the bond $5$ gets promoted to the stronger bond, releasing 
+the capability $p$ of $H_3$. We represent this change as a rewrite denoted by $\Rightarrow$
+(which is not as a transition) and we obtain the following process:
+\begin{flalign*}
+&( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n\boldsymbol{[5]}).O'_1 \paral 
+(\boldsymbol{h_3};p\boldsymbol{[5]}).H'_3 &&\\
+&\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3},o_4[4],n).O'_2 &&\\
+&\Rightarrow( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1) \paral (h_3\boldsymbol{[5]};\boldsymbol{p}).H'_3) &&\\
+&\paral (h_4[4];p).H'_4  \paral (o_3,o_4[4],n).O'_2&&
+\end{flalign*}
+Oxygen $O_1$ is still blocked, which represents it being fully bonded (and positively charged).
+Oxygen  $O_2$ has a free $n$ capability and can remove any of the hydrogens from $O_1$. 
+As a result the process can reverse to its original state.
+
+We show this by again transferring $H_3$. We then execute promotion again:
+%
+\begin{flalign*}
+&(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1) \paral (h_3[5];p).H'_3) &&\\
+&\paral (h_4[4];p).H'_4  \paral (o_3,o_4[4],n).O'_2&&\\
+&\xrightarrow{\{ np[3], \underline{nh_{3}}[5]\}}&&\\
+&(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],\boldsymbol{n}).O'_1) \paral (\boldsymbol{h_3};\boldsymbol{p[3]}).H'_3) &&\\
+&\paral (h_4[4];p).H'_4  \paral (o_3,o_4[4],\boldsymbol{n[3]}).O'_2\\
+&\Rightarrow\\
+&(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],\boldsymbol{n}).O'_1) \paral (\boldsymbol{h_3[3]};\boldsymbol{p}).H'_3) &&\\
+&\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3[3]},o_4[4],\boldsymbol{n}).O'_2
+\end{flalign*}
+%
+This corresponds to the original process, which we started with, after moving the restrictions to the outside. Remember that we left out the restrictions only to improve readability. If we re-add them we get:
+%
+\begin{flalign*}
+&( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1 \paral (h_3[3];p).H'_3 &&\\
+&\paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) \setminus\{h_1,h_2,o_1,o_2\}\setminus\{h_3,h_4,o_3,o_4\}\setminus\{n,p\}&&
+\end{flalign*}
+%
+We can therefore apply the movement of restrictions the reverse way we applied it originally and get:
+%
+\begin{flalign*}
+&(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1)\setminus\{h_1,h_2,o_1,o_2\} \paral &&\\
+&( (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) \setminus\{h_3,h_4,o_3,o_4\} ) \setminus\{n,p\}&&
+\end{flalign*}
+%
+\subsection{Chemically equivalent processes}
+%
+So far we have chosen a particular hydrogen atom to transfer. It would be equally possible to use any other hydrogen. Since we have marked our actions and processes by subscript numbers, we are able to distinguish the various situations here. Furthermore, the use of keys is arbitrary and many more syntactically different processes can be generated by using different keys. If we disregard different keys linking the same actions, but annotate actions and processes by subscripts, we can distinguish the processes shown in Figure~\ref{fig:allwater}. In Figure~\ref{fig:allwaterprocesses} the processes are shown in a graph with the possible transitions. The numbers in Figure~\ref{fig:allwaterprocesses} correspond to those in Figure~\ref{fig:allwater}.
+%
+\begin{figure}[h!] 
+$$\begin{array}{ll}
+1 & (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1 \paral\\
+& (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) \\[5pt]
+2 & (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1 \paral \\
+& (h_3[5];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3,o_4[4],n).O'_2) \\[5pt]
+3 & (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1 \paral \\
+& (h_3[3];p).H'_3 \paral (h_4[5];p).H'_4  \paral (o_3[3],o_4,n).O'_2) \\[5pt]
+4 & (h_1[1];p).H'_1 \paral (h_2[5];p).H'_2 \paral (o_1[1],o_2,n).O'_1 \paral\\
+& (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n[5]).O'_2) \\[5pt] 
+5 & (h_1[5];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1,o_2[2],n).O'_1 \paral \\ & (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n[5]).O'_2) \\[5pt]
+6 & (h_1[6];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[5],o_2[2],n).O'_1 \paral \\ 
+& (h_3[3];p).H'_3 \paral (h_4[5];p).H'_4  \paral (o_3[3],o_4[6],n).O'_2)\\[5pt]
+7 & (h_1[1];p).H'_1 \paral (h_2[6];p).H'_2 \paral (o_1[1],o_2[5],n).O'_1 \paral\\
+& (h_3[3];p).H'_3 \paral (h_4[5];p).H'_4  \paral (o_3[3],o_4[6],n).O'_2)\\[5pt]
+8 & (h_1[6];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[5],o_2[2],n).O'_1 \paral \\
+& (h_3[5];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[6],o_4[4],n).O'_2)\\[5pt]
+9 & (h_1[1];p).H'_1 \paral (h_2[6];p).H'_2 \paral (o_1[1],o_2[5],n).O'_1 \paral \\
+& (h_3[5];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[6],o_4[4],n).O'_2)\\[5pt]
+10 & (h_1[6];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[5],o_2[2],n[7]).O'_1 \paral \\
+& (h_3[7];p).H'_3 \paral (h_4[5];p).H'_4  \paral (o_3,o_4[6],n).O'_2)\\[5pt]
+11 & (h_1[6];p).H'_1 \paral (h_2[7];p).H'_2 \paral (o_1[5],o_2,n).O'_1 \paral \\ & (h_3[3];p).H'_3 \paral (h_4[5];p).H'_4  \paral (o_3[3],o_4[6],n[7]).O'_2) \\[5pt]
+12 & (h_1[6];p).H'_1 \paral (h_2[7];p).H'_2 \paral (o_1[5],o_2,n).O'_1 \paral \\ & (h_3[5];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[6],o_4[4],n[7]).O'_2) \\[5pt]
+13 & (h_1[6];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[5],o_2[2],n[7]).O'_1 \paral \\
+& (h_3[5];p).H'_3 \paral (h_4[7];p).H'_4  \paral (o_3[6],o_4,n).O'_2)\\[5pt]
+14 & (h_1[6];p).H'_1 \paral (h_2[8];p).H'_2 \paral (o_1[5],o_2[7],n).O'_1 \paral \\
+& (h_3[5];p).H'_3 \paral (h_4[7];p).H'_4  \paral (o_3[6],o_4[8],n).O'_2)
+\end{array}$$
+\caption[The processes from Figure~\ref{fig:allwater}.]{The processes from Figure~\ref{fig:allwater}. Restrictions are left out for clarity and possible differences due to keys used are ignored.} \label{fig:allwaterprocesses}
+\end{figure}
+\clearpage
+\begin{sidewaysfigure}[h!]
+\psfrag{1}{{\Large 1}}
+\psfrag{2}{{\Large 2}}
+\psfrag{3}{{\Large 3}}
+\psfrag{4}{{\Large 4}}
+\psfrag{5}{{\Large 5}}
+\psfrag{6}{{\Large 6}}
+\psfrag{7}{{\Large 7}}
+\psfrag{8}{{\Large 8}}
+\psfrag{9}{{\Large 9}}
+\psfrag{10}{{\Large 10}}
+\psfrag{11}{{\Large 11}}
+\psfrag{12}{{\Large 12}}
+\psfrag{13}{{\Large 13}}
+\psfrag{14}{{\Large 14}}
+\psfrag{o1}{${\mathrm{o_1}}$}
+\psfrag{o2}{${\mathrm{o_2}}$}
+\psfrag{h1}{${\mathrm{h_1}}$}
+\psfrag{h2}{${\mathrm{h_2}}$}
+\psfrag{h3}{${\mathrm{h_3}}$}
+\psfrag{h4}{${\mathrm{h_4}}$}
+  \centering
+    \includegraphics[width=1.0\textwidth]{allwater2}
+\caption[All paths for the autoprotolysis of water.]{All paths for the autoprotolysis of water. The numbers correspond to the processes shown in Figure~\ref{fig:allwaterprocesses}. Some transitions require changes of keys.}
+  \label{fig:allwater}
+\end{sidewaysfigure}
+\clearpage
+%
+From a chemical point of view there are only two possible configurations, namely a system of two water molecules (processes 1, 6, 7, 8, 9, and 14 in Figure~\ref{fig:allwater}) and a system of one $H_3O^+$ and one $HO^-$ molecule (processes 2, 3, 4, 5, 10, 11, 12, and 13 in Figure~\ref{fig:allwater}). Processes 6, 7, 8, and 9 have two hydrogens swapped between the oxygens, and process 14 has all hydrogens swapped between the oxygens. 
+
+In order to model this equality in our calculus, we need two operations, which we discuss informally here. Firstly, we must be able to change a key in the process to some other fresh key. The new key must not be used in the process so far. For example, in Figure~\ref{fig:allwaterprocesses} process 5 is: 
+\begin{flalign*}
+&(h_1[5];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1,o_2[2],n).O'_1 \paral &&\\  &(h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n[5]).O'_2)&&
+\end{flalign*}
+From this process we can transition to process 6 in Figure~\ref{fig:allwaterprocesses}. This would happen by the following transition and promotion:
+\begin{flalign*}
+&(h_1[5];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1,o_2[2],n).O'_1 \paral &&\\  &(h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n[5]).O'_2)&&\\
+&\xrightarrow{\{np[6],\underline{h_4n}[4]\}}\Tran{}&&\\
+&(h_1[5];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[6],o_2[2],n).O'_1 \paral &&\\  &(h_3[3];p).H'_3 \paral (h_4[6];p).H'_4  \paral (o_3[3],o_4[5],n).O'_2)&&
+\end{flalign*}
+On the other hand, Figure~\ref{fig:allwaterprocesses} tells us that process 6 is actually as follows (this was derived by a transition from process 3, which leads to process 6 as well):
+\begin{flalign*}
+& (h_1[6];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[5],o_2[2],n).O'_1 \paral &&\\ 
+& (h_3[3];p).H'_3 \paral (h_4[5];p).H'_4  \paral (o_3[3],o_4[6],n).O'_2)&&
+\end{flalign*}
+If we swap keys 5 and 6, these processes are syntactically identical (swapping is a short name for changing both keys to the other key via a third variable to avoid conflicts). Clearly this is possible, since as long as keys link the same actions, their naming is arbitrary. Figure~\ref{fig:allwater} implies several such changes in order for the transitions to be valid.
+
+Secondly, we can also disregard subscripts (which were introduced to distinguish copies of atoms of the same type). Informally we can say that if we remove the subscripts on the actions and process names and change keys accordingly, then only two processes can be distinguished. In Chapter~\ref{sec:ccbwithsubscripts} we will call this chemical process equivalence. To demonstrate this we use processes 1 and 14. Process 1 is
+\begin{flalign*}&(h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1 \paral &&\\ &(h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2&&\end{flalign*}
+and becomes (with keys and order of processes unchanged):
+\begin{flalign*}
+&(h[1];p).H' \paral (h[2];p).H' \paral (o[1],o[2],n).O' \paral &&\\
+&(h[3];p).H' \paral (h[4];p).H'  \paral (o[3],o[4],n).O'&& (1)\end{flalign*}
+Process 14 is 
+\begin{flalign*}
+&(h_1[6];p).H'_1 \paral (h_2[8];p).H'_2 \paral (o_1[5],o_2[7],n).O'_1 \paral &&\\
+&(h_3[5];p).H'_3 \paral (h_4[7];p).H'_4  \paral (o_3[6],o_4[8],n).O'_2)\end{flalign*}
+and becomes (with keys 6, 8, 5, 7 being changed to 1, 2, 3, 4 respectively and the two processes representing oxygen atoms being swapped)
+\begin{flalign*}
+&(h[1];p).H' \paral (h[2];p).H' \paral (o[1],o[2],n).O') \paral &&\\ 
+&(h[3];p).H' \paral (h[4];p).H' \paral (o[3],o[4],n).O'&&(2)
+\end{flalign*}
+As we can see the resulting processes (1) and (2) are syntactically identical.
+
+We will elaborate on these further in Chapter~\ref{sec:ccbwithsubscripts}, for now we notice that the subscripts allow us to distinguish cases which would otherwise be written identically. On the other hand, the naming of keys has no semantic meaning. Overall there are two possible states in a system of two oxygen atoms and four hydrogen atoms if keys and subscripts are disregarded completly, 14 different states if subscripts are taken into account (these states are shown in Figure~\ref{fig:allwater}), and an infinite number of states if keys from $\mathbb{N}$ are considered different.
+
+\begin{example}\label{auto-bonding-water}
+{\rm 
+Note that in water the $n$ of $O_1$ can combine with the $p$ of one of its hydrogen atoms, say 
+$H_1$. Due to the property of the operator $(h_1[1];p).H'_1$, this must be followed immediately
+by breaking the bond 1 on $h_1$ with $O_1$, giving 
+$$( (h_1;p[5]).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1,o_2[2],n[5]).O'_1) ) 
+\; \setminus\{h_1,h_2,h_3,o_1,o_2\}.$$
+Now the system is converted to a system which is equivalent to the original formulation of water by promoting the bond 5 to a strong bond:
+$$( (h_1[5];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[5],o_2[2],n).O'_1) )                         
+\; \setminus\{h_1,h_2,h_3,o_1,o_2\}$$
+So our calculus allows a reaction which does not change the actual state of the system. We have replaced the original key $1$ with a new key $5$, but we will see in Chapter~\ref{sec:ccbwithsubscripts} that this change is not indicating an actual change in the system.
+}
+\end{example}
+
+\begin{remark}\label{types-of-bonds}
+{\rm
+It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``r\^{o}le''. This is done in our modelling by promoting the bond from the $n$ action to the $o$ action. For the hydrogen we have a similar situation: Once the proton transfer has happened, the new bond is the same as the old one, so we perform the promotion. We can have only one bond at a time on the hydrogen, therefore we need the ; operator to model this situation, whereas the oxygen can have two or three bonds, so we model all bonds as a multiset.
+}
+\end{remark}
+
+\subsection{Conclusion}
+
+We have seen in this chapter that we can model a simple covalent chemical reaction with our new calculus. The main feature of the new calculus is a new prefix operator $(s;b).P$. Whilst we have not yet given a formal definition we could already see the possibilities of the calculus and some challenges we may encounter when working with it. \cite{merevcomp2018}
+
+\section{Bonding Calculus}
+
+In this section we present shortly the bonding calculus \cite{NaCo18}, and 
+illustrate its expressiveness by modelling the autoprotolysis of water. 
+Let us consider the set $\mathbb{N}$ of natural numbers, the set 
+$\mN=\{x,x^+,x^-,\dots\}$ of bond names, the set $\mM=\{a,b,\dots\}$ of 
+molecules and the set $\mP=\{P,Q,\ldots\}$ of processes. A multiset over 
+$\mN$ is defined as a partial function $N:\mN \rightarrow \N$. In bonding 
+calculus each molecule has an unique name, and the bond $x$ between two 
+molecules $a$ and $b$ is denoted by $\{a-^x b\}$.
+
+The bonding calculus syntax is presented in Table \ref{table:syntax}.
+
+\begin{table}[h]
+\centering
+\vspace{-3ex}\begin{tabular}{c@{\hspace{2ex}}lll@{\hspace{2ex}}l}
+Bonds & $L$ & $::=$&$ \emptyset$ & {\sf (empty)}\\
+
+&& $\shortmid$ &$ \{a-^x b\}$ & {\sf (bond)}\\
+
+&& $\shortmid$ & $ L \uplus L $ & {\sf (union)}\\
+
+Actions & $\alpha$&$::=$&$\overline{x}(b) $ & {\sf (bond)}\\
+
+&& $\shortmid$ & $ \underline{x}(b) $ & {\sf (unbond)}\\
+
+Processes &$P$&$::= $&$\textbf{0} $ & {\sf (empty)}\\ 
+
+&& $\shortmid$ & $ \alpha.P $ & {\sf (action prefix)}\\
+
+&& $\shortmid$ & $ P+Q$ & {\sf (choice)}\\
+
+&& $\shortmid$ & $ P \mid Q$ & {\sf (parallel)}\\
+
+&& $\shortmid$ & $ \textbf{if}\ a \Bumpeq^L b \ \textbf{then}\ P\ \textbf{else}\ Q $ & {\sf (testing)}\\
+
+&& $\shortmid$ & $ A(b_1,\ldots,b_n) $ & {\sf (identifier)}\\
+
+Definition & $A(a_1,\ldots,a_n)$&$::= $& $P$ & {\sf (recursion)}\\
+
+{ } \\ 
+
+System & $S$ & $::=$ & $ P \; ||\; L$ . \\
+\end{tabular}
+\caption{Syntax of the Bonding Calculus}\label{table:syntax}
+\end{table}
+\vspace{-3ex}
+
+A bond prefix $\overline{x}(b)$ is used to indicate the availability of 
+molecule with name~$b$ to create a new bond with name $x$, while an unbond 
+prefix $\underline{x}(b)$ indicates the availability of $b$ to destroy an 
+existing bond $x$. The process of creating or breaking a bond leads to an 
+update of the global bond memory $L$. Since several similar bonds can exist 
+between the same molecules, $L$ is actually a multiset of bonds.
+
+The process $\textbf{0}$ denotes inactivity. The availability to perform an 
+action $\alpha$, and then to continue the execution as process $P$ is denoted 
+by the process $\alpha.P$. The process $P+Q$ offers a choice 
+between the processes $P$ and $Q$, while the process $P \mid Q$ allows the 
+execution of processes $P$ and $Q$ in parallel, with possible interactions 
+between them by using appropriate actions.
+
+As we work with bonds, we use the function $\Bumpeq: \mathcal{M}\times 
+\N^{\mN} \times \mathcal{M} \rightarrow Bool$ to check if between two 
+molecules exist certain bonds. For example, $a\Bumpeq^N b$ checks for the 
+existence of all bonds in $N$ between the molecules $a$ and $b$; it 
+returns true when such bonds exist, and false otherwise. When we consider 
+$N=\emptyset$, then $a\Bumpeq^{\emptyset}b$ checks if at least a bond 
+exists between the two molecules. When $b=\varepsilon$, then $a\Bumpeq^N 
+{\varepsilon}$ checks if $a$ has all of bonds from $N$, regardless of 
+the molecules he has them with. The Boolean result $a \Bumpeq^N b$ used 
+in the testing process is defined formally as:
+\smallskip
+
+$a \Bumpeq^N b=\begin{cases}
+\displaystyle(\biguplus_{x \in N} \{a-^x b\}) \in L & N \neq \emptyset~and ~a \neq b \neq \varepsilon\\
+\displaystyle(\biguplus_{x \in \mN} \{a-^x b\}) \cap L \neq \emptyset & N = \emptyset~and ~a \neq b \neq \varepsilon\\
+\displaystyle\bigwedge_{x \in N} (|L|_{a,x}=|N|_x) & N \neq \emptyset~and ~a \neq \varepsilon ~and~b = \varepsilon\\
+undefined & otherwise,
+\end{cases}$
+
+\noindent where $|L|_{a,x}$ is the number of bonds containing the molecule 
+$a$ and bond name~$x$ that appear in the multiset $L$, while $|N|_x$ is 
+the number of occurrences of~$x$ in~$N$.
+
+Depending on the truth value of $a \Bumpeq^N\!\! b $, the process 
+$\textbf{if}\;a \Bumpeq^N\!\! b$ $\;\textbf{then}\;P\;\textbf{else}\;Q$ 
+executes either $P$ or $Q$.  An identifier $ A(b_1,\ldots,b_n) $ is used 
+to provide recursion by creating new instances of processes defined as 
+$A(a_1,\ldots,a_n)=P$, where $a_i \neq a_j$ for all $i\neq j \in 
+\{1,\ldots,n\}$; the new process is defined as $ A(b_1,\ldots,b_n) 
+=P\{b_1/a_1,\ldots,b_n/a_n\}$, where $\{b_i/a_i\}$ denotes the replacement 
+of variable $a_i$ by value $b_i$. A system $S$ is given as a parallel 
+composition of a process $P$ and the multiset of bonds $L$.
+\smallskip
+
+The structural congruence relation $\equiv$ is the least congruence such 
+that $(\mP,+,{\bf 0})$ and $(\mP,\mid,{\bf 0})$ are commutative monoids 
+and the unfolding law $A(b_1,\ldots,b_n) \equiv 
+P\{b_1/a_1,\ldots,b_n/a_n\}$ holds whenever $A(a_1,\ldots,a_n)$ = $P$.
+
+The calculus presented in \cite{NaCo18} was intended to model only the 
+creation and breaking of the covalent bonds. In order to be able to model 
+both covalent and hydrogen bonds, we apply a minor update to the 
+operational semantic in \cite{NaCo18} because we need two instances of the 
+rules used to create and to break bonds. The only difference between the 
+two instances of the same rule is given by the names of the bonds 
+appearing in the interacting processes, and by the fact that a bond cannot 
+be created using the names $x^+$ and $x^-$ if other bonds exist between 
+the same molecules; more details about this restriction will be given in 
+the example below.
+
+The operational semantics of the bonding calculus is given in Table~\ref{table:semantics}.
+
+The rules {\sf (CREATE1)} and {\sf (CREATE2)} describe the creation of a 
+new bond $\{a-^x b\}$, while the rules {\sf (REMOVE1)} and {\sf (REMOVE2)} 
+describe the breaking of a bond $\{a-^x b\}$; if there exist two bonds 
+$\{a-^x b\}$ in~$L$, then any of the these bonds is broken. The rule 
+{\sf (PAR}) is used to compose processes in parallel, while the rules 
+{\sf (TRUE}) and {\sf (FALSE}) choose one of the branches of the testing 
+process based on the result of the checking. The rule {\sf (IDE)} describes 
+the recursion, while {\sf (STRUCT)} rule indicates the fact that we reason 
+up to the structural congruence.
+
+\begin{table}[h]
+\begin{center}
+%\vspace{-5ex}
+\begin{tabular}{c}
+\vspace{1ex}
+{\sf (CREATE1)} $\dfrac{P=\overline{x}(b).P'+P'' \quad Q= \overline{x}(a).Q'+Q''}{(P\mid Q)\ || \ L \xrightarrow{} (P' \mid Q') \ ||\ L \uplus \{a-^x b\}}$\\
+\vspace{1ex}
+{\sf (CREATE2)} $\dfrac{P=\overline{x^+}(b).P'+P'' \quad Q= \overline{x^-}(a).Q'+Q''\quad a \Bumpeq^{\emptyset} b~is~false~w.r.t.~L}{(P\mid Q)\ || \ L \xrightarrow{} (P' \mid Q') \ ||\ L \uplus \{a-^x b\}}$\\
+\vspace{1ex}
+{\sf (REMOVE1)} $\dfrac{P=\underline{x}(b).P'+P'' \quad Q= \underline{x}(a).Q'+Q'' \quad a \Bumpeq^x b~is~true~w.r.t.~L }{(P\mid Q)\ || \ L \xrightarrow{} (P' \mid Q') \ || \ L \backslash \{a-^x b\}}$\\
+\vspace{1ex}
+{\sf (REMOVE2)} $\dfrac{P=\underline{x^+}(b).P'+P'' \quad Q= \underline{x^-}(a).Q'+Q'' \quad a \Bumpeq^N b~is~true~w.r.t.~L }{(P\mid Q)\ || \ L \xrightarrow{} (P' \mid Q') \ || \ L \backslash \{a-^x b\}}$\\
+\vspace{1ex}
+{\sf (PAR)} $ \dfrac{P\ || \ L\xrightarrow{} P'\ || \ L}{(P\mid Q)\ || \ L\xrightarrow{} (P' \mid Q) \ || \ L}$\\
+\vspace{1ex}
+{\sf (TRUE)} $\dfrac{a \Bumpeq^N b~is~true~w.r.t.~L}{(\textbf{if}\;a \Bumpeq^N b \;\textbf{then}\;P\;\textbf{else}\;
+Q)\ || \ L  \xrightarrow{} P\ || \ L}$\\
+\vspace{1ex}
+{\sf (FALSE)} $\dfrac{a \Bumpeq^N b~is~false~w.r.t.~L}{(\textbf{if}\;a \Bumpeq^N b \;\textbf{then}\;P\;\textbf{else}\;
+Q)\ || \ L  \xrightarrow{} Q\ || \ L}$\\
+
+\vspace{1ex}
+{\sf (IDE)} $\dfrac{P\{b_1/a_1,\ldots,b_n/a_n\} \xrightarrow{} P'}{A(b_1,\ldots,b_n) \xrightarrow{} P'}$ \ if \ $A(a_1,\ldots,a_n) =P$\\
+
+{\sf (STRUCT)} $\dfrac{S_1 \rightarrow S'_1 \quad S_1 \equiv S_2 \quad S_2 \rightarrow S'_2}{S'_1 \rightarrow S'_2}$
+
+\end{tabular}
+\end{center}
+  \vspace{-2ex}\caption{Operational Semantics of the Bonding Calculus.}
+  \label{table:semantics}
+\vspace{-3ex}
+\end{table}
+
+\begin{example}
+We illustrate the expressiveness of the bonding calculus by modelling the 
+autoprotolysis of water. We use two types of bond names, namely $c$ and $h$, 
+to stand for the covalent and hydrogen bonds, respectively. Using our  
+calculus, the system composed of two molecules of water is described by:
+
+\centerline{$\MolOxy_2(O_1) \mid \MolHy_1(H_1) \mid \MolHy_1(H_2) $}
+
+\centerline{$\mid \MolOxy_2(O_2) \mid \MolHy_1(H_3) \mid \MolHy_1(H_4) $}
+
+\centerline{$\mid\mid \{O_1 -^c H_1, O_1 -^c H_2, O_2 -^c H_3, O_2 -^c H_4\}$,}
+
+\noindent 
+where the molecules are those of hydrogen and oxygen that are described below:
+
+$\MolHy_0(H_i) = \overline{c}(H_i).\MolHy_1(H_i)$;
+
+$\MolHy_1(H_i) = \underline{c}(H_i).\MolHy_0(H_i) + \overline{h^+}(H_i).\MolHy_2(H_i)$;
+
+$\MolHy_2(H_i) = \underline{c}(H_i).\overline{c}(H_i).\underline{h^+}(H_i).\MolHy_{1}(H_i)$.
+
+$\MolOxy_0(O_i) = \overline{c}(O_i).\MolOxy_1(O_i)$;
+
+$\MolOxy_1(O_i) = \underline{c}(O_i).\MolOxy_0(O_i) +\overline{c}(O_i).\MolOxy_2(O_i)$;
+
+$\MolOxy_2(O_i) = \underline{c}(O_i).\MolOxy_1(O_i) +\overline{h^-}(O_i).\MolOxy_3(O_i)$.
+
+$\MolOxy_3(O_i) = \underline{h^-}(O_i).\MolOxy_2(O_i)$.
+
+\noindent 
+Each molecule of water is a structure consisting of one molecule of oxygen 
+and two molecules of hydrogen which are properly bonded. E.g., the process 
+$\MolOxy_2(O_1) \mid \MolHy_1(H_1) \mid \MolHy(H_2) $ together with the 
+bonds $\{O_1 -^c H_1, O_1 -^c H_2\}$ model one molecule of water. We use 
+unique names for the molecules given as $O_i$ (for oxygen) and $H_i$ (for 
+hydrogen), while the processes having the names $\MolHy_i$ and $\MolOxy_i$ 
+identify processes modelling hydrogen and oxygen molecules with~$i$ bonds, 
+respectively. E.g., the process $MolOxy_1(O_i)$ can either create or break 
+bonds, and this is why we use the operator $+$ to describe such a  
+(non-deterministic) choice.
+
+Now we present the steps of one of the possible reactions modelling the 
+autoprotolysis of water. The system of two molecules of water can be 
+rewritten as follows (where we extend the definitions for the processes 
+that will interact in the next step, and bold the actions to be executed):\\
+
+\centerline{$\underline{c}(O_1).\MolOxy_1(O_1) +{\bf \overline{h^-}(O_1)}.
+\MolOxy_3(O_1) \mid \MolHy_1(H_1) \mid \MolHy_1(H_2) $}
+
+\centerline{$\mid \MolOxy_2(O_2) \mid \MolHy_1(H_3) \mid \underline{c}(H_4).
+\MolHy_0(H_4) + {\bf \overline{h^+}(H_4)}.\MolHy_2(H_4)$}
+
+%\centerline{$\mid \underline{c}(H_4).\MolHy_0(H_4) + {\bf \overline{h^+}(H_4)}.\MolHy_2(H_4)$}
+
+\centerline{$\mid\mid \{O_1 -^c H_1, O_1 -^c H_2, O_2 -^c H_3, O_2 -^c H_4\}$.}
+
+\noindent 
+This leads to the following system, where we again bold the processes to be~executed:
+
+\centerline{$\MolOxy_3(O_1) \mid \MolHy_1(H_1) \mid \MolHy_1(H_2) $}
+
+\centerline{$\mid {\bf \underline{c}(O_2)}.\MolOxy_1(O_2) +\overline{h^-}(O_2).\MolOxy_3(O_1) \mid \MolHy_1(H_3)$}
+
+\centerline{$ \mid {\bf \underline{c}(H_4)}.\overline{c}(H_4).\underline{h^+}(H_4).\MolHy_{1}(H_4)$}
+
+\centerline{$\mid\mid \{O_1 -^c H_1, O_1 -^c H_2, O_1-^h H_4,O_2 -^c H_3, O_2 -^c H_4\}$.}
+
+\noindent 
+The creation of the hydrogen bond forces the break of the other bond in 
+which the hydrogen molecule $H_4$ is involved. This leads to the following
+system containing the $H_3O$ and $HO$ molecules:
+
+\centerline{$\MolOxy_3(O_1) \mid \MolHy_1(H_1) \mid \MolHy_1(H_2) $}
+
+\centerline{$\mid \underline{c}(O_2).\MolOxy_0(O_2) +{\bf \overline{c}(O_2)}.\MolOxy_2(O_2)$}
+
+\centerline{$ \mid \MolHy_1(H_3)$ $ \mid {\bf \overline{c}(H_4)}.\underline{h^+}(H_4).\MolHy_{1}(H_4)$}
+
+\centerline{$\mid\mid \{O_1 -^c H_1, O_1 -^c H_2, O_1-^h H_4,O_2 -^c H_3\}$.}
+
+\noindent 
+Since some bonds are weaker, the system is evolving to:
+
+\centerline{${\bf \underline{h^-}(O_1)}.\MolOxy_2(O_1) \mid \MolHy_1(H_1) \mid \MolHy_1(H_2) $}
+
+\centerline{$\mid \MolOxy_2(O_2)$ $ \mid \MolHy_1(H_3)$ $ \mid {\bf \underline{h^+}(H_4)}.\MolHy_{1}(H_4)$}
+
+\centerline{$\mid\mid \{O_1 -^c H_1, O_1 -^c H_2, O_1-^h H_4,O_2 -^c H_3, O_2 -^c H_4\}$,}
+
+\noindent 
+followed by the breaking of the hydrogen bond $O_1-^h H_4$:
+
+\centerline{$\MolOxy_2(O_1) \mid \MolHy_1(H_1) \mid \MolHy_1(H_2) $}
+
+\centerline{$\mid \MolOxy_2(O_2)$ $ \mid \MolHy_1(H_3)$ $ \mid \MolHy_{1}(H_4)$}
+
+\centerline{$\mid\mid \{O_1 -^c H_1, O_1 -^c H_2, O_2 -^c H_3, O_2 -^c H_4\}$}
+
+\noindent 
+The obtained system contains again two water molecules of water.
+\end{example}
+
+Therefore, the bonding calculus is suitable for modelling in a 
+natural and easy way the autoprotolysis of water.
+
+
+\section{Conclusion}
+
+Here a general conclusion
+
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\bibliography{springer}{}
+\bibliographystyle{splncs04}
+
+\end{document}
