@@ -157,7 +157,7 @@
 
 \begin{document}
 %
-\title{Reversibility in chemical reactions\thanks{The author acknowledges partial support of COST Action IC1405 on Reversible Computation - extending horizons of computing.}}
+\title{Reversibility in chemical reactions\thanks{The authors acknowledges partial support of COST Action IC1405 on Reversible Computation - extending horizons of computing.}}
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
@@ -190,17 +190,6 @@ We give an overview of some calculi which are able to model out-of-causal-order 
 General introduction, what we wanted to do and did.
 
 \section{The autoprotolysis of water}
-
-Move general things from CCB section.
-
-\section{CCB}
-
-In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818} informally, concentrating on the new general 
-prefixing operator $(s;b).P$ which produces pairs of \emph{concerted} actions,
-while presenting an intuitive model of the autoprotolysis of water. We also use this to introduce some chemical concepts.
-
-\subsection{Modelling the autoprotolysis of water in CCB}
-\label{sec:simplemodel}
 
 We consider a reaction that transfers a hydrogen atom between two water molecules. Since the
 reaction takes place in water it is also known as \emph{autoprotolysis of water}. The reaction is shown 
@@ -237,6 +226,19 @@ all positively charged. Therefore, any of the hydrogens
 %(not just the one which moved in the first instance) 
 can be removed, making both oxygens formally uncharged, and restoring the two water 
 molecules. In Figure~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are correspondent electron movements when going from right to left. These are not given in line with usual conventions, but can be inferred.
+
+In this simple reaction, the forward and the reverse step consist of two steps each. It is not possible to say which of these happen first, since they occur simultaneously. This also means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction.
+
+\section{CCB}
+
+In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818} informally, concentrating on the new general 
+prefixing operator $(s;b).P$ which produces pairs of \emph{concerted} actions,
+while presenting an intuitive model of the autoprotolysis of water. We also use this to introduce some chemical concepts.
+
+\subsection{Modelling the autoprotolysis of water in CCB}
+\label{sec:simplemodel}
+
+
 
 We shall model the hydrogen and oxygen atoms as processes $H$ and $O$ as follows, where 
 $h,o$ are actions representing the bonding capabilities of the atoms and $n,p$ 
