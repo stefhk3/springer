@@ -233,7 +233,7 @@ In this simple reaction, the forward and the reverse step consist of two steps e
 
 In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818} informally, concentrating on the new general 
 prefixing operator $(s;b).P$ which produces pairs of \emph{concerted} actions,
-while presenting an intuitive model of the autoprotolysis of water. We also use this to introduce some chemical concepts.
+while presenting an intuitive model of the autoprotolysis of water. This shows the strengths of CCB compared to previous calculi.
 
 \subsection{Modelling the autoprotolysis of water in CCB}
 \label{sec:simplemodel}
@@ -254,7 +254,7 @@ all actions in $s$ have already taken place. Once $b$ takes place, it must be ac
 undoing immediately one of the actions in $s$. The weak action in the sequence, as we shall see later, is important for rewriting operations.  
 
 We use a synchronisation function $\gamma$ which tells us which actions can combine to 
-produce bonds between atoms. We define $\gamma$ in the style of ACP (\cite{ACPBook}, \cite{BaetenBook}), 
+produce bonds between atoms. We define $\gamma$ in the style of ACP \cite{ACPBook}, 
 where actions $ho, np, nh, no$ represent the created bonds and the communication function is a partial function $\gamma: \mathcal A \times \mathcal A \rightarrow \mathcal A$. :
 
 $$\begin{array}{llllll}
@@ -449,7 +449,7 @@ On the other hand, Figure~\ref{fig:allwaterprocesses} tells us that process 6 is
 \end{flalign*}
 If we swap keys 5 and 6, these processes are syntactically identical (swapping is a short name for changing both keys to the other key via a third variable to avoid conflicts). Clearly this is possible, since as long as keys link the same actions, their naming is arbitrary. Figure~\ref{fig:allwater} implies several such changes in order for the transitions to be valid.
 
-Secondly, we can also disregard subscripts (which were introduced to distinguish copies of atoms of the same type). Informally we can say that if we remove the subscripts on the actions and process names and change keys accordingly, then only two processes can be distinguished. In Chapter~\ref{sec:ccbwithsubscripts} we will call this chemical process equivalence. To demonstrate this we use processes 1 and 14. Process 1 is
+Secondly, we can also disregard subscripts (which were introduced to distinguish copies of atoms of the same type). Informally we can say that if we remove the subscripts on the actions and process names and change keys accordingly, then only two processes can be distinguished. In \cite{mediss} we called this chemical process equivalence. To demonstrate this we use processes 1 and 14. Process 1 is
 \begin{flalign*}&(h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1 \paral &&\\ &(h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2&&\end{flalign*}
 and becomes (with keys and order of processes unchanged):
 \begin{flalign*}
@@ -466,7 +466,7 @@ and becomes (with keys 6, 8, 5, 7 being changed to 1, 2, 3, 4 respectively and t
 \end{flalign*}
 As we can see the resulting processes (1) and (2) are syntactically identical.
 
-We will elaborate on these further in Chapter~\ref{sec:ccbwithsubscripts}, for now we notice that the subscripts allow us to distinguish cases which would otherwise be written identically. On the other hand, the naming of keys has no semantic meaning. Overall there are two possible states in a system of two oxygen atoms and four hydrogen atoms if keys and subscripts are disregarded completly, 14 different states if subscripts are taken into account (these states are shown in Figure~\ref{fig:allwater}), and an infinite number of states if keys from $\mathbb{N}$ are considered different.
+On the one hand, he subscripts allow us to distinguish cases which would otherwise be written identically. On the other hand, the naming of keys has no semantic meaning. Overall there are two possible states in a system of two oxygen atoms and four hydrogen atoms if keys and subscripts are disregarded completly, 14 different states if subscripts are taken into account (these states are shown in Figure~\ref{fig:allwater}), and an infinite number of states if keys from $\mathbb{N}$ are considered different.
 
 \begin{example}\label{auto-bonding-water}
 {\rm 
@@ -478,7 +478,7 @@ $$( (h_1;p[5]).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1,o_2[2],n[5]).O'_1) )
 Now the system is converted to a system which is equivalent to the original formulation of water by promoting the bond 5 to a strong bond:
 $$( (h_1[5];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[5],o_2[2],n).O'_1) )                         
 \; \setminus\{h_1,h_2,h_3,o_1,o_2\}$$
-So our calculus allows a reaction which does not change the actual state of the system. We have replaced the original key $1$ with a new key $5$, but we will see in Chapter~\ref{sec:ccbwithsubscripts} that this change is not indicating an actual change in the system.
+So our calculus allows a reaction which does not change the actual state of the system. We have replaced the original key $1$ with a new key $5$, but this change is not indicating an actual change in the system.
 }
 \end{example}
 
@@ -490,7 +490,7 @@ It should be noted that there are two types of bonding modelled here. Firstly, w
 
 \subsection{Conclusion}
 
-We have seen in this chapter that we can model a simple covalent chemical reaction with our new calculus. The main feature of the new calculus is a new prefix operator $(s;b).P$. Whilst we have not yet given a formal definition we could already see the possibilities of the calculus and some challenges we may encounter when working with it. \cite{merevcomp2018}
+We have seen in this chapter that we can model a simple covalent chemical reaction using CCB. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}.
 
 \section{Bonding Calculus}
 
