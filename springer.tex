@@ -12,7 +12,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-
+\usepackage{subfigure}
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -155,6 +155,15 @@
 \newcommand{\MolHy}{\mathit{MolHy}}
 \newcommand{\Uppaal}{{\scshape Uppaal}\,}
 
+\newcommand{\PN}{reversing Petri net } 
+\newcommand{\guard}[1]{\mathsf{pre}(#1)}
+\newcommand{\effects}[1]{\mathsf{post}(#1)}
+\newcommand{\bond}{\!-\!}
+\newcommand{\connected}{\mathsf{con}}
+\newcommand{\state}[2]{\langle {#1}, {#2}\rangle}
+\newcommand{\rtrans}[1]{\ensuremath{\stackrel{#1}{\rightsquigarrow}}}
+\newcommand{\RPN}{\textsc{RPN\ }} 
+\newcommand{\type}{\mathit{type}}
 \begin{document}
 %
 \title{Reversibility in chemical reactions\thanks{The authors acknowledges partial support of COST Action IC1405 on Reversible Computation - extending horizons of computing.}}
@@ -754,6 +763,302 @@ The obtained system contains again two water molecules of water.
 Therefore, the bonding calculus is suitable for modelling in a 
 natural and easy way the autoprotolysis of water.
 
+
+\section{Reversing Petri nets}
+In this section we present reversing Petri nets (RPNs), an extension of Petri nets
+developed for modeling reversing computations, and we employ the formalism
+to model the autoprotolysis of water. Reversing Petri nets~\cite{RPNs} are 
+Petri net structures that allow transitions to be reversed. They assume 
+tokens to be distinguished from each other by an identity/type and to be persistent. Furthermore,
+during transitions tokens can be bonded with each other. The creation of bonds
+is considered to be the effect of a transition, whereas their destruction is the effect of
+the transition's reversal. RPNs
+have been extended with a mechanism for controlling transition
+reversal by associating transitions with conditions~\cite{CRPNs}. In this section we consider
+a model allowing multiple tokens of the same type as well as the possibility for 
+transitions to break bonds. Thus, a transition may simultaneously create
+and destruct bonds, and its reversal results in the opposite effect. Formally, a RPN
+is defined as follows:
+\begin{definition}{\rm
+		A \emph{\PN}(RPN) is a tuple $(P,T,  A, A_V, B, F)$ where:
+		\begin{enumerate}
+			\item $P$ is a finite set of \emph{places} and
+			$T$ is a finite set of \emph{transitions}.
+			\item $A$ is a finite set of \emph{base} or \emph{token types} ranged over by $a, b,\ldots$.
+			$\overline{A} = 
+			\{\overline{a}\mid a\in A\}$ contains a ``negative"  version for each token type. We assume that
+			for any token type $a$ there may exist a finite number of \emph{token instances}. 
+			We write $a_1,\ldots,$ for
+			instances of type $a$ and $A_I$ for the set of all token instances. 
+			\item $A_V$ is a finite set of \emph{token variables}. We write $\type(v)$ for the type
+			of variable $v$ and assume that $\type(v) \in A$ for all $v\in A_V$.
+			\item $B\subseteq A\times A$ is a finite set of undirected \emph{bond} types ranged over
+			by $\beta,\gamma,\ldots$. We use the notation $a \bond b$ for a bond $(a,b)\in B$.  
+			$\overline{B} = \{\overline{\beta}\mid \beta\in B\}$ contains a ``negative" version for 
+			each bond type. $B_I\subseteq A_I\times A_I$ is a finite set of \emph{bond instances},
+			where we write $\beta_i$ 
+			for elements of $B$.
+			\item $F : (P\times T  \cup T \times P)\rightarrow {\cal P}( A_V \cup (A_V \times A_V) \cup \overline{A}
+			\cup \overline{B}) $ 
+			is a set of directed labelled \emph{arcs}.
+		\end{enumerate}
+}\end{definition}
+
+Thus, a reversing Petri net is built on the basis of a set of \emph{tokens} or \emph{bases}. These
+are organized in a set of token types $A$, where each token type is associated with a set of token instances.
+Token instances correspond to the basic entities that occur in a system and they may occur as 
+stand-alone elements but as computation proceeds they may also merge together to form \emph{bond 
+	instances}. 
+Places and transitions have the standard meaning and are connected
+via directed arcs which are labelled by a set of elements from $A_V \cup (A_V \times A_V) \cup \overline{A}
+\cup \overline{B}$.  Intuitively, these labels express the requirements for a transition
+to fire when placed on arcs incoming the transition, and the effects of the transition when placed on the
+outgoing arcs. 
+Graphically, a RPN is portrayed as a directed bipartite graph where token instances are indicated by $\bullet$, places by
+circles, transitions by boxes, and bond instances by lines between token instances. 
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=8cm]{model.png}
+	\caption{RPN model of the autoprotolysis of water}
+	\label{RPNmodel}
+\end{figure}
+
+Fig.~\ref{RPNmodel} depicts the graphical representation of the RPN model for the autoprotolysis of water.
+In this model, we assume two token types, $H$ for hydrogen
+and $O$ for oxygen. They are instantiated via four token instances of $H$ ($H_1$, $H_2$, $H_3$, and $H_4$) and two token instances of
+$O$, ($O_1$ and $O_2$). The net consists of five places and three transitions and the edges between
+them are associated with token variables and bonds, where we assume that $\type(o)=\type(o_1)=\type(o_2) = O$
+and $\type(h)=\type(h_1)=\type(h_2)=\type(h_3)=\type(h_4)=H$. 
+Looking at the transitions, transition $t_1$ models the formation of a bond between a hydrogen
+token and an oxygen token. Precisely, the transition stipulates a selection of two such
+molecules with the use
+of variables $o$ and $h$ on the incoming arcs of the transition which are bonded
+together, as described in the outgoing arc of the transition.
+Subsequently, transition $t_2$ completes
+the formation of a water molecule by selecting an oxygen token from place $x$ and
+a hydrogen token from place $v$ and forming a bond between them, placing the resulting component at place $y$. Note that the selected oxygen instance in this transition will be connected to a hydrogen token via a bond 
+created by transition $t_1$; this bond is preserved and the component resulting from the creation of
+the new $o-h$ bond will be transferred to place $y$. (Details about execution of the model will follow the
+description of RPN semantics.)
+Finally, transition $t_3$ models the autoprotolysis reaction: assuming the existence of two distinct oxygen
+instances, as required by the variables $o_1$ and $o_2$ on the incoming arc of the transition, connected
+with hydrogen instances as speficied in $F(y,t_3)$, the transition breaks the bond $o_2-h_3$ and forms the
+bond  $o_1-h_3$.  As such, assuming the existence of two water molecules at place $y$, the transition
+will form  a hydronium  (H$_3^+$O) and a hydroxin (OH$^-$) molecule in place $z$ of the net.
+The reversibility semantics of RPNs ensures that  reversing the transition $t_3$ will result in the re-creation
+of  two water molecules placed at $y$, while the use of variables allows the formation of water molecules consisting
+of different bondings between the hydrogen and oxygen instances, as will be explained in the sequel.
+
+
+In order to introduce the semantics of RPNs we need to introduce some notations. Note that in 
+the sequel we omit the discussion of negative tokens and negative bonds as they are not relevant to our
+case study. We also restrict  our attention to causal reversibility which allows some simplifications
+of the exposition and, in particular, of the history function defined below.
+We write 
+$\circ t =   \{x\in P\mid  F(x,t)\neq \emptyset\}$ and  
+$ t\circ = \{x\in P\mid F(t,x)\neq \emptyset\}$
+for the incoming and outgoing places of transition
+$t$, respectively. Furthermore, we write
+$\guard{t}  =   \bigcup_{x\in P} F(x,t)$ 
+for the union of all labels on the
+incoming arcs of  transition $t$, 
+and $\effects{t}  =   \bigcup_{x\in P} F(t,x)$
+for the union of all labels on the 
+outgoing arcs of transition $t$. 
+\begin{definition}\label{well-formed}{\rm 
+		A \PN is \emph{well-formed}, if for all $t\in T$:
+		\begin{enumerate}
+			\item $A_V\cap \guard{t} = A_V\cap \effects{t}$,
+			\item $ F(t,x)\cap F(t,y)\cap A_V=\emptyset$ for all $x,y\in P$, $x\neq y $. 
+		\end{enumerate}
+}\end{definition}
+Thus, a \PN is well-formed if (1) whenever a variable exists in
+the ingoing arcs of a transition then it also exists on the outgoing arcs, which implies that transitions do not
+erase tokens, and  (2) 
+tokens/bonds cannot be cloned into more than one outgoing places.
+
+As with standard Petri nets the association of token/bond instances to places is called a \emph{marking}  such that 
+$M: P\rightarrow 2^{A_I\cup B_I}$, where we assume that if $(u,v)\in M(x)$ then $u, v\in M(x)$. 
+In addition, we employ the notion of a \emph{history}, which assigns a memory to each
+transition $H : T\rightarrow \mathbb{N}$. 
+Intuitively, a history of $H(t) = 0$ for some $t \in T$ captures that the transition has not taken place, or 
+every execution of it has been reversed, and a history
+of $ H(t)=k, k>0$, captures that the transition was executed  $k$ times that have not been  reversed.
+Note that $H(t)>1$ may
+arise due to the consecutive execution of the transition with different token
+instances. A pair of a marking and a history, $\state{M}{H}$, describes a \emph{state} of a RPN 
+with $\state{M_0}{H_0}$ the initial state, where $H_0(t) = 0$ for all $t\in T$. 
+
+Finally, we define $\connected(a_i,C)$, where $a_i\in A_I$ and $C\subseteq 2^{A_I\cup B_I}$,
+to be the tokens connected
+to $a_i$  as well as the bonds creating these connections according to 
+set $C$. 
+
+\paragraph{Forward Execution.}
+During the forward execution of a transition in a RPN, 
+a set of tokens and bonds, as specified by the incoming arcs of the transition, are selected and
+moved to the outgoing places of the transition, as specified by the transition's outgoing arcs, possibly
+forming or destructing bonds, as necessary. Given, however, the presence of multiple instances of the same token
+type, it is possible that different token instances are selected during the transition's execution.  
+
+
+A transition is forward-enabled in a state $\state{M}{H}$ of a \PN if there exists a selection of token instances 
+available at the incoming places of the transition that 
+match the requirements  on the transitions incoming arcs. Formally:
+
+\begin{definition}\label{fenabled}{\rm
+		Given a \RPN $(P,T, A, A_V, B, F)$, a state $\state{M}{H}$, and a transition $t$, we say that $t$ is 
+		\emph{forward-enabled} in $\state{M}{H}$  if there exists a surjective function 
+		$U:\guard{t}\cap A_V\rightarrow A_I$ such that:
+		
+		\begin{enumerate}
+			\item  for all $v\in\guard{t}$, if $\type(v) = a$	then $\type(U(v))=a$
+			\item for all $a\in F(x,t)$, then $U(a)\in M(x)$ and for all $(a,b)\in F(x,t)$, then $(U(a),U(b))\in M(x)$, 
+			\item for all
+			$(a,b)\in \effects{t}-\guard{t}$ then $(U(a),U(b))\not\in M(x)$ for all $x\in\circ t$.
+		\end{enumerate}
+}\end{definition}
+
+Thus, $t$ is enabled in state $\state{M}{H}$ if  (1,2) there is a type-respecting assignment of token instances
+to the variables on the incoming edges, with the token instances originating from the appropriate
+input places of the transition and  connected with
+bonds as required by the variable bonds occurring on the incoming edges, and (3) if a bond
+occurs in the outgoing edges of the transition but not the incoming ones, then the selected instances
+associated with the bond's variables should not be bonded together in the incoming places
+of the transition (thus transitions do not recreate bonds). We refer to $U$ as a forward enabling 
+assignment.
+
+To execute a transition $t$ according to an enabling assignment $U$, 
+the selected token instances, along with their connected components,
+are relocated to the outgoing places of the transition as specified
+by the outgoing arcs, with bonds created and destructed accordingly. 
+Furthermore,
+the history of the executed transition is increased by one. Specifically,
+we define:
+\begin{definition}{\rm \label{forward}
+		Given a \RPN $(P,T,  A, A_V, B, F)$, a state $\langle M, H\rangle$, and an
+		enabling assignment $U$, we write $\state{M}{H}
+		\trans{t} \state{M'}{H'}$
+		where for all $x\in P$:
+		\[
+		M'(x) =   M(x)- \bigcup_{a\in f(x,t)} \connected(U(a), M(x)) 
+		\cup  \bigcup_{a\in f(t,x),U(a)\in M(y))} \connected(U(a),S)\]
+		where $S= (M(y)
+		-\{(U(a),U(b))\mid (a,b)\in F(y,t)\})\cup \{ (U(a),U(b))\mid (a,b)\in F(t,x) \}$
+		\[
+		\hspace{0.2in}\mbox{and}\hspace{0.2in}
+		H'(t') = \left\{
+		\begin{array}{ll}
+		H(t')+1, \hspace{1cm} \textrm{ if } t' = t  \; \\
+		H(t'), \hspace{1.5cm}  \;\textrm{ otherwise }
+		\end{array}
+		\right.			\]	
+}\end{definition} 
+
+
+\paragraph{Reversing Execution.}
+We now move on to  reversing transitions. 
+A transition can be reversed in a certain state if it has been previously executed and there exist token instances in its output places 
+that match the requirements on its outgoing arcs. Specifically, we define the notion of reverse enabledness
+as follows.
+\begin{definition}\label{renabled}{\rm
+		Consider a \RPN $(P,T, A, A_V, B, F)$, a state $\state{M}{H}$, and a transition $t$.
+		We say that $t$ is \emph{reverse-enabled} in $\state{M}{H}$ if (1)  $H(t)\neq 0$, and (2)
+		there exists a surjective function 
+		$W:\effects{t}\cap A_V\rightarrow  A_I$ such that:
+		\begin{enumerate}
+			\item  for all
+			$v\in\effects{t}$, if $\type(v) = a$
+			then $\type(W(v))=a$, 
+			\item for all $a\in F(t,x)$, then $W(a)\in M(x)$ and for all $(a,b)\in F(t,x)$, then $(W(a),W(b))\in M(x)$, 
+			\item  for all $(a,b)\in \guard{t} - \effects{t}$ then $(W(a),W(b))\not\in M(x)$ for all $x\in\circ t$.
+		\end{enumerate}
+}\end{definition}
+
+Thus, a transition $t$ is reverse-enabled in $\state{M}{H}$ if  
+(1) the transition has been executed and (2) there exists a type-respecting assignment of token instances,
+from the instances in the out-places of the transition, to the variables on the outgoing
+edges of the transition, and where the instances are connected with bonds as required by
+the transition's outgoing edges.  
+We refer to $W$ as a reversal enabling assignment.
+To implement the reversal of a transition $t$ according to a reversal enabling assignment $W$, 
+the selected instances are relocated from  the outgoing places of the transition to the incoming places,
+as specified
+by the incoming arcs of the transition, with bonds created and destructed accordingly:
+
+\begin{definition}\label{causal}{\rm
+		Given a \RPN $(P,T, A, A_V, B, F)$, 
+		a state $\langle M, H\rangle$, and a transition $t$ reverse-enabled in $\state{M}{H}$  with 
+		$W$ a reversal enabling assignment, we write $ \state{M}{H}
+		\rtrans{t} \state{M'}{H'}$   where for all $x$:
+		\[
+		M'(x) =   M(x)- \bigcup_{a\in f(t,x)} \connected(W(a), M(x)) 
+		\cup  \bigcup_{a\in f(x,t),W(a)\in M(y))} \connected(W(a),S)\]
+		where $S= (M(y)
+		-\{(W(a),W(b))\mid (a,b)\in F(t,y)\})\cup \{ (W(a),W(b))\mid (a,b)\in F(x,t) \})$
+		\[
+		\hspace{0.3in}\mbox{and}\hspace{0.3in}
+		H'(t') = \left\{
+		\begin{array}{ll}
+		H(t') - 1, \hspace{0.3cm} \;\;\textrm{ if } t' = t  \; \\
+		H(t'),\hspace{1cm}  \;\textrm{ otherwise }
+		\end{array}
+		\right.
+		\]
+}\end{definition}	
+
+We now return to the RPN autoprotolysis model and in Fig.~\ref{execution} we present
+a possible execution of the model. The first net in this sequence shows the system after 
+the execution of transition $t_1$ with enabling assignment $U(h)=H_1, U(o)=O_1$. Note
+that the term $[1]$ written over transition $t_1$ captures that at this point $H(t_1)=1$ 
+since the transition has been executed once.
+This notation is generally used for histories in the graphical representation with occasional
+missing histories corresponding to histories equal to $0$.
+Subsequently,
+we have the model after execution of transition $t_2$ with enabling assignment $U(h)=H_2,
+U(o)=O_1$, creating the bond $O_1-H_2$, thus forming the first water molecule. A second
+execution of transitions $t_1$ and $t_2$ results in the second molecule of water in the system,
+placed again at place $y$, as shown in the third net in the figure. At this state, transition
+$t_3$ is forward-enabled and,  with enabling assignment $U(o_1)=O_1, U(o_2)=O_2, U(h_1)=H_1, 
+U(h_2)=H_2,U(h_3)=H_3,U(h_4)=H_4$, we have the creation of the hydronium and hydroxide
+depicted at place $z$ in the fourth net of the figure. At this stage  transition $t_3$ is
+now reverse-enabled and the last net in the figure illustrates the state resulting after
+reversing $t_3$ with reversal enabling assignment $W(o_1)=O_1, W(o_2)=O_2, W(h_1)=H_1, 
+W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
+\begin{figure}[t]
+	\centering
+	%\subfigure{\includegraphics[width=6.3cm]{model.png}}
+	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert1.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert2.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
+	%\subfigure{\includegraphics[width=6.6cm]{aftert12.png}}
+	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert22.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt3.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert3.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt3r.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert3r.png}}
+	\caption{Execution of the RPN autoprotolysis of water model.}
+	\label{execution}
+\end{figure}
+
+\paragraph{Conclusion.} As we have shown, RPNs are a graphical
+formalism well-suited to model chemical reactions such
+as the autoprotolysis of water. At the same time, they are amenable for modeling
+other types of distributed systems and they have been used successfully for
+the modeling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{CRPNs}. Their extension in~\cite{CRPNs} also introduces
+a mechanism for controlling reversibility. This control is
+enforced with the aid of conditions associated with transitions, whose satisfaction/violation
+acts as a guard for the transition execution in the forward/backward direction, respectively. 
+The conditions are enunciated within a simple logical language expressing properties 
+relating to available tokens, and 
+may capture environmental or other conditions that determine a transition's
+reversal, e.g., changes in temperature. In future work, we plan to exploit recent work
+that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards
+the development of a methodology for the analysis of reversing Petri nets exploiting
+available tools.
 
 \section{Conclusion}
 
