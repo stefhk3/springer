@@ -197,7 +197,38 @@ We give an overview of some calculi which are able to model out-of-causal-order 
 %
 \section{Introduction}
 
-General introduction, what we wanted to do and did.
+Biological reactions, pathways and reactions networks have been studied using
+various  techniques,  including  process  calculi.   The  initial  research  focused  on
+reaction rates, by modelling and simulating networks of reactions, in order to
+analyse or even predict the common paths through the network.  Reversibility
+was not considered there explicitly.  Once a more structural approach was taken
+reversibility  started  to  be  taken  into  account,  since  it  plays  a  crucial  role  in
+many processes, typically by going back to a previous state in the system.  For
+example, if a gene is regulated by a protein binding to and unbinding from it,
+then reversibility is needed if this to be modelled directly.  Such examples can
+be modelled by backtracking along the path taken to the current state.  Beyond
+backtracking and causal reversibility, there are more general forms of reversibility, specifically the out-of-causal-order reversibility, which make it possible to get
+to states which cannot be reached by forward reactions alone.  Such sequences
+of forward and reversible reactions are important as they lead to new chemical
+structures and new reactions, which would not be possible if the out-of-causal
+reversibility was not used.
+
+Looking at proteins and other macromolecules means working at relatively
+high  levels  of  abstraction.   It  also  means  that  such  biological  entities  are  often  difficult  to  represent  as  there  is  still  no  complete  understanding  of  their
+behaviour.  Also their interactions with other similar molecules are hard to enumerate as they are sometime not fully understood.  This could also mean that
+some aspects of reversibility are not clearly modelled since we have abstracted
+too  much  detail. Therefore,  we  have  studied chemical  reactions  when
+studying reversibility in the context of living systems. We have done this using techniques which have mostly been applied to higher-level biological systems. This is justified since chemical reactions involve various forms of reversibility and offer good case
+studies  for  the  modelling  of  reversibility.   Specifically,  we  can  find  interesting
+examples  of  the  out-of-causal  order  reversibility  in  many  chemical  reactions,
+and can study the intermediate steps of such reactions where some bonds are
+only “helping” to achieve the overall aim of the reaction:  are only formed to be
+broken before the end such reactions.  The level of detail we have about such
+chemical  reactions  should  help  with  seeing  reversibility  in  action  in  the  ways
+not obvious at higher levels.  As an additional benefit,  in many cases a good
+understanding of the underlying reaction mechanisms exists.
+
+Do we need a background section?
 
 \section{The autoprotolysis of water}
 
@@ -237,11 +268,12 @@ all positively charged. Therefore, any of the hydrogens
 can be removed, making both oxygens formally uncharged, and restoring the two water 
 molecules. In Figure~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are correspondent electron movements when going from right to left. These are not given in line with usual conventions, but can be inferred.
 
-In this simple reaction, the forward and the reverse step consist of two steps each. It is not possible to say which of these happen first, since they occur simultaneously. This also means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction.
+In this simple reaction, the forward and the reverse step consist of two steps each. The breaking of the old and the formting of a new bond occur simultaneously. This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. Since the reverse step can be done with another atom then the forward step, a clear forward and reverse path is difficult to identify
 
 It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``r\^{o}le''. This explains why any proton can be transferred in the reverse reaction and not just the one involved in the forward path.
 
 \section{CCB}
+\label{sec:ccb}
 
 In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818} informally, concentrating on the new general 
 prefixing operator $(s;b).P$ which produces pairs of \emph{concerted} actions,
@@ -261,8 +293,8 @@ all actions in $s$ have already taken place. Once $b$ takes place, it must be ac
 undoing immediately one of the actions in $s$. The weak action in the sequence, as we shall see later, is important for rewriting operations.  
 
 We use a synchronisation function $\gamma$ which tells us which actions can combine to 
-produce bonds between atoms. We define $\gamma$ in the style of ACP \cite{ACPBook}, 
-where actions $ho, np, nh, no$ represent the created bonds and the communication function is a partial function $\gamma: \mathcal A \times \mathcal A \rightarrow \mathcal A$. :
+produce bonds between atoms. We define $\gamma$ 
+as a partial function $\gamma: \mathcal A \times \mathcal A \rightarrow \mathcal A$, where actions $ho, np, nh, no$ represent the created bonds:
 
 $$\begin{array}{llllll}
 \gamma(h,o) & = & ho \qquad &
@@ -374,7 +406,7 @@ We can therefore apply the movement of restrictions the reverse way we applied i
 &( (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) \setminus\{h_3,h_4,o_3,o_4\} ) \setminus\{n,p\}&&
 \end{flalign*}
 
-We have seen in this chapter that we can model a simple covalent chemical reaction using CCB. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}.
+We have seen in this chapter that we can model a simple covalent chemical reaction using CCB. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. The same modelling of hydrogens and oxygens can be used to model a more complex reaction, involving carbon atoms as well \cite{KUHN201818}. This shows that the modelling implements general concepts and not only this particular situation. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}.
 
 \section{Bonding Calculus}
 
@@ -937,7 +969,61 @@ available tools.
 
 \section{Conclusion}
 
-Here a general conclusion
+As mentioned, the reverse reaction can work by transferring any of the hydrogens of the hydronium. In our calculi, we can actuall distinguish the hydrogens due to the subscripts used. When reversing the reaction in CCB, instead of the transition in Section~\ref{sec:ccb}, we could also have done this (writing the transition and the rewrite together):
+%
+\begin{flalign*}
+&(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1) \paral (h_3[5];p).H'_3) &&\\
+&\paral (h_4[4];p).H'_4  \paral (o_3,o_4[4],n).O'_2&&\\
+&\xrightarrow{\{ np[3], \underline{nh_{1}}[1]\}} \Rightarrow &&\\
+&(( (\boldsymbol{h_1[3]};p).H'_1 \paral (h_2[2];p).H'_2 \paral (\boldsymbol{o_1[5]},o_2[2],\boldsymbol{n}).O'_1) \paral (h_3[5];p).H'_3) &&\\
+&\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3[3]},o_4[4],\boldsymbol{n}).O'_2
+\end{flalign*}
+%
+The result is differnt from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. All calculi presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. Reversing Petri Nets give exact rules and can therefore only execute one forward and reverse possibility.
+
+
+
+
+
+Recent progress in the area of reversibility in chemical reactions was presented
+at the COST IC1405 meeting in Belgrade.  Based on previous work a process
+calculus called Calculus for Covalent Bonding (CCB) has been developed which
+can  model  many  features  found  in  chemical  reactions  [40].   The  calculus  has
+formal semantics given by SOS rules that extended with appropriate predicates.
+Simulation software was developed based on CCB and used to successfully model
+several examples of biochemical reactions of increasing complexity.
+12
+In order to explore the calculus further we have also modelled a high-level
+example, Base Excision Repair (BER) of DNA using CCB. This demonstrates
+that the principles encoded in the calculus are useful beyond the domain where
+the initial inspiration came from.  The software was used to check the modelling.
+We have identified spatial configurations as an area for further work in this and
+other examples.
+Natural computing is a complex field of research dealing with models and
+computational  techniques  inspired  by  nature  that  helps  us  in  understanding
+the biochemical world in terms of information processing.  The articles [1] and
+[2] investigate the reversibility of biochemical reactions in two important theo-
+ries of natural computing inspired by the functioning of living cells, namely in
+membrane computing [13, 68] and in reaction systems [26].  Membrane comput-
+ing deals with multisets of symbols processed in the compartments of a mem-
+brane structure according to some multiset rewriting rules; some of the symbols
+(presented with their multiplicity within the regions delimited by membranes)
+evolve in parallel according to the rules associated with their membranes, while
+the  others  remain  unchanged  and  can  be  used  in  the  subsequent  steps.   The
+situation is different in reaction systems; these systems represent a qualitative
+model, and so they deal with sets rather than multisets. Two major assumptions
+distinguish the reaction systems from the membrane systems:  (i) threshold as-
+sumption claiming that if a resource is present in the system, then it is present
+in  a  ”sufficient  amount”  such  that  several  reactions  needing  such  a  resource
+are not in conflict (this means that reaction systems have actually an infinite
+multiplicity for their resources); (ii) no permanency assumption claiming that
+an entity disappears from the current state unless it is produced by one of the
+reactions enabled in that state.
+The important innovations of these articles are given by adding the reverse
+rules to the initial set of rules, as well as by adding an external control specified
+by using a special symbol informing the system that a rollback is needed.  Their
+contribution is done by several theoretical results relating the evolutions of these
+systems to their reversible extensions.
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
