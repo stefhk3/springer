@@ -272,6 +272,34 @@ In this simple reaction, the forward and the reverse step consist of two steps e
 
 It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``r\^{o}le''. This explains why any proton can be transferred in the reverse reaction and not just the one involved in the forward path.
 
+In order to see how well existing formalisms could capture this reaction, we model it in CCSK \cite{Irek2007}. CCSK is based in the Calculus of Communicating Systems, but included reversibility. To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
+%
+$$\begin{array}{lll}
+H & \bydef & \overline{a}.H'\\
+O & \bydef & a.a.a.O'
+\end{array}$$
+%
+Here, an oxygen atom is modelled with three prefixes and a hydrogen atom with the corresponding co-name. As in CCS, these can synchronise. A synchronisation (represented by a key) forms a bond until undone. In our modelling, the actions make sure the oxygen atom can bond to two or three hydrogen atoms as required and a hydrogen atom can bond to exactly one other atom. We can then model our system of two oxygen atoms and four hydrogen atoms:
+%
+$$( \overline{a}.H'_1 \paral \overline{a}.H'_2 \paral a.a.a.O'_1 \paral \overline{a}.H'_3 \paral \overline{a}.H'_4 \paral a.a.a.O'_2) 
+\; \setminus\{a\}.$$
+%
+This system now can develop to two water molecules. This happens by four communications of $a$ and $\overline{a}$, so that two hydrogen atoms are bonded to each oxygen atom:
+%
+$$( \overline{a}[1].H'_1 \paral \overline{a}[2].H'_2 \paral a[1].a[2].a.O'_1 \paral \overline{a}[3].H'_3 \paral \overline{a}[4].H'_4 \paral a[3].a[4].a.O'_2) 
+\; \setminus\{a\}.$$
+%
+It can also develop to a $OH^-$ and a $H_3O^+$. For this, three communications happen with one oxygen atom and the remaining hydrogen atom could go to the other oxygen atom:
+%
+$$( \overline{a}[1].H'_1 \paral \overline{a}[2].H'_2 \paral a[1].a.a.O'_1 \paral \overline{a}[3].H'_3 \paral \overline{a}[4].H'_4 \paral a[2].a[3].a[4].O'_2) 
+\; \setminus\{a\}.$$
+%
+Any of these bonds can be broken by backtracking, which is the benefit of a reversible calculus. So we could go from the two water molecules to $OH$ and a $H_3O$ by breaking the bond between one the hydrogen atoms and the oxygen atom it is bonded to and re-bonding to the other oxygen atom. A problem is that three hydrogen atoms could bond directly to an oxygen atom, without two waters ever existing. This would not happen in reality, since, as we have seen in Chapter~\ref{sec:simple}, it is the partial charge of the water which enables the transfer. These charges are not at all modelled in this representation.
+
+In order for the hydrogen transfer to happen, a spontaneous dissociation of a hydrogen atom would be needed. This could then bind to another oxygen atom thus completing the transfer. Whilst such dissociations exist, it is a different mechanism than the transfer, which is supported by the partial charge. The dissociation would also allow for protons to flow freely between water molecules, which is not the situation in reality. There could even be several water molecules loosing all of their protons without any of them being bonded, which is quite unrealistic. Finally, the hydrogen atoms bonded to one oxygen atom must dissolve in reverse order as they were bonded, which is not at all the case in the real world.
+
+Overall, we can model the final products in CCSK, but the processes taking place are not well represented. The main reason for this is that the calculus is restricted to backtracking for undoing actions.
+
 \section{CCB}
 \label{sec:ccb}
 
@@ -969,6 +997,10 @@ available tools.
 
 \section{Conclusion}
 
+We have presented three formalism to model chemical reactions. In particular, they can represent how covalent bonds in small molecules are formed and broken. The example we used was the autoprotolysis of water. This is a small example, but it already shows that in such reactions causality is not a clearly defined concept.
+
+Considering the three formalisms mentioned, all can represent this reaction. CCB is quite close to the chemical concepts and can therefore model this reactions faithfully. In particular, it shows the linked forming and breaking of bonds. In the Bonding Calculus, this link is not expressed. Reversing Petri Nets are in comparison a high-level modelling, but still capture the breaking and forming together. It does this without representing details of the reaction, which CCB does. All calculi avoid a $H_3O^+$ molecule forming directly.
+
 As mentioned, the reverse reaction can work by transferring any of the hydrogens of the hydronium. In our calculi, we can actuall distinguish the hydrogens due to the subscripts used. When reversing the reaction in CCB, instead of the transition in Section~\ref{sec:ccb}, we could also have done this (writing the transition and the rewrite together):
 %
 \begin{flalign*}
@@ -979,51 +1011,7 @@ As mentioned, the reverse reaction can work by transferring any of the hydrogens
 &\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3[3]},o_4[4],\boldsymbol{n}).O'_2
 \end{flalign*}
 %
-The result is differnt from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. All calculi presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. Reversing Petri Nets give exact rules and can therefore only execute one forward and reverse possibility.
-
-
-
-
-
-Recent progress in the area of reversibility in chemical reactions was presented
-at the COST IC1405 meeting in Belgrade.  Based on previous work a process
-calculus called Calculus for Covalent Bonding (CCB) has been developed which
-can  model  many  features  found  in  chemical  reactions  [40].   The  calculus  has
-formal semantics given by SOS rules that extended with appropriate predicates.
-Simulation software was developed based on CCB and used to successfully model
-several examples of biochemical reactions of increasing complexity.
-12
-In order to explore the calculus further we have also modelled a high-level
-example, Base Excision Repair (BER) of DNA using CCB. This demonstrates
-that the principles encoded in the calculus are useful beyond the domain where
-the initial inspiration came from.  The software was used to check the modelling.
-We have identified spatial configurations as an area for further work in this and
-other examples.
-Natural computing is a complex field of research dealing with models and
-computational  techniques  inspired  by  nature  that  helps  us  in  understanding
-the biochemical world in terms of information processing.  The articles [1] and
-[2] investigate the reversibility of biochemical reactions in two important theo-
-ries of natural computing inspired by the functioning of living cells, namely in
-membrane computing [13, 68] and in reaction systems [26].  Membrane comput-
-ing deals with multisets of symbols processed in the compartments of a mem-
-brane structure according to some multiset rewriting rules; some of the symbols
-(presented with their multiplicity within the regions delimited by membranes)
-evolve in parallel according to the rules associated with their membranes, while
-the  others  remain  unchanged  and  can  be  used  in  the  subsequent  steps.   The
-situation is different in reaction systems; these systems represent a qualitative
-model, and so they deal with sets rather than multisets. Two major assumptions
-distinguish the reaction systems from the membrane systems:  (i) threshold as-
-sumption claiming that if a resource is present in the system, then it is present
-in  a  ”sufficient  amount”  such  that  several  reactions  needing  such  a  resource
-are not in conflict (this means that reaction systems have actually an infinite
-multiplicity for their resources); (ii) no permanency assumption claiming that
-an entity disappears from the current state unless it is produced by one of the
-reactions enabled in that state.
-The important innovations of these articles are given by adding the reverse
-rules to the initial set of rules, as well as by adding an external control specified
-by using a special symbol informing the system that a rollback is needed.  Their
-contribution is done by several theoretical results relating the evolutions of these
-systems to their reversible extensions.
+The result is different from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. All calculi presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. Reversing Petri Nets give exact rules and can therefore only execute one forward and reverse possibility.
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
