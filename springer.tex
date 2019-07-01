@@ -197,36 +197,31 @@ We give an overview of some calculi which are able to model out-of-causal-order 
 %
 \section{Introduction}
 
-Biological reactions, pathways and reactions networks have been studied using
-various  techniques,  including  process  calculi.   The  initial  research  focused  on
-reaction rates, by modelling and simulating networks of reactions, in order to
+Biological reactions, pathways and reaction networks have been extensively studied in the literature using
+various  techniques,  including  process  calculi.  The initial work of research was mainly focused  on
+reaction rates by modelling and simulating networks of reactions, in order to
 analyse or even predict the common paths through the network.  Reversibility
-was not considered there explicitly.  Once a more structural approach was taken
+was not considered there explicitly.  Later on
 reversibility  started  to  be  taken  into  account,  since  it  plays  a  crucial  role  in
 many processes, typically by going back to a previous state in the system.  For
-example, if a gene is regulated by a protein binding to and unbinding from it,
-then reversibility is needed if this to be modelled directly.  Such examples can
-be modelled by backtracking along the path taken to the current state.  Beyond
-backtracking and causal reversibility, there are more general forms of reversibility, specifically the out-of-causal-order reversibility, which make it possible to get
+example,  reversibility is needed to model directly when a gene is regulated by a protein binding to it and unbinding from it.  Such examples can
+be modelled by backtracking the computation along the executed path of action that led us to the current state.  Beyond
+backtracking and causal reversibility, there is a more general form of reversibility, known as the out-of-causal-order reversibility, which makes it possible to get
 to states which cannot be reached by forward reactions alone.  Such sequences
 of forward and reversible reactions are important as they lead to new chemical
-structures and new reactions, which would not be possible if the out-of-causal
-reversibility was not used.
+structures and new reactions, which would not be possible without out-of-causal
+reversibility.
 
 Looking at proteins and other macromolecules means working at relatively
 high  levels  of  abstraction.   It  also  means  that  such  biological  entities  are  often  difficult  to  represent  as  there  is  still  no  complete  understanding  of  their
-behaviour.  Also their interactions with other similar molecules are hard to enumerate as they are sometime not fully understood.  This could also mean that
-some aspects of reversibility are not clearly modelled since we have abstracted
-too  much  detail. Therefore,  we  have  studied chemical  reactions  when
-studying reversibility in the context of living systems. We have done this using techniques which have mostly been applied to higher-level biological systems. This is justified since chemical reactions involve various forms of reversibility and offer good case
-studies  for  the  modelling  of  reversibility.   Specifically,  we  can  find  interesting
+behaviour.  Also their interactions with other similar molecules are hard to enumerate as they are sometimes not fully understood. This could also mean that some aspects of reversibility are not clearly modelled since we have abstracted too  much  detail. Therefore,  we  have studied chemical  reactions  when studying reversibility in the context of living systems. We have done this using techniques which have mostly been applied to higher-level biological systems. This is justified since chemical reactions involve various forms of reversibility and offer good case
+studies  for  the  modelling  of  reversibility. Specifically,  we  can  find  interesting
 examples  of  the  out-of-causal  order  reversibility  in  many  chemical  reactions,
 and can study the intermediate steps of such reactions where some bonds are
 only “helping” to achieve the overall aim of the reaction:  are only formed to be
-broken before the end such reactions.  The level of detail we have about such
-chemical  reactions  should  help  with  seeing  reversibility  in  action  in  the  ways
-not obvious at higher levels.  As an additional benefit,  in many cases a good
-understanding of the underlying reaction mechanisms exists.
+broken before the end such reactions.  The level of detail we have on
+chemical  reactions  makes more obvious the use of  reversibility compared to higher level models.  In many cases we have the additional benefit of good
+understanding of the underlying reaction mechanisms.
 
 \section{The autoprotolysis of water}
 
@@ -244,15 +239,17 @@ low rate, making pure water slightly conductive.
 
 In order to model this reaction we need to understand what it is that makes it happen.
 The main factor is that the oxygen in the water molecule is \emph{nucleophilic}, meaning it has the tendency to bond to another atomic nucleus, which would serve as an \emph{electrophile}. This is because oxygen has a high 
-electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pair} of two electrons each, which can form new bonds (lone pairs are shown in Figure~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
+electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pairs} of two electrons each, which can form new bonds (lone pairs are shown in Figure~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
 to other atomic nuclei by forming bonds from its lone pairs. Since oxygen attracts electrons, the hydrogen atoms in water
-have a positive partial charge and oxygen a negative partial charge. The reaction
+have a positive partial charge and oxygen has a negative partial charge. 
+
+The reaction
 starts with the oxygen (in one water molecule) being attracted by a hydrogen in another 
 water molecule due to their opposite
 charges (this attraction is called a \emph{hydrogen bond}). Due to the nucleophilicity of 
 the oxygen, a bond can form to the hydrogen. This bond is formed out of 
 the electrons of one of the lone pairs of the oxygen. The curved arrows in Figure~\ref{fig:autoprotolysis} indicate the movements of the electrons. Since a hydrogen atom cannot have more 
-than one bond 
+than one bonds 
 the creation of a new bond is compensated by breaking the existing hydrogen-oxygen bond (again indicated by a curved arrow). When this happens, both electrons, which form the hydrogen-oxygen bond, are left with oxygen. Since a hydrogen consists of one electron and one proton, it is only the proton that is transferred, so the process can be called a proton transfer as well as a hydrogen transfer. The forming of the new bond and the breaking of the old bond are \emph{concerted}, namely they happen together without a stable 
 intermediate configuration. As a result we have reached the state where one oxygen atom
 has three bonds to hydrogen atoms and is positively charged, represented on the right side of Figure~\ref{fig:autoprotolysis}. This molecule is called hydronium and can be written as $\mathrm{H_3O^+}$. And the other oxygen atom bonds to only one hydrogen and is negatively charged, having an 
@@ -266,11 +263,11 @@ all positively charged. Therefore, any of the hydrogens
 can be removed, making both oxygens formally uncharged, and restoring the two water 
 molecules. In Figure~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are correspondent electron movements when going from right to left. These are not given in line with usual conventions, but can be inferred.
 
-In this simple reaction, the forward and the reverse step consist of two steps each. The breaking of the old and the formting of a new bond occur simultaneously. This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. Since the reverse step can be done with another atom then the forward step, a clear forward and reverse path is difficult to identify
+In this simple reaction, the forward and the reverse step consist of two steps each. The breaking of the old and the forming of the new bond occurs simultaneously. This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. The reverse step can be done with a different atom than the one used during the forward step because it is difficult to identify a  clear forward and reverse path. 
 
 It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``r\^{o}le''. This explains why any proton can be transferred in the reverse reaction and not just the one involved in the forward path.
 
-In order to see how well existing formalisms could capture this reaction, we model it in CCSK \cite{Irek2007}. CCSK is based in the Calculus of Communicating Systems, but included reversibility. To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
+In order to see how well existing formalisms could capture this reaction, we model it in CCSK \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
 %
 $$\begin{array}{lll}
 H & \bydef & \overline{a}.H'\\
@@ -282,7 +279,7 @@ Here, an oxygen atom is modelled with three prefixes and a hydrogen atom with th
 $$( \overline{a}.H'_1 \paral \overline{a}.H'_2 \paral a.a.a.O'_1 \paral \overline{a}.H'_3 \paral \overline{a}.H'_4 \paral a.a.a.O'_2) 
 \; \setminus\{a\}.$$
 %
-This system now can develop to two water molecules. This happens by four communications of $a$ and $\overline{a}$, so that two hydrogen atoms are bonded to each oxygen atom:
+This system can now develop two water molecules. This happens by four communications of $a$ and $\overline{a}$, so that two hydrogen atoms are bonded to each oxygen atom:
 %
 $$( \overline{a}[1].H'_1 \paral \overline{a}[2].H'_2 \paral a[1].a[2].a.O'_1 \paral \overline{a}[3].H'_3 \paral \overline{a}[4].H'_4 \paral a[3].a[4].a.O'_2) 
 \; \setminus\{a\}.$$
@@ -292,9 +289,9 @@ It can also develop to a $OH^-$ and a $H_3O^+$. For this, three communications h
 $$( \overline{a}[1].H'_1 \paral \overline{a}[2].H'_2 \paral a[1].a.a.O'_1 \paral \overline{a}[3].H'_3 \paral \overline{a}[4].H'_4 \paral a[2].a[3].a[4].O'_2) 
 \; \setminus\{a\}.$$
 %
-Any of these bonds can be broken by backtracking, which is the benefit of a reversible calculus. So we could go from the two water molecules to $OH$ and a $H_3O$ by breaking the bond between one the hydrogen atoms and the oxygen atom it is bonded to and re-bonding to the other oxygen atom. A problem is that three hydrogen atoms could bond directly to an oxygen atom, without two waters ever existing. This would not happen in reality, since, as we have seen in Chapter~\ref{sec:simple}, it is the partial charge of the water which enables the transfer. These charges are not at all modelled in this representation.
+Any of these bonds can be broken by backtracking, which is the benefit of a reversible calculus. Thus we could go from the two water molecules to $OH$ and a $H_3O$ by breaking the bond between one of the hydrogen atoms and the oxygen atom it is bonded to and re-bonding to the other oxygen atom. A problem is that three hydrogen atoms could bond directly to an oxygen atom, without two waters ever existing. This would not happen in reality, since, as we have seen in Chapter~\ref{sec:simple}, it is the partial charge of the water which enables the transfer. These charges are not modelled in this representation.
 
-In order for the hydrogen transfer to happen, a spontaneous dissociation of a hydrogen atom would be needed. This could then bind to another oxygen atom thus completing the transfer. Whilst such dissociations exist, it is a different mechanism than the transfer, which is supported by the partial charge. The dissociation would also allow for protons to flow freely between water molecules, which is not the situation in reality. There could even be several water molecules loosing all of their protons without any of them being bonded, which is quite unrealistic. Finally, the hydrogen atoms bonded to one oxygen atom must dissolve in reverse order as they were bonded, which is not at all the case in the real world.
+In order for the hydrogen transfer to happen, a spontaneous dissociation of a hydrogen atom would be needed. This hydrogen atom could then bind to another oxygen atom thus completing the transfer. Whilst such dissociations exist, it is a different mechanism than the transfer, which is supported by the partial charge. The dissociation would also allow for protons to flow freely between water molecules, which is not the situation in reality. There could even be several water molecules loosing all of their protons without any of them being bonded, which is quite unrealistic. Finally, the hydrogen atoms bonded to one oxygen atom must dissolve in reverse order as they were bonded, which is not at all the case in the real world.
 
 Overall, we can model the final products in CCSK, but the processes taking place are not well represented. The main reason for this is that the calculus is restricted to backtracking for undoing actions.
 
@@ -313,12 +310,12 @@ H & \bydef & (h;p).H'\\
 O & \bydef & (o,o,n).O'
 \end{array}$$
 We use a general prefixing construct $(s;b).P$ where $s$ is a sequence of actions or executed 
-actions, and $b$ is a \emph{weak} action. The prefixing operator must not used (as in the definition of $O$). In such a case at most one of the actions in the sequence can be a weak action. Informally, actions in $s$ can take place in any order 
+actions, and $b$ is a \emph{weak} action. The prefixing operator should not be used (as in the definition of $O$). In such a case at most one of the actions in the sequence can be a weak action. Informally, actions in $s$ can take place in any order 
 and $b$ can happen if
 all actions in $s$ have already taken place. Once $b$ takes place, it must be accompanied by
 undoing immediately one of the actions in $s$. The weak action in the sequence, as we shall see later, is important for rewriting operations.  
 
-We use a synchronisation function $\gamma$ which tells us which actions can combine to 
+We use a synchronisation function $\gamma$ which tells us which actions can be combined to 
 produce bonds between atoms. We define $\gamma$ 
 as a partial function $\gamma: \mathcal A \times \mathcal A \rightarrow \mathcal A$, where actions $ho, np, nh, no$ represent the created bonds:
 
@@ -359,7 +356,7 @@ Note the $\underline{h_i}$, $\underline{o_j}$, and $\underline{n}$ are not restr
 Notice that we leave out the restrictions to improve readability in the following description.
 
 Now actions $n$ in $O_1$ and $p$ in $H_3$ can combine (we use the new key $5$), representing a transfer of a proton from one atom 
-of oxygen ($O_2$ in our model) to another one ($O_1$ in our model). Since a hydrogen atom consists of a proton and an electron, and the electron stays in such a transfer, it can either be called a proton transfer or the transfer of a (positively charged) hydrogen atoms. We show the transfer from $O_2$ to $O_1$, where $\xrightarrow{}$
+of oxygen ($O_2$ in our model) to another one ($O_1$ in our model). Since a hydrogen atom consists of a proton and an electron, and the electron stays in such a transfer, it can either be called a proton transfer or the transfer of a (positively charged) hydrogen atom. We show the transfer from $O_2$ to $O_1$, where $\xrightarrow{}$
 is a transition relation denoting a reaction taking place, here a creation of a bond (changes highlighted in \textbf{bold}):
 \begin{flalign*}
 &(h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1) \paral &&\\
@@ -393,7 +390,7 @@ There are weak bonds between $n$ and $p$ (denoted by key $5$) and \emph{strong} 
 all appropriate $i,j$. Since $H_3$ is weakly bonded to $O_1$ and its strong capability 
 $h_3$ has become available, the bond $5$ gets promoted to the stronger bond, releasing 
 the capability $p$ of $H_3$. We represent this change as a rewrite denoted by $\Rightarrow$
-(which is not as a transition) and we obtain the following process:
+(which is not a transition) and we obtain the following process:
 \begin{flalign*}
 &( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n\boldsymbol{[5]}).O'_1 \paral 
 (\boldsymbol{h_3};p\boldsymbol{[5]}).H'_3 &&\\
@@ -442,14 +439,15 @@ Let us consider the set $\mathbb{N}$ of natural numbers, the set
 $\mN=\{x,x^+,x^-,\dots\}$ of bond names, the set $\mM=\{a,b,\dots\}$ of 
 molecules and the set $\mP=\{P,Q,\ldots\}$ of processes. A multiset over 
 $\mN$ is defined as a partial function $N:\mN \rightarrow \N$. In bonding 
-calculus each molecule has an unique name, and the bond $x$ between two 
+calculus each molecule has a unique name, and the bond $x$ between two 
 molecules $a$ and $b$ is denoted by $\{a-^x b\}$.
 
 The bonding calculus syntax is presented in Table \ref{table:syntax}.
 
 \begin{table}[h]
 \centering
-\vspace{-3ex}\begin{tabular}{c@{\hspace{2ex}}lll@{\hspace{2ex}}l}
+%\vspace{-3ex}
+\begin{tabular}{c@{\hspace{2ex}}lll@{\hspace{2ex}}l}
 Bonds & $L$ & $::=$&$ \emptyset$ & {\sf (empty)}\\
 
 && $\shortmid$ &$ \{a-^x b\}$ & {\sf (bond)}\\
@@ -480,10 +478,10 @@ System & $S$ & $::=$ & $ P \; ||\; L$ . \\
 \end{tabular}
 \caption{Syntax of the Bonding Calculus}\label{table:syntax}
 \end{table}
-\vspace{-3ex}
+%\vspace{-3ex}
 
 A bond prefix $\overline{x}(b)$ is used to indicate the availability of 
-molecule with name~$b$ to create a new bond with name $x$, while an unbond 
+a molecule with name~$b$ to create a new bond with name $x$, while an unbond 
 prefix $\underline{x}(b)$ indicates the availability of $b$ to destroy an 
 existing bond $x$. The process of creating or breaking a bond leads to an 
 update of the global bond memory $L$. Since several similar bonds can exist 
@@ -497,8 +495,8 @@ execution of processes $P$ and $Q$ in parallel, with possible interactions
 between them by using appropriate actions.
 
 As we work with bonds, we use the function $\Bumpeq: \mathcal{M}\times 
-\N^{\mN} \times \mathcal{M} \rightarrow Bool$ to check if between two 
-molecules exist certain bonds. For example, $a\Bumpeq^N b$ checks for the 
+\N^{\mN} \times \mathcal{M} \rightarrow Bool$ to check whether between two 
+molecules there exist certain bonds. For example, $a\Bumpeq^N b$ checks for the 
 existence of all bonds in $N$ between the molecules $a$ and $b$; it 
 returns true when such bonds exist, and false otherwise. When we consider 
 $N=\emptyset$, then $a\Bumpeq^{\emptyset}b$ checks if at least a bond 
@@ -538,7 +536,7 @@ P\{b_1/a_1,\ldots,b_n/a_n\}$ holds whenever $A(a_1,\ldots,a_n)$ = $P$.
 The calculus presented in \cite{NaCo18} was intended to model only the 
 creation and breaking of the covalent bonds. In order to be able to model 
 both covalent and hydrogen bonds, we apply a minor update to the 
-operational semantic in \cite{NaCo18} because we need two instances of the 
+operational semantics in \cite{NaCo18} because we need two instances of the 
 rules used to create and to break bonds. The only difference between the 
 two instances of the same rule is given by the names of the bonds 
 appearing in the interacting processes, and by the fact that a bond cannot 
@@ -555,7 +553,7 @@ $\{a-^x b\}$ in~$L$, then any of the these bonds is broken. The rule
 {\sf (PAR}) is used to compose processes in parallel, while the rules 
 {\sf (TRUE}) and {\sf (FALSE}) choose one of the branches of the testing 
 process based on the result of the checking. The rule {\sf (IDE)} describes 
-the recursion, while {\sf (STRUCT)} rule indicates the fact that we reason 
+the recursion, while the {\sf (STRUCT)} rule indicates the fact that we reason 
 up to the structural congruence.
 
 \begin{table}[h]
@@ -806,7 +804,7 @@ outgoing arcs of transition $t$.
 		\end{enumerate}
 }\end{definition}
 Thus, a \PN is well-formed if (1) whenever a variable exists in
-the ingoing arcs of a transition then it also exists on the outgoing arcs, which implies that transitions do not
+the incoming arcs of a transition then it also exists on the outgoing arcs, which implies that transitions do not
 erase tokens, and  (2) 
 tokens/bonds cannot be cloned into more than one outgoing places.
 
@@ -852,8 +850,8 @@ match the requirements  on the transitions incoming arcs. Formally:
 		\end{enumerate}
 }\end{definition}
 
-Thus, $t$ is enabled in state $\state{M}{H}$ if  (1,2) there is a type-respecting assignment of token instances
-to the variables on the incoming edges, with the token instances originating from the appropriate
+Thus, $t$ is enabled in state $\state{M}{H}$ if  (1) there is a type-respecting assignment of token instances
+to the variables on the incoming edges, with (2) the token instances originating from the appropriate
 input places of the transition and  connected with
 bonds as required by the variable bonds occurring on the incoming edges, and (3) if a bond
 occurs in the outgoing edges of the transition but not the incoming ones, then the selected instances
@@ -875,7 +873,7 @@ we define:
 		where for all $x\in P$:
 		\[
 		M'(x) =   M(x)- \bigcup_{a\in f(x,t)} \connected(U(a), M(x)) 
-		\cup  \bigcup_{a\in f(t,x),U(a)\in M(y))} \connected(U(a),S)\]
+		\cup  \bigcup_{a\in f(t,x),U(a)\in M(y)} \connected(U(a),S)\]
 		where $S= (M(y)
 		-\{(U(a),U(b))\mid (a,b)\in F(y,t)\})\cup \{ (U(a),U(b))\mid (a,b)\in F(t,x) \}$
 		\[
@@ -912,7 +910,7 @@ Thus, a transition $t$ is reverse-enabled in $\state{M}{H}$ if
 (1) the transition has been executed and (2) there exists a type-respecting assignment of token instances,
 from the instances in the out-places of the transition, to the variables on the outgoing
 edges of the transition, and where the instances are connected with bonds as required by
-the transition's outgoing edges.  
+the transition's outgoing edges.  Also we do not recreate bonds when going backwards. 
 We refer to $W$ as a reversal enabling assignment.
 To implement the reversal of a transition $t$ according to a reversal enabling assignment $W$, 
 the selected instances are relocated from  the outgoing places of the transition to the incoming places,
@@ -926,9 +924,9 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 		\rtrans{t} \state{M'}{H'}$   where for all $x$:
 		\[
 		M'(x) =   M(x)- \bigcup_{a\in f(t,x)} \connected(W(a), M(x)) 
-		\cup  \bigcup_{a\in f(x,t),W(a)\in M(y))} \connected(W(a),S)\]
+		\cup  \bigcup_{a\in f(x,t),W(a)\in M(y)} \connected(W(a),S)\]
 		where $S= (M(y)
-		-\{(W(a),W(b))\mid (a,b)\in F(t,y)\})\cup \{ (W(a),W(b))\mid (a,b)\in F(x,t) \})$
+		-\{(W(a),W(b))\mid (a,b)\in F(t,y)\})\cup \{ (W(a),W(b))\mid (a,b)\in F(x,t) \}$
 		\[
 		\hspace{0.3in}\mbox{and}\hspace{0.3in}
 		H'(t') = \left\{
@@ -961,18 +959,18 @@ W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
 \begin{figure}[t]
 	\centering
 	%\subfigure{\includegraphics[width=6.3cm]{model.png}}
-	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert1.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert2.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
+	\subfigure{\includegraphics[width=.4cm]{arrowt1.png}}
+	\subfigure{\includegraphics[width=5.6cm]{aftert1.png}}%\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.4cm]{arrowt2.png}}
+	\subfigure{\includegraphics[width=5.6cm]{aftert2.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.4cm]{arrowt1.png}}
 	%\subfigure{\includegraphics[width=6.6cm]{aftert12.png}}
-	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert22.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.5cm]{arrowt3.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert3.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.5cm]{arrowt3r.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert3r.png}}
+	\subfigure{\includegraphics[width=.4cm]{arrowt2.png}}
+	\subfigure{\includegraphics[width=5.3cm]{aftert22.png}}%\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.4cm]{arrowt3.png}}
+	\subfigure{\includegraphics[width=5.3cm]{aftert3.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.4cm]{arrowt3r.png}}
+	\subfigure{\includegraphics[width=5.6cm]{aftert3r.png}}
 	\caption{Execution of the RPN autoprotolysis of water model.}
 	\label{execution}
 \end{figure}
@@ -999,7 +997,7 @@ We have presented three formalism to model chemical reactions. In particular, th
 
 Considering the three formalisms mentioned, all can represent this reaction. CCB is quite close to the chemical concepts and can therefore model this reactions faithfully. In particular, it shows the linked forming and breaking of bonds. In the Bonding Calculus, this link is not expressed. Reversing Petri Nets are in comparison a high-level modelling, but still capture the breaking and forming together. It does this without representing details of the reaction, which CCB does. All calculi avoid a $H_3O^+$ molecule forming directly.
 
-As mentioned, the reverse reaction can work by transferring any of the hydrogens of the hydronium. In our calculi, we can actuall distinguish the hydrogens due to the subscripts used. When reversing the reaction in CCB, instead of the transition in Section~\ref{sec:ccb}, we could also have done this (writing the transition and the rewrite together):
+As mentioned, the reverse reaction can work by transferring any of the hydrogens of the hydronium. In our calculi, we can actually distinguish the hydrogens due to the subscripts used. When reversing the reaction in CCB, instead of the transition in Section~\ref{sec:ccb}, we could also have done this (writing the transition and the rewrite together):
 %
 \begin{flalign*}
 &(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1) \paral (h_3[5];p).H'_3) &&\\
