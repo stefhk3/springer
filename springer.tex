@@ -6,7 +6,7 @@
 %
 \usepackage{graphicx}
 \usepackage{amsmath}
-\usepackage{psfrag}
+%\usepackage{psfrag}
 \usepackage{url}
 \usepackage{rotating}
 \usepackage{amsmath}
@@ -188,9 +188,9 @@ Department of Computer Science, University of Cyprus \\
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-We give an overview of some calculi which are able to model out-of-causal-order reversibility, as they appear for example in chemical reactions. We use the autoprotolysis of water as an example. We model this in various calculi to demonstrate their use.
+We give an overview of some techniques which are able to model out-of-causal-order reversibility, as they appear for example in chemical reactions. We use the autoprotolysis of water as an example. We model this using the Calculus of Covalent Bonding (CCB), the Bonding Calculus, and Reversing Petri Nets to demonstrate their use, and contrast it with CCSK as a conventional reversible process calculus. All these calculi can model the reaction better, but show some advantages or disadvantages compared to each other.  
 
-\keywords{Process calculi \and Reversibility \and Base Excision Repair \and Calculus of Covalent Bonding.}
+\keywords{Process calculi \and Reversibility \and Bonding Calculus \and Calculus of Covalent Bonding \and Reversing Petri Nets \and Reactin Modelling.}
 \end{abstract}
 %
 %
@@ -937,6 +937,24 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 		\right.
 		\]
 }\end{definition}	
+\begin{figure}
+	\centering
+	%\subfigure{\includegraphics[width=6.3cm]{model.png}}
+	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert1.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert2.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
+	%\subfigure{\includegraphics[width=6.6cm]{aftert12.png}}
+	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert22.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt3.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert3.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt3r.png}}
+	\subfigure{\includegraphics[width=7.2cm]{aftert3r.png}}
+	\caption{Execution of the RPN autoprotolysis of water model.}
+	\label{execution}
+\end{figure}
 
 We now return to the RPN autoprotolysis model and in Fig.~\ref{execution} we present
 a possible execution of the model. The first net in this sequence shows the system after 
@@ -956,24 +974,7 @@ depicted at place $z$ in the fourth net of the figure. At this stage  transition
 now reverse-enabled and the last net in the figure illustrates the state resulting after
 reversing $t_3$ with reversal enabling assignment $W(o_1)=O_1, W(o_2)=O_2, W(h_1)=H_1, 
 W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
-\begin{figure}[t]
-	\centering
-	%\subfigure{\includegraphics[width=6.3cm]{model.png}}
-	\subfigure{\includegraphics[width=.4cm]{arrowt1.png}}
-	\subfigure{\includegraphics[width=5.6cm]{aftert1.png}}%\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.4cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=5.6cm]{aftert2.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.4cm]{arrowt1.png}}
-	%\subfigure{\includegraphics[width=6.6cm]{aftert12.png}}
-	\subfigure{\includegraphics[width=.4cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=5.3cm]{aftert22.png}}%\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.4cm]{arrowt3.png}}
-	\subfigure{\includegraphics[width=5.3cm]{aftert3.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.4cm]{arrowt3r.png}}
-	\subfigure{\includegraphics[width=5.6cm]{aftert3r.png}}
-	\caption{Execution of the RPN autoprotolysis of water model.}
-	\label{execution}
-\end{figure}
+
 
 \paragraph{Conclusion.} As we have shown, RPNs are a graphical
 formalism well-suited to model chemical reactions such
