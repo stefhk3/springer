@@ -13,6 +13,10 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{subfigure}
+
+\usepackage{xcolor}
+\newcommand\anna[1]{\textcolor{red}{#1}}
+
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -166,13 +170,13 @@
 \newcommand{\type}{\mathit{type}}
 \begin{document}
 %
-\title{Reversibility in chemical reactions\thanks{The authors acknowledges partial support of COST Action IC1405 on Reversible Computation - extending horizons of computing.}}
+\title{Reversibility in chemical reactions\thanks{The authors acknowledge partial support of COST Action IC1405 on Reversible Computation - extending horizons of computing.}}
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Stefan Kuhn\orcidID{0000-0002-5990-4157}, Irek Ulidowski, Bogdan Aman, Gabriel Ciobanu, Kyriaki Psara, Anna Philippou}
+\author{Stefan Kuhn\orcidID{0000-0002-5990-4157}, Bogdan Aman, Gabriel Ciobanu,  Anna Philippou, Kyriaki Psara, and  Irek Ulidowski}
 %
 \authorrunning{S. Kuhn et al.}
 % First names are abbreviated in the running head.
@@ -188,9 +192,9 @@ Department of Computer Science, University of Cyprus \\
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-We give an overview of some techniques which are able to model out-of-causal-order reversibility, as they appear for example in chemical reactions. We use the autoprotolysis of water as an example. We model this using the Calculus of Covalent Bonding (CCB), the Bonding Calculus, and Reversing Petri Nets to demonstrate their use, and contrast it with CCSK as a conventional reversible process calculus. All these calculi can model the reaction better, but show some advantages or disadvantages compared to each other.  
+In this chapter we give an overview of some techniques developed for modeling and reasoning about reversibility of systems, including out-of-causal-order reversibility, as this appear for example in chemical reactions. We use the autoprotolysis of water as an example. We model this using the Calculus of Covalent Bonding (CCB), the Bonding Calculus, and Reversing Petri Nets (RPNs), thus demonstrating the use of the three formalisms while contrasting them to CCSK, a conventional reversible process calculus. This exercise demonstrates that these formalisms, developed  especially for the purpose of expressing advanced forms of reversibility, are able to model the reaction more accurately. At the same time, each formalism has its own characteristics and expresiveness potential, which are brought out in our discussion.
 
-\keywords{Process calculi \and Reversibility \and Bonding Calculus \and Calculus of Covalent Bonding \and Reversing Petri Nets \and Reactin Modelling.}
+\keywords{ Reversibility \and Reaction Modelling \and Process calculi \and Bonding Calculus \and Calculus of Covalent Bonding \and Reversing Petri Nets }
 \end{abstract}
 %
 %
@@ -237,23 +241,27 @@ low rate, making pure water slightly conductive.
 \label{fig:autoprotolysis}
 \end{figure}
 
-In order to model this reaction we need to understand what it is that makes it happen.
+In order to model this reaction we need to understand its causes. % what it is that makes it happen.
 The main factor is that the oxygen in the water molecule is \emph{nucleophilic}, meaning it has the tendency to bond to another atomic nucleus, which would serve as an \emph{electrophile}. This is because oxygen has a high 
-electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pairs} of two electrons each, which can form new bonds (lone pairs are shown in Figure~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
+electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell, which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pairs} of two electrons each, which can form new bonds (lone pairs are shown in Figure~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
 to other atomic nuclei by forming bonds from its lone pairs. Since oxygen attracts electrons, the hydrogen atoms in water
 have a positive partial charge and oxygen has a negative partial charge. 
 
 The reaction
-starts with the oxygen (in one water molecule) being attracted by a hydrogen in another 
+starts with an oxygen (in one water molecule) being attracted by a hydrogen in another 
 water molecule due to their opposite
 charges (this attraction is called a \emph{hydrogen bond}). Due to the nucleophilicity of 
 the oxygen, a bond can form to the hydrogen. This bond is formed out of 
 the electrons of one of the lone pairs of the oxygen. The curved arrows in Figure~\ref{fig:autoprotolysis} indicate the movements of the electrons. Since a hydrogen atom cannot have more 
-than one bonds 
-the creation of a new bond is compensated by breaking the existing hydrogen-oxygen bond (again indicated by a curved arrow). When this happens, both electrons, which form the hydrogen-oxygen bond, are left with oxygen. Since a hydrogen consists of one electron and one proton, it is only the proton that is transferred, so the process can be called a proton transfer as well as a hydrogen transfer. The forming of the new bond and the breaking of the old bond are \emph{concerted}, namely they happen together without a stable 
+than one bonds, 
+the creation of a new bond is compensated by breaking the existing hydrogen-oxygen bond (again indicated by a curved arrow
+\anna{perhaps use another color for this arrow to distinguish?}). When this happens, the two electrons, which formed the original hydrogen-oxygen bond, remain with the oxygen. Since a hydrogen contains %consists of 
+one electron and one proton, it is only the proton that is transferred, so the process can be called a proton transfer as well as a hydrogen transfer. The forming of the new bond and the breaking of the old bond are concerted, meaning that %namely
+they happen together without a stable 
 intermediate configuration. As a result we have reached the state where one oxygen atom
-has three bonds to hydrogen atoms and is positively charged, represented on the right side of Figure~\ref{fig:autoprotolysis}. This molecule is called hydronium and can be written as $\mathrm{H_3O^+}$. And the other oxygen atom bonds to only one hydrogen and is negatively charged, having an 
-electron in surplus. This molecule is a hydroxide and can be written as $\mathrm{OH^-}$. 
+has three bonds to hydrogen atoms and is positively charged, represented on the right side of the reaction in %of
+ Figure~\ref{fig:autoprotolysis}. This molecule is called hydronium and is written as $\mathrm{H_3O^+}$. The other oxygen atom bonds to only one hydrogen and is negatively charged, having an 
+electron in surplus. This molecule is called a hydroxide and is written as $\mathrm{OH^-}$. 
 
 We notice the reaction is reversible: the oxygen, which has lost a hydrogen, can 
 pull back one of the hydrogens from the other molecule, the  $\mathrm{H_3O^+}$ molecule. This is the case since the negatively 
@@ -263,18 +271,18 @@ all positively charged. Therefore, any of the hydrogens
 can be removed, making both oxygens formally uncharged, and restoring the two water 
 molecules. In Figure~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are correspondent electron movements when going from right to left. These are not given in line with usual conventions, but can be inferred.
 
-In this simple reaction, the forward and the reverse step consist of two steps each. The breaking of the old and the forming of the new bond occurs simultaneously. This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. The reverse step can be done with a different atom than the one used during the forward step because it is difficult to identify a  clear forward and reverse path. 
+In this simple reaction, the forward and the reverse step consist of two steps each. The breaking of the old and the forming of the new bond occur simultaneously. This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. Furthermore, the reverse step can be done with a different atom to the one used during the forward step because each of the molecules are in a sense identical and in practice there does not exist a single ``reverse'' path corresponding to a forward one.%it is difficult to identify a  clear forward and reverse path. 
 
 It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``r\^{o}le''. This explains why any proton can be transferred in the reverse reaction and not just the one involved in the forward path.
 
-In order to see how well existing formalisms could capture this reaction, we model it in CCSK \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
+In order to see how accurately existing formalisms can capture this reaction, we model it in CCSK \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
 %
 $$\begin{array}{lll}
 H & \bydef & \overline{a}.H'\\
 O & \bydef & a.a.a.O'
 \end{array}$$
 %
-Here, an oxygen atom is modelled with three prefixes and a hydrogen atom with the corresponding co-name. As in CCS, these can synchronise. A synchronisation (represented by a key) forms a bond until undone. In our modelling, the actions make sure the oxygen atom can bond to two or three hydrogen atoms as required and a hydrogen atom can bond to exactly one other atom. We can then model our system of two oxygen atoms and four hydrogen atoms:
+\anna{where $H'$ and $O'$...} Here, an oxygen atom is modelled with three prefixes and a hydrogen atom with the corresponding co-name. As in CCS, these can synchronise. A synchronisation (represented by a key) forms a bond until undone. In our modelling, the actions make sure the oxygen atom can bond to two or three hydrogen atoms as required and a hydrogen atom can bond to exactly one other atom. We can then model our system of two oxygen atoms and four hydrogen atoms:
 %
 $$( \overline{a}.H'_1 \paral \overline{a}.H'_2 \paral a.a.a.O'_1 \paral \overline{a}.H'_3 \paral \overline{a}.H'_4 \paral a.a.a.O'_2) 
 \; \setminus\{a\}.$$
