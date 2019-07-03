@@ -285,7 +285,9 @@ In this simple reaction, the forward and the reverse step consist of two steps e
 
 It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``r\^{o}le''. This explains why any proton can be transferred in the reverse reaction and not just the one involved in the forward path.
 
-In order to see how accurately existing formalisms can capture this reaction, we model it in CCSK \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
+\section{The autoprotolysis of water in CSSK}
+
+In order to see how accurately existing formalisms can capture the autoprotolysis of water, we model it in CCSK \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
 
 %
 $$\begin{array}{lll}
@@ -293,7 +295,7 @@ H & \bydef & \overline{a}.H'\\
 O & \bydef & a.a.a.O'
 \end{array}$$
 %
-\anna{where $H'$ and $O'$ are synonyms of $\Nil$ and help to identify processes.} Here, an oxygen atom is modelled with three prefixes and a hydrogen atom with the corresponding co-name. As in CCS, these can synchronise. A synchronisation (represented by a key) forms a bond until undone. In our modelling, the actions make sure the oxygen atom can bond to two or three hydrogen atoms as required and a hydrogen atom can bond to exactly one other atom. We can then model our system of two oxygen atoms and four hydrogen atoms:
+where $H'$ and $O'$ are synonyms of $\Nil$ and help to identify processes. Here, an oxygen atom is modelled with three prefixes and a hydrogen atom with the corresponding co-name. As in CCS, these can synchronise. A synchronisation (represented by a key) forms a bond until undone. In our modelling, the actions make sure the oxygen atom can bond to two or three hydrogen atoms as required and a hydrogen atom can bond to exactly one other atom. We can then model our system of two oxygen atoms and four hydrogen atoms:
 %
 $$( \overline{a}.H'_1 \paral \overline{a}.H'_2 \paral a.a.a.O'_1 \paral \overline{a}.H'_3 \paral \overline{a}.H'_4 \paral a.a.a.O'_2) 
 \; \setminus\{a\}.$$
@@ -314,14 +316,15 @@ In order for the hydrogen transfer to happen, a spontaneous dissociation of a hy
 
 Overall, we can model the final products in CCSK, but the processes taking place are not well represented. The main reason for this is that the calculus is restricted to backtracking for undoing actions.
 
-\section{CCB}
+\section{New developments}
+\subsection{CCB}
 \label{sec:ccb}
 
 In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, concentrating on the new general 
 prefixing operator $(s;b).P$ which produces pairs of \emph{concerted} actions,
 while presenting an intuitive model of the autoprotolysis of water. This shows the strengths of CCB compared to previous calculi.
 
-\subsection{Definition of CCB}\label{sec:calculusdef}
+\subsubsection{Definition of CCB}\label{sec:calculusdef}
 
 
 In this section we define our new calculus CCB, discussing only the main ideas. More details can be fond in \cite{KUHN201818}. First, we introduce some preliminary notions and notations.
@@ -581,7 +584,7 @@ We shall call henceforth the transitions derived by the forward SOS rules the \e
 and, the transitions derived by the reverse SOS rules the \emph{reverse transitions}.
 Correspondingly, there are the \emph{concerted (action)} transitions. 
 
-\subsection{The autoprotolysis of water in CCB}
+\subsubsection{The autoprotolysis of water in CCB}
 
 When modelling the autoprotolysis of water in CCB, we shall model the hydrogen and oxygen atoms as processes $H$ and $O$ as follows, where 
 $h,o$ are actions representing the bonding capabilities of the atoms and $n,p$ 
@@ -708,11 +711,11 @@ We can therefore apply the movement of restrictions the reverse way we applied i
 &( (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) \setminus\{h_3,h_4,o_3,o_4\} ) \setminus\{n,p\}&&
 \end{flalign*}
 
-\subsection{Conclusion}
+\subsubsection{Conclusion}
 
 We have seen in this chapter that we can model a simple covalent chemical reaction using CCB. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. The same modelling of hydrogens and oxygens can be used to model a more complex reaction, involving carbon atoms as well \cite{KUHN201818}. This shows that the modelling implements general concepts and not only this particular situation. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}.
 
-\section{Bonding Calculus}
+\subsection{Bonding Calculus}
 
 In this section we present shortly the bonding calculus \cite{NaCo18}, and 
 illustrate its expressiveness by modelling the autoprotolysis of water. 
@@ -976,7 +979,7 @@ Therefore, the bonding calculus is suitable for modelling in a
 natural and easy way the autoprotolysis of water.
 
 
-\section{Reversing Petri nets}
+\subsection{Reversing Petri nets}
 In this section we present reversing Petri nets (RPNs), an extension of Petri nets
 developed for modeling reversing computations, and we employ the formalism
 to model the autoprotolysis of water. Reversing Petri nets~\cite{RPNs} are 
