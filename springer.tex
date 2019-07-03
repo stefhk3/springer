@@ -293,7 +293,7 @@ H & \bydef & \overline{a}.H'\\
 O & \bydef & a.a.a.O'
 \end{array}$$
 %
-\anna{where $H'$ and $O'$...} Here, an oxygen atom is modelled with three prefixes and a hydrogen atom with the corresponding co-name. As in CCS, these can synchronise. A synchronisation (represented by a key) forms a bond until undone. In our modelling, the actions make sure the oxygen atom can bond to two or three hydrogen atoms as required and a hydrogen atom can bond to exactly one other atom. We can then model our system of two oxygen atoms and four hydrogen atoms:
+\anna{where $H'$ and $O'$ are synonyms of $\Nil$ and help to identify processes.} Here, an oxygen atom is modelled with three prefixes and a hydrogen atom with the corresponding co-name. As in CCS, these can synchronise. A synchronisation (represented by a key) forms a bond until undone. In our modelling, the actions make sure the oxygen atom can bond to two or three hydrogen atoms as required and a hydrogen atom can bond to exactly one other atom. We can then model our system of two oxygen atoms and four hydrogen atoms:
 %
 $$( \overline{a}.H'_1 \paral \overline{a}.H'_2 \paral a.a.a.O'_1 \paral \overline{a}.H'_3 \paral \overline{a}.H'_4 \paral a.a.a.O'_2) 
 \; \setminus\{a\}.$$
@@ -317,9 +317,271 @@ Overall, we can model the final products in CCSK, but the processes taking place
 \section{CCB}
 \label{sec:ccb}
 
-In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818} informally, concentrating on the new general 
+In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, concentrating on the new general 
 prefixing operator $(s;b).P$ which produces pairs of \emph{concerted} actions,
 while presenting an intuitive model of the autoprotolysis of water. This shows the strengths of CCB compared to previous calculi.
+
+\subsection{Definition of CCB}\label{sec:calculusdef}
+
+
+In this section we define our new calculus CCB, discussing only the main ideas. More details can be fond in \cite{KUHN201818}. First, we introduce some preliminary notions and notations.
+
+Let $\mA$ be the set of (forward) action labels, 
+ranged over by $a,b,c,d,e,f$. We partition $\mA$ into the set of \emph{strong actions}, written as
+$\mSA$, and the set of \emph{weak actions}, written as $\mWA$. Reverse (or past) action labels are members of
+$\underline\mA$, with typical members $\un{a},\un b, \un c,\un d, \un e ,\un f$, and represent 
+undoing of actions. The set $\mathcal{P}(\mA \cup \underline\mA)$ is ranged over by $L$.
+
+Let $\Keys$ be an infinite set of {\em communication keys} (or {\em keys} for short)
+\cite{Irek2007}, ranged over by $k,l, m,n$. The Cartesian product $\mathcal A \times \Keys$, denoted by $\mAK$,
+ represents past actions, which are written as $a[k]$ for $a\in \mA$ and $k\in\Keys$. 
+Correspondingly, we have the set $\umAK$ that represents undoing of past actions. We use $\alpha, \beta$ to identify actions which are either from $\mA$ or $\mAK$. It would be 
+useful to consider sequences of actions or past actions, namely the elements of $(\mA \cup \mAK)^*$, 
+which are ranged over by $s,s'$ and sequences of purely past actions, namely the elements of $\mAK^*$, 
+which are ranged over by $t,t'$. The empty sequence is denoted by $\epsilon$. We use the notation ``$\alpha$,$s$'' and
+``$s$,$s'$'' to denote a concatenation of elements, which can be strings or single actions.
+
+We shall also use two sets of auxiliary action labels, namely the set $(\mA) =\{ (a)\ \mid a\in\mA\}$, and its product with the set of keys, namely $(\mA)\Keys$. These labels will be used in the auxiliary rules when defining
+the semantics of CCB. They denote the execution of a weak action, which makes it possible in the SOS rules to force breaking of a bond for those actions only.
+
+We now define the Calculus of Covalent Bonding. The syntax of CCB is given 
+below where $P$ is a process term:
+
+$$P ::=  S\lvert S\bydef P \ \bigm\lvert \ (s;b).P \ \bigm\lvert \ P\lvert Q \ \bigm\lvert \ P\restrict L $$
+
+The set of process identifiers (constants) $\PI$ contains typical elements $S$ and $T$. 
+Each process identifier $S$ has a defining equation $S\bydef P$ where $P$ contains only forward 
+actions (and no past actions). There is also a special identifier
+ $\Nil$, denoting the deadlocked process, which has no defining equation. For restrictions $L \subseteq \mA$ holds.
+ 
+We have a general prefixing operator
+$(s;b).P$, where $s$ is a non-empty sequence of actions or past actions. This operator
+extends the prefixing operator in \cite{Irek2012}. The action $b$ is a weak action
+and it can be omitted, in which case the prefixing is written as $(s).P$ and is called the
+\emph{simple prefix}. The simple prefix (which is still a sequence) is the prefixing operator in \cite{Irek2012}. 
+One of the actions in $s$ in $(s).P$ may be a weak action from $\mWA$. A weak action in $s$ is only allowed for the simple prefix, in the $(s;b)$ operator b is the only allowed weak action. If $s$ is a sequence that contains   
+a single action, then the action is a strong action and the operator 
+is the prefixing operator of CCS \cite{MilnerBook}.
+We omit trailing $\Nil$s so, for example, $(s).\Nil$ is written as $(s)$. The new feature of the operator $(s;b).P$ is the execution of the weak action $b$, which
+can happen only after all the actions in $s$ have taken place. Performing $b$ then forces
+undoing one of the past actions in $s$ (by the \rulename{concert} rule in Figure~\ref{fig:csos}). If a $(s;b)$ operator is followed by another sequence of actions there is a non-deterministic choice of either doing $b$ or progressing to the next sequence of actions.
+
+$P\paral Q$ represents two systems $P$ and $Q$ which can perform actions or reverse actions on
+their own, or which can interact with each other according to a communication function
+$\gamma$. As in the calculus ACP \cite{ACPBook}, the communication function is a partial function 
+$\gamma: \mathcal A \times \mathcal A \rightarrow \mathcal A$ which is commutative and associative. The function
+$\gamma$ is used in the operational semantics to define when two processes can interact. Processes 
+$P$ and $Q$ in $P\paral Q$ can also perform a pair of concerted actions,
+which is the new feature of our calculus.  We also have the ACP-like restriction operator 
+$\setminus L$, where $L$ is a set of labels. It prevents actions from taking place and, due to 
+the synchronisation algebra used, it also blocks communication. If $\gamma(a,b)=c$ then $a.P$ and $b.Q$
+cannot communicate in $(a.P\paral b.Q)\setminus c$.
+Note that we do not use the usual relabelling 
+operator $[f]$, where $f: \mA \rightarrow \mA$, in CCB, which could be easily added.
+
+The set of \emph{process terms} is ranged over by $P,Q$ and $R$ and is denoted by $\Proc$. 
+In the setting of CCB these terms are simply called \emph{processes}. We define the semantics of our calculus using SOS rules (Figures~\ref{fig:fsos}--\ref{fig:csos}) and rewrite rules (Figure~\ref{fig:reduction}).
+
+We use some predicates and functions, which are formally defined in \cite{KUHN201818}. Informally, a process $P$ is standard, written $\std{P}$, if it contains no past actions (hence no keys). A key $n$ is fresh in $Q$, written $\freshpred{n}(Q)$, if $Q$ contains no past action with the key $n$. Function $\mathsf{k}$ returns the keys in a sequence of actions, whereas $\mathsf{keys}$ returns the keys in a process, and $\mathsf{fn}$ gives the actions of a process which could be executed.
+
+
+\begin{figure}
+\[
+\begin{array}{ll}
+\rulename{act1}\ 
+\Rule
+{\std{P} \quad \fresh{k}{s,s'}}
+{(s,a,s';b).P \xrightarrow{a[k]}(s,a[k],s';b).P}
+\qquad &
+\rulename{act2}\
+\Rule
+{P \xrightarrow{a[k]} P' \quad \fresh{k}{t}}
+{(t;b).P \xrightarrow{a[k]} (t;b).P'}
+\\[25pt]
+%\rom{act3}\ Dec 17
+%\Rule
+%{\std{P} \quad \fresh{k}{t,t'}}
+%{(t,b,t';b').P \xrightarrow{b[k]}(t,b[k],t';b').P}
+%\qquad &
+%\\[25pt]
+\rulename{par}\
+\Rule
+{P \xrightarrow{a[k]} P'\quad \fresh{k}{Q}}
+{P \paral Q \xrightarrow{a[k]} P' \paral Q}
+\qquad &
+\rulename{com}\
+\Rule
+{P \xrightarrow{a[k]} P' \quad Q \xrightarrow{d[k]} Q'}
+{P \paral Q \xrightarrow{c[k]} P' \paral Q'}
+\; (*)
+%
+\\[25pt]
+\rulename{res}\
+\Rule
+{P \xrightarrow{a[k]} P'}
+{P\backslash L \xrightarrow{a[k]} P'\backslash L}
+\; a \notin L
+\qquad &
+\rulename{con}\
+\Rule
+{P \xrightarrow{a[k]} P'}
+{S \xrightarrow{a[k]} P'}
+\; S \bydef P
+\end{array}
+\] 
+\caption[Forward SOS rules for CCB.]{Forward SOS rules for CCB. The condition (*) is $\gamma(a,d)=c$, 
+and $b \in \mathcal{WA}$. Remember that $s$ is a mixed sequence of actions and past actions and $t$ is a sequence of purely past actions} \label{fig:fsos}
+\end{figure}
+
+
+\begin{figure}
+\[
+\begin{array}{ll}
+\rulename{rev act1}\
+\Rule
+{\std{P} %\quad \fresh{k}{s,s'}
+}
+{(s,a[k],s';b).P \xrightarrow{\underline{a}[k]}(s,a,s';b).P}
+\quad &
+%
+% b was previously beta. Since we must apply prom rewrite before we apply any SOS rule, we do not 
+% need a rule with a beta.
+%
+% referees suggested to remove fsh predicates from both act rules. They were there for symmetry reason 
+% with the forward rules but are not used in the reverse.
+%
+\rulename{rev act2}\
+\Rule
+{P \xrightarrow{\underline{a}[k]} P' %\quad \fresh{k}{t}
+}
+{(t;b).P \xrightarrow{\underline{a}[k]} (t;b).P'}
+\\[25pt]
+% Dec 17
+%\rom{rev act3}\
+%\Rule
+%{\std{P}  \quad \fresh{k}{t,t'} }
+%{(t,b[k],t';b').P \xrightarrow{\underline{b}[k]} (t,b,t';b').P'}
+%& \\[25pt]
+\rulename{rev par}\
+\Rule
+{P \xrightarrow{\underline{a}[k]} P'\quad \fresh{k}{Q}}
+{P \paral Q \xrightarrow{\underline{a}[k]} P' \paral Q}
+\quad &
+\rulename{rev com}\
+\Rule
+{P \xrightarrow{\underline{a}[k]} P' \quad Q \xrightarrow{\underline{d}[k]} Q'}
+{P \paral Q \xrightarrow{\underline{c}[k]} P' \paral Q'}
+\; (*)
+%
+\\[25pt]
+\rulename{rev res}\
+\Rule
+{P \xrightarrow{\underline{a}[k]} P'}
+{P\backslash L \xrightarrow{\underline{a}[k]} P'\backslash L}
+\; \underline{a} \notin L
+\quad &
+\rulename{rev con}\
+\Rule
+{P \xrightarrow{\underline{a}[k]} P'}
+{P \xrightarrow{\underline{a}[k]} S}
+\; S \bydef P'
+\end{array}
+\]
+\caption[Reverse SOS rules for CCB.]{Reverse SOS rules for CCB. The condition (*) is $\gamma(a,d)=c$, and $b \in \mathcal{WA}$. %Note that $\beta \in \mA \cup \mAK$.
+} 
+\label{fig:reversesos}
+\end{figure}
+
+\begin{figure}
+\[
+\begin{array}{l}
+\rulename{aux1}\ 
+\Rule{\std{P} \quad \fresh{k}{t}}
+{(t;b).P \xrightarrow{(b)[k]}(t;b[k]).P}
+\qquad
+\rulename{aux2}\
+\Rule
+{P \xrightarrow{(b)[k]} P' \quad \fresh{k}{t}}
+{(t;b').P \xrightarrow{(b)[k]} (t;b').P'}
+\\[25pt]
+\rulename{concert}\ 
+\Rule
+{P\xrightarrow{(b)[k]}P' \quad P'\xrightarrow{\underline{a}[l]}P'' \qquad Q\xrightarrow{\alpha[k]}Q' 
+  \quad Q'\xrightarrow{\underline{d}[l]}Q''% %\quad \fresh{k}{Q} 
+ }
+{P \paral Q\xrightarrow{\{e[k],\underline{f}[l]\}} P'' \paral Q''} (*)\\[25pt]
+\rulename{concert act}\
+\Rule
+{P \xrightarrow{\{{a}[k], \underline{h}[l]\}} P' \quad \fresh{k}{t}}
+{(t;b).P \xrightarrow{\{{a}[k], \underline{h}[l]\}} (t;b).P'}\\[25pt]
+\rulename{concert par}\
+\Rule
+{P \xrightarrow{\{{a}[k], \underline{h}[l]\}} P'\quad \fresh{k}{Q} \quad \fresh{l}{Q}}
+{P \paral Q \xrightarrow{\{{a}[k], \underline{h}[l]\}} P' \paral Q}\\[25pt]
+\rulename{concert res}\
+\Rule
+{P \xrightarrow{\{{a}[k], \underline{h}[l]\}} P'}
+{P\backslash L \xrightarrow{\{{a}[k], \underline{h}[l]\}} P'\backslash L} (**)
+%
+\end{array}
+\] 
+\caption[SOS rules for concerted actions in CCB.]{SOS rules for concerted actions in CCB. The condition (*) is 1. $\alpha$ is $c$ or $(c)$ 
+and $\gamma(b,c)=e$ for some $c\in \mathcal{A}$, and 2. $\gamma(a,d)=f$. 
+The condition (**) is $a, \underline{h}  \notin L \cup (L)$. 
+Recall that $t \in \mAK^*$, and $b \in \mathcal{WA}$.} \label{fig:csos}
+\end{figure}
+
+\begin{figure}
+\[
+\begin{array}{lll}
+\rulename{prom}: & (s,a,s';b[k]).P \Rightarrow (s,a[k],s';b).P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA} 
+\\[10pt]
+\rulename{move-r}: & (s,a,s',b[k],s'').P \Rightarrow (s,a[k],s',b,s'').P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA}
+\\[10pt]
+\rulename{move-l}: & (s,b[k],s',a,s'').P \Rightarrow (s,b,s',a[k],s'').P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA}
+\end{array}
+\] 
+\caption[Reduction rules for CCB.]{New reduction rules for CCB. Sequences $s, s', s''$ are members of $(\mathcal{A} \cup \mathcal{AK})^{*}$.} 
+\label{fig:reduction}
+\end{figure}
+\clearpage
+
+The forward and reverse SOS rules for CCB are given in Figures~\ref{fig:fsos} and \ref{fig:reversesos}. 
+Figure \ref{fig:csos} contains the SOS rules that define the new concerted actions transitions. 
+The main rule is the rule \rulename{concert} that defines when a pair of concerted actions 
+takes place.  We also have two auxiliary rules \rulename{aux1} and \rulename{aux2} which 
+define only an auxiliary transition relation needed in the \rulename{concert} rule. The auxiliary rules are only applicable if a weak action is beyond the semicolon, whereas a weak action in the simple prefix is dealt with by standard rules and can therefore not become part of a concerted action. Note that the \rulename{concert} rule uses \emph{lookahead} \cite{Uli92}.
+Also note that transitions in \rulename{aux1} and \rulename{aux2} use the auxiliary labels $(b)[k]$ 
+for all $b \in \mWA$ and $k \in \Keys$. The rule \rulename{concert par} requires that $k$ is fresh in $Q$,
+correspondingly as in \rulename{par}. Moreover, we need to ensure that when we reverse $h$ with the key $l$
+in $P$ we do not leave out any actions with the key $l$ in $Q$ which make up a multiaction 
+communication with the key $l$. Hence, we also include the premise $\fresh{l}{Q}$ in \rulename{concert par}.
+The rule \rulename{concert act} requires, correspondingly as \rulename{act}, that $k$ is fresh in $t$.
+Our operational semantics guarantees that if a standard process evolves to $(t;b).P$, for some $P$, and
+$P$ reverses an action with the key $l$, then $l$ is fresh in $t$. Hence, we do not include $\fresh{l}{t}$
+in the premises of \rulename{concert act}.
+%
+%
+Overall, the transitions in Figures~\ref{fig:fsos}--\ref{fig:csos} are labelled with $a[k] \in \mAK$, or with 
+$\underline{c}[l] \in \umAK$, or with concerted actions $(a[k], \underline{c}[l])$.
+%\} \in \mathcal{C}$.
+
+Next, we introduce our reduction relation which is given by the reduction (rewrite) rules 
+in Figure~\ref{fig:reduction}. We do not include the standard rules for simple operation like swapping parallel processes (see \cite{KUHN201818}). We add rules define {\em promotion} of actions. These are \rulename{prom}, \rulename{move-r}, and \rulename{move-l} which  
+promote weak bonds (here $b$) to strong bonds (here $a$).
+The rule \rulename{prom} applies to the full version of our prefix operator (with the ; construct), and
+\rulename{move-r} and \rulename{move-l} apply only to the simple prefix.
+These three rules are here to model what happens in chemical systems: a bond on a weak action is 
+temporary and as soon as there is a strong action that can accommodate that bond (as the result
+of concerted actions) the bond establishes itself on the strong action thus releasing the weak action.
+In order to align the use of these three rules to what happens in chemical reactions, we insist
+that they are used as soon as they becomes applicable, a formal definiation is given in \cite{KUHN201818}.
+
+We shall call henceforth the transitions derived by the forward SOS rules the \emph{forward transitions} 
+and, the transitions derived by the reverse SOS rules the \emph{reverse transitions}.
+Correspondingly, there are the \emph{concerted (action)} transitions. 
+
+\subsection{The autoprotolysis of water in CCB}
 
 When modelling the autoprotolysis of water in CCB, we shall model the hydrogen and oxygen atoms as processes $H$ and $O$ as follows, where 
 $h,o$ are actions representing the bonding capabilities of the atoms and $n,p$ 
@@ -334,9 +596,7 @@ and $b$ can happen if
 all actions in $s$ have already taken place. Once $b$ takes place, it must be accompanied by
 undoing immediately one of the actions in $s$. The weak action in the sequence, as we shall see later, is important for rewriting operations.  
 
-We use a synchronisation function $\gamma$ which tells us which actions can be combined to 
-produce bonds between atoms. We define $\gamma$ 
-as a partial function $\gamma: \mathcal A \times \mathcal A \rightarrow \mathcal A$, where actions $ho, np, nh, no$ represent the created bonds:
+The synchronisation function $\gamma$ is:
 
 $$\begin{array}{llllll}
 \gamma(h,o) & = & ho \qquad &
@@ -447,6 +707,8 @@ We can therefore apply the movement of restrictions the reverse way we applied i
 &(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1)\setminus\{h_1,h_2,o_1,o_2\} \paral &&\\
 &( (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) \setminus\{h_3,h_4,o_3,o_4\} ) \setminus\{n,p\}&&
 \end{flalign*}
+
+\subsection{Conclusion}
 
 We have seen in this chapter that we can model a simple covalent chemical reaction using CCB. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. The same modelling of hydrogens and oxygens can be used to model a more complex reaction, involving carbon atoms as well \cite{KUHN201818}. This shows that the modelling implements general concepts and not only this particular situation. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}.
 
