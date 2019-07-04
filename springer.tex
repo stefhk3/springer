@@ -73,7 +73,7 @@
 \newcommand{\std}[1]{\mathsf{std}(#1)}
 %
 \newcommand{\Bch}[2]{\mathsf{before}_{#1}(#2)}
-
+\newcommand{\remove}[1]{} 
 \newcommand{\keys}[1]{\mathsf{keys}(#1)}
 \newcommand{\kkey}[1]{\mathsf{k}(#1)}
 \newcommand{\key}[1]{[#1]}
@@ -235,7 +235,62 @@ counterpart in the biophysical system, and the behaviour of the whole system is 
 
 Another approach to model biological interactions is by using rule-based formalisms such as BIOCHAM \cite{biocham}, $\kappa$-calculus  \cite{danoscausality} and BioNetGen Language (BNGL) \cite{pmid19399430}. Just like in our bonding calculus \cite{NaCo18}, $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM. Just like in BNGL, we allow to use the molecule sites having the same name, while this is not possible in $\kappa$-calculus. While $\kappa$-calculus describe molecules as a set of sites and use rules to manipulate these sites between two or more molecules, in our bonding calculus \cite{NaCo18} a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus. Moreover, the number of rules is smaller because we use generic rules.
 
-Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no expllicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are CCSK \cite{Irek2007} and RCCS \cite{danos2004ccsr}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of forward action, which is not the case in other calculi. Actions can be undone in exacetly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables modelling of out-of-causal-order reversibility. In biological and chemical systems, such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailled view. This suggests that this is a case of emergent behaviour.
+Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no expllicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are CCSK \cite{Irek2007} and RCCS \cite{danos2004ccsr}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of forward action, which is not the case in other calculi. Actions can be undone in exactly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables modelling of out-of-causal-order reversibility. In biological and chemical systems, such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailled view. This suggests that this is a case of emergent behaviour.
+
+Petri nets (PNs)~\cite{PNs} are another formalism that has been widely used to model and reason
+about a wide range of applications featuring concurrency and distribution. They are a graphical 
+language  associated with 
+a rich mathematical theory and supported by a variety of tools. Their employment in systems 
+biology was initiated in~\cite{DBLP:conf/ismb/ReddyML93,DBLP:journals/jsamas/HofestadtH94}
+and since then they have been widely employed for
+the modelling, analysis, and simulation of a diversity of biological systems including 
+biochemical reactions in metabolic pathways, gene expression, signal transduction, and neuronal processes~\cite{PNbiology,DBLP:journals/bib/Chaouiya07,DBLP:journals/nc/BaldanCMS10}. Indeed, PNs seem to be a natural framework for representing biochemical systems as themselves constitute a set of interdependent
+transitions/reactions which consume 
+and produce resources, and are represented graphically in a similar fashion to the systems
+in question. Furthemore, a PN model
+can be decomposed in order to gandle the overall complexity, and the abstraction level of a model
+can vary from single molecules, to cells, to multicellular aggregations.
+Several specialized Petri net classes like qualitative, stochastic, continuous, or
+hybrid Petri nets and their coloured counterparts have been used to describe different
+systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
+At the same time, PNs enable a wide range of analysis techniques, 
+such as determining states of equilibrium, conflicting evolutions, 
+and reachable states. 
+
+As far as reversibility is concerned, classical PNs and their extensions do not
+directly handle reversibility. Modelling reversible reactions in these formalisms requires the employment
+of mechanisms involving two distinct transitions,
+one for the forward and one for the reverse version of a reaction. This
+may result in expanded models and state spaces and less natural and/or less accurate
+models of  reversible behavior. In this study we consider
+a recently-introduced extension of Petri nets called reversing Petri nets (RPNs)~\cite{RPNs}.
+%A large amount of work has focused on providing a formal understanding of reversibility within process calculi and it has recently been extended to the formalism of Petri nets.  
+%Petri nets (PNs)~\cite{PNs} are a graphical mathematical language that can be used for the specification and
+%analysis of discrete event systems. 
+%The first study of reversible computation within PNs was proposed in~\cite{PetriNets,BoundedPNs}. In these works, the
+%authors investigate the effects of adding \emph{reversed} versions of selected transitions in a PN
+%by reversing the directions of a transition's arcs. They then explore decidability problems regarding reachability and coverability in the resulting PNs. In
+%was proposed, called reversing Petri nets (RPNs).  In this work, RPNs are acyclic Petri net structures that  assume 
+RPNs are the first proposal for capturing reversible behavior directly in the Petri net model
+and they support reversible computation in all its forms
+(backtracking, causal-order reversibility and out-of-causal-order reversibility).
+RPNs  enable the reversal of each executed transition and assume tokens to be distinguished from each 
+other by an identity/type and to be persistent. Furthermore,
+during transitions tokens can be bonded together, with  the creation of bonds
+ considered to be the effect of a transition, whereas their destruction is the effect of
+the transition's reversal. The notion of bonds is especially useful for reasoning about biochemical
+systems as illustrated in the current paper through the case study of the autoprotolysis of water.
+RPNs have been shown to be closely related to Coloured Petri nets, as a subset of the former model
+has been encoded into the latter~\cite{RPNtoCPN}.
+%RPNs
+%have been extended with cycles~\cite{RPNJournal} and with a mechanism for controlling transition
+%reversal by associating transitions with conditions~\cite{RC19}. 
+
+
+
+
+
+
 
 \section{The autoprotolysis of water}
 
@@ -724,7 +779,7 @@ during transitions tokens can be bonded with each other. The creation of bonds
 is considered to be the effect of a transition, whereas their destruction is the effect of
 the transition's reversal. RPNs
 have been extended with a mechanism for controlling transition
-reversal by associating transitions with conditions~\cite{CRPNs}. In this section we consider
+reversal by associating transitions with conditions~\cite{RC19}. In this section we consider
 a model allowing multiple tokens of the same type as well as the possibility for 
 transitions to break bonds. Thus, a transition may simultaneously create
 and destruct bonds, and its reversal results in the opposite effect. Formally, a RPN
@@ -999,7 +1054,7 @@ W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
 formalism well-suited to model chemical reactions such
 as the autoprotolysis of water. At the same time, they are amenable for modeling
 other types of distributed systems and they have been used successfully for
-the modeling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{CRPNs}. Their extension in~\cite{CRPNs} also introduces
+the modeling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. Their extension in~\cite{RC19} also introduces
 a mechanism for controlling reversibility. This control is
 enforced with the aid of conditions associated with transitions, whose satisfaction/violation
 acts as a guard for the transition execution in the forward/backward direction, respectively. 
@@ -1027,7 +1082,25 @@ As mentioned, the reverse reaction can work by transferring any of the hydrogens
 &\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3[3]},o_4[4],\boldsymbol{n}).O'_2
 \end{flalign*}
 %
-The result is different from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. All calculi presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. Reversing Petri Nets give exact rules and can therefore only execute one forward and reverse possibility.
+The result is different from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. All calculi presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. 
+
+Reversing Petri nets are a natural choice to model and analyse biochemical reaction systems, which by nature
+have multi-party interactions, are inherently concurrent, and may feature reversible behavior.  
+As we have shown, RPNs are 
+well-suited to model biochemical phenomena such
+as the autoprotolysis of water and, as for PNs in general, their graphical nature allows them to be easily understood by
+non-computer-science experts. In particular, the feature of token multiplicity and 
+the use of variables allows to non-deterministically 
+select different combinations of atoms of a particular element when creating molecules. Also the possibility for 
+transitions to break bonds allows to model a transition that simultaneously 
+destructs  a water molecule and creates a hydronium whose  reversal results in the opposite effect. Furthermore,
+the collective token interpretation adopted in the framework, treating all tokens of the same type
+as equivalent, allows the reaction to reverse into two different water molecules than the original ones,
+i.e., using different instances of the atoms. 
+Note that the presented model abstracts away the positive/negative charge of the atoms and 
+captures the existence of electrons by the enablednes of transitions. A model at a lower
+level of abstraction would be possible by introducing tokens to represent the electrons  bonded to the associated 
+atom tokens to illustrate the relevant charges. 
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
