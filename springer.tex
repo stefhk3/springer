@@ -176,7 +176,7 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Stefan Kuhn\orcidID{0000-0002-5990-4157}\inst{1}, Bogdan Aman\inst{2}, Gabriel Ciobanu\inst{3},  Anna Philippou\inst{4}, Kyriaki Psara\inst{4}, and  Irek Ulidowski\inst{5}}
+\author{Stefan Kuhn\orcidID{0000-0002-5990-4157}\inst{1}, Bogdan Aman\inst{2,3}, Gabriel Ciobanu\inst{2,3},  Anna Philippou\inst{4}, Kyriaki Psara\inst{4}, and  Irek Ulidowski\inst{5}}
 %
 \authorrunning{S. Kuhn et al.}
 % First names are abbreviated in the running head.
@@ -184,7 +184,7 @@
 %
 \institute{School of Computer Science and Informatics, De Montfort University, Leicester, UK\\ \email{\scriptsize stefan.kuhn@dmu.ac.uk} \and
 Romanian Academy, Institute of Computer Science, Ia\c si\\
- \email{\scriptsize bogdan.aman@gmail.com } \and
+ \email{\scriptsize bogdan.aman@iit.academiaromana-is.ro } \and
 A.I.Cuza University, Faculty of Computer Science, Ia\c si, Romania\\ 
 \email{\scriptsize gabriel@info.uaic.ro} \and
 Department of Computer Science, University of Cyprus \\ \email{\scriptsize \{annap,kpsara01\}@cs.ucy.ac.cy}  \and 
@@ -195,7 +195,7 @@ Department of Informatics, University of Leicester\\
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-In this chapter we give an overview of some techniques developed for modeling and reasoning about reversibility of systems, including out-of-causal-order reversibility, as this appear for example in chemical reactions. We use the autoprotolysis of water as an example. We model this using the Calculus of Covalent Bonding (CCB), the Bonding Calculus, and Reversing Petri Nets (RPNs), thus demonstrating the use of the three formalisms while contrasting them to CCSK, a conventional reversible process calculus. This exercise demonstrates that these formalisms, developed  especially for the purpose of expressing advanced forms of reversibility, are able to model the reaction more accurately. At the same time, each formalism has its own characteristics and expresiveness potential, which are brought out in our discussion.
+In this chapter we give an overview of some techniques developed for modelling and reasoning about reversibility of systems, including out-of-causal-order reversibility, as this appear for example in chemical reactions. We use the autoprotolysis of water as an example. We model this using the Calculus of Covalent Bonding (CCB), the Bonding Calculus, and Reversing Petri Nets (RPNs), thus demonstrating the use of the three formalisms while contrasting them to CCS with keys (CCSK), a conventional reversible process calculus. This exercise demonstrates that these formalisms, developed  especially for the purpose of expressing advanced forms of reversibility, are able to model the reaction more accurately. At the same time, each formalism has its own characteristics and expressiveness potential, which are brought out in our discussion.
 
 \keywords{ Reversibility \and Reaction Modelling \and Process calculi \and Bonding Calculus \and Calculus of Covalent Bonding \and Reversing Petri Nets }
 \end{abstract}
@@ -235,7 +235,7 @@ counterpart in the biophysical system, and the behaviour of the whole system is 
 
 Another approach to model biological interactions is by using rule-based formalisms such as BIOCHAM \cite{biocham}, $\kappa$-calculus  \cite{danoscausality} and BioNetGen Language (BNGL) \cite{pmid19399430}. Just like in our bonding calculus \cite{NaCo18}, $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM. Just like in BNGL, we allow to use the molecule sites having the same name, while this is not possible in $\kappa$-calculus. While $\kappa$-calculus describe molecules as a set of sites and use rules to manipulate these sites between two or more molecules, in our bonding calculus \cite{NaCo18} a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus. Moreover, the number of rules is smaller because we use generic rules.
 
-Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no expllicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are CCSK \cite{Irek2007} and RCCS \cite{danos2004ccsr}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of forward action, which is not the case in other calculi. Actions can be undone in exacetly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables modelling of out-of-causal-order reversibility. In biological and chemical systems, such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailled view. This suggests that this is a case of emergent behaviour.
+Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no explicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are CCSK \cite{Irek2007} and RCCS \cite{danos2004ccsr}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of forward action, which is not the case in other calculi. Actions can be undone in exactly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables modelling of out-of-causal-order reversibility. In biological and chemical systems, such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailed view. This suggests that this is a case of emergent behaviour.
 
 \section{The autoprotolysis of water}
 
@@ -265,7 +265,7 @@ the oxygen, a bond can form to the hydrogen. This bond is formed out of
 the electrons of one of the lone pairs of the oxygen. The curved arrows in Figure~\ref{fig:autoprotolysis} indicate the movements of the electrons. Since a hydrogen atom cannot have more 
 than one bonds, 
 the creation of a new bond is compensated by breaking the existing hydrogen-oxygen bond (again indicated by a curved arrow
-\anna{perhaps use another color for this arrow to distinguish?}). When this happens, the two electrons, which formed the original hydrogen-oxygen bond, remain with the oxygen. Since a hydrogen contains %consists of 
+\anna{perhaps use another color for this arrow to distinguish? stefan I don't think we can use color}). When this happens, the two electrons, which formed the original hydrogen-oxygen bond, remain with the oxygen. Since a hydrogen contains %consists of 
 one electron and one proton, it is only the proton that is transferred, so the process can be called a proton transfer as well as a hydrogen transfer. The forming of the new bond and the breaking of the old bond are concerted, meaning that %namely
 they happen together without a stable 
 intermediate configuration. As a result we have reached the state where one oxygen atom
@@ -285,9 +285,32 @@ In this simple reaction, the forward and the reverse step consist of two steps e
 
 It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``r\^{o}le''. This explains why any proton can be transferred in the reverse reaction and not just the one involved in the forward path.
 
-\section{The autoprotolysis of water in CSSK}
+\section{Existing reversible formalisms}
+In order to see how accurately existing formalisms can capture the autoprotolysis of water, we model it in CCS with keys (CCSK) \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. 
 
-In order to see how accurately existing formalisms can capture the autoprotolysis of water, we model it in CCSK \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
+\subsection{Syntax of CCSK}
+
+The key idea of CCSK is to extend CCS to mark past actions with a key instead of discarding them. These keys can then be used to undo actions. The syntax is an extension of CCS, so every CCS process is a valid CCSK process as well. We illustrate the working of CCSK with an example. The process
+%
+$$a.\Nil \paral b.\Nil$$
+%
+is ready to perform $a$ or $b$, just like a CCS process. If we execute $a$, we get
+%
+$$a[1].\Nil \paral b.\Nil$$
+%
+where $1$ is a key. $a$ is now a past action. The process could next do $b$ and we get
+%
+$$a[1].\Nil \paral b[2].\Nil$$
+%
+At this point, we now have the choice of undoing either $a$ or $b$. If we undo $b$, we get
+%
+$$a[1].\Nil \paral b.\Nil$$
+%
+which is the same as the process after performing $a$, so we reversed back to this state. We could also have undone $b$ instead, which would have been a causally-consistent path, but not backtracking. The semantics of CCSK are specified by SOS rules (see \cite{Irek2007}), which are the reverse of the forward CCS rules.
+
+\subsection{The autoprotolysis of water in CSSK}
+
+To model the system of two water molecules in CCSK, we would model oxygen and hydrogen atoms with appropriate actions. The modelling most faithful to the real situation is this:
 
 %
 $$\begin{array}{lll}
@@ -310,14 +333,14 @@ It can also develop to a $OH^-$ and a $H_3O^+$. For this, three communications h
 $$( \overline{a}[1].H'_1 \paral \overline{a}[2].H'_2 \paral a[1].a.a.O'_1 \paral \overline{a}[3].H'_3 \paral \overline{a}[4].H'_4 \paral a[2].a[3].a[4].O'_2) 
 \; \setminus\{a\}.$$
 %
-Any of these bonds can be broken by backtracking, which is the benefit of a reversible calculus. Thus we could go from the two water molecules to $OH$ and a $H_3O$ by breaking the bond between one of the hydrogen atoms and the oxygen atom it is bonded to and re-bonding to the other oxygen atom. A problem is that three hydrogen atoms could bond directly to an oxygen atom, without two waters ever existing. This would not happen in reality, since, as we have seen in Chapter~\ref{sec:simple}, it is the partial charge of the water which enables the transfer. These charges are not modelled in this representation.
+Any of these bonds can be broken by backtracking, which is the benefit of a reversible calculus. Thus we could go from the two water molecules to $OH$ and a $H_3O$ by breaking the bond between one of the hydrogen atoms and the oxygen atom it is bonded to and re-bonding to the other oxygen atom. A problem is that three hydrogen atoms could bond directly to an oxygen atom, without two waters ever existing. This would not happen in reality, since it is the partial charge of the water which enables the transfer. These charges are not modelled in this representation.
 
 In order for the hydrogen transfer to happen, a spontaneous dissociation of a hydrogen atom would be needed. This hydrogen atom could then bind to another oxygen atom thus completing the transfer. Whilst such dissociations exist, it is a different mechanism than the transfer, which is supported by the partial charge. The dissociation would also allow for protons to flow freely between water molecules, which is not the situation in reality. There could even be several water molecules loosing all of their protons without any of them being bonded, which is quite unrealistic. Finally, the hydrogen atoms bonded to one oxygen atom must dissolve in reverse order as they were bonded, which is not at all the case in the real world.
 
 Overall, we can model the final products in CCSK, but the processes taking place are not well represented. The main reason for this is that the calculus is restricted to backtracking for undoing actions.
 
-\section{New developments}
-\subsection{CCB}
+\section{New reversible formalisms}
+\subsection{Calculus of Covalent Bonding}
 \label{sec:ccb}
 
 In this chapter we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, concentrating on the new general 
@@ -711,9 +734,6 @@ We can therefore apply the movement of restrictions the reverse way we applied i
 &( (h_3[3];p).H'_3 \paral (h_4[4];p).H'_4  \paral (o_3[3],o_4[4],n).O'_2) \setminus\{h_3,h_4,o_3,o_4\} ) \setminus\{n,p\}&&
 \end{flalign*}
 
-\subsubsection{Conclusion}
-
-We have seen in this chapter that we can model a simple covalent chemical reaction using CCB. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. The same modelling of hydrogens and oxygens can be used to model a more complex reaction, involving carbon atoms as well \cite{KUHN201818}. This shows that the modelling implements general concepts and not only this particular situation. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}.
 
 \subsection{Bonding Calculus}
 
@@ -975,13 +995,9 @@ followed by the breaking of the hydrogen bond $O_1-^h H_4$:
 The obtained system contains again two water molecules of water.
 \end{example}
 
-Therefore, the bonding calculus is suitable for modelling in a 
-natural and easy way the autoprotolysis of water.
-
-
 \subsection{Reversing Petri nets}
 In this section we present reversing Petri nets (RPNs), an extension of Petri nets
-developed for modeling reversing computations, and we employ the formalism
+developed for modelling reversing computations, and we employ the formalism
 to model the autoprotolysis of water. Reversing Petri nets~\cite{RPNs} are 
 Petri net structures that allow transitions to be reversed. They assume 
 tokens to be distinguished from each other by an identity/type and to be persistent. Furthermore,
@@ -1057,12 +1073,12 @@ the new $o-h$ bond will be transferred to place $y$. (Details about execution of
 description of RPN semantics.)
 Finally, transition $t_3$ models the autoprotolysis reaction: assuming the existence of two distinct oxygen
 instances, as required by the variables $o_1$ and $o_2$ on the incoming arc of the transition, connected
-with hydrogen instances as speficied in $F(y,t_3)$, the transition breaks the bond $o_2-h_3$ and forms the
+with hydrogen instances as specified in $F(y,t_3)$, the transition breaks the bond $o_2-h_3$ and forms the
 bond  $o_1-h_3$.  As such, assuming the existence of two water molecules at place $y$, the transition
 will form  a hydronium  (H$_3^+$O) and a hydroxin (OH$^-$) molecule in place $z$ of the net.
 The reversibility semantics of RPNs ensures that  reversing the transition $t_3$ will result in the re-creation
 of  two water molecules placed at $y$, while the use of variables allows the formation of water molecules consisting
-of different bondings between the hydrogen and oxygen instances, as will be explained in the sequel.
+of different bonds between the hydrogen and oxygen instances, as will be explained in the sequel.
 
 
 In order to introduce the semantics of RPNs we need to introduce some notations. Note that in 
@@ -1260,11 +1276,17 @@ reversing $t_3$ with reversal enabling assignment $W(o_1)=O_1, W(o_2)=O_2, W(h_1
 W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
 
 
-\paragraph{Conclusion.} As we have shown, RPNs are a graphical
+\section{Conclusion}
+
+We have presented three formalisms to model chemical reactions. In CCB, we can model a simple covalent chemical reaction. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. The same modelling of hydrogens and oxygens can be used to model a more complex reaction, involving carbon atoms as well \cite{KUHN201818}. This shows that the modelling implements general concepts and not only this particular situation. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}.
+
+The bonding calculus is suitable for modelling in a natural and easy way the autoprotolysis of water.
+
+RPNs are a graphical
 formalism well-suited to model chemical reactions such
-as the autoprotolysis of water. At the same time, they are amenable for modeling
+as the autoprotolysis of water. At the same time, they are amenable for modelling
 other types of distributed systems and they have been used successfully for
-the modeling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{CRPNs}. Their extension in~\cite{CRPNs} also introduces
+the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{CRPNs}. Their extension in~\cite{CRPNs} also introduces
 a mechanism for controlling reversibility. This control is
 enforced with the aid of conditions associated with transitions, whose satisfaction/violation
 acts as a guard for the transition execution in the forward/backward direction, respectively. 
@@ -1275,10 +1297,6 @@ reversal, e.g., changes in temperature. In future work, we plan to exploit recen
 that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards
 the development of a methodology for the analysis of reversing Petri nets exploiting
 available tools.
-
-\section{Conclusion}
-
-We have presented three formalism to model chemical reactions. In particular, they can represent how covalent bonds in small molecules are formed and broken. The example we used was the autoprotolysis of water. This is a small example, but it already shows that in such reactions causality is not a clearly defined concept.
 
 Considering the three formalisms mentioned, all can represent this reaction. CCB is quite close to the chemical concepts and can therefore model this reactions faithfully. In particular, it shows the linked forming and breaking of bonds. In the Bonding Calculus, this link is not expressed. Reversing Petri Nets are in comparison a high-level modelling, but still capture the breaking and forming together. It does this without representing details of the reaction, which CCB does. All calculi avoid a $H_3O^+$ molecule forming directly.
 
