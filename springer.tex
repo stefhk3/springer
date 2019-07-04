@@ -237,6 +237,26 @@ Another approach to model biological interactions is by using rule-based formali
 
 Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no explicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are CCSK \cite{Irek2007} and RCCS \cite{danos2004ccsr}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of forward action, which is not the case in other calculi. Actions can be undone in exactly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables modelling of out-of-causal-order reversibility. In biological and chemical systems, such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailed view. This suggests that this is a case of emergent behaviour.
 
+Petri nets (PNs)~\cite{PNs} are another formalism that has been widely used to model and reason
+about a wide range of applications featuring concurrency and distribution. They are a graphical 
+language  associated with 
+a rich mathematical theory and supported by a variety of tools. Their employment in systems 
+biology was initiated in~\cite{DBLP:conf/ismb/ReddyML93,DBLP:journals/jsamas/HofestadtH94}
+and since then they have been widely employed for
+the modelling, analysis, and simulation of a diversity of biological systems including 
+biochemical reactions in metabolic pathways, gene expression, signal transduction, and neuronal processes~\cite{PNbiology,DBLP:journals/bib/Chaouiya07,DBLP:journals/nc/BaldanCMS10}. Indeed, PNs seem to be a natural framework for representing biochemical systems as themselves constitute a set of interdependent
+transitions/reactions which consume 
+and produce resources, and are represented graphically in a similar fashion to the systems
+in question. Furthemore, a PN model
+can be decomposed in order to gandle the overall complexity, and the abstraction level of a model
+can vary from single molecules, to cells, to multicellular aggregations.
+Several specialized Petri net classes like qualitative, stochastic, continuous, or
+hybrid Petri nets and their coloured counterparts have been used to describe different
+systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
+At the same time, PNs enable a wide range of analysis techniques, 
+such as determining states of equilibrium, conflicting evolutions, 
+and reachable states. 
+
 \section{The autoprotolysis of water}
 
 We consider a reaction that transfers a hydrogen atom between two water molecules. Since the
@@ -1286,7 +1306,7 @@ RPNs are a graphical
 formalism well-suited to model chemical reactions such
 as the autoprotolysis of water. At the same time, they are amenable for modelling
 other types of distributed systems and they have been used successfully for
-the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{CRPNs}. Their extension in~\cite{CRPNs} also introduces
+the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. Their extension in~\cite{RC19} also introduces
 a mechanism for controlling reversibility. This control is
 enforced with the aid of conditions associated with transitions, whose satisfaction/violation
 acts as a guard for the transition execution in the forward/backward direction, respectively. 
