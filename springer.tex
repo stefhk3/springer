@@ -257,6 +257,35 @@ At the same time, PNs enable a wide range of analysis techniques,
 such as determining states of equilibrium, conflicting evolutions, 
 and reachable states. 
 
+As far as reversibility is concerned, classical PNs and their extensions do not
+directly handle reversibility. Modelling reversible reactions in these formalisms requires the employment
+of mechanisms involving two distinct transitions,
+one for the forward and one for the reverse version of a reaction. This
+may result in expanded models and state spaces and less natural and/or less accurate
+models of  reversible behavior. In this study we consider
+a recently-introduced extension of Petri nets called reversing Petri nets (RPNs)~\cite{RPNs}.
+%A large amount of work has focused on providing a formal understanding of reversibility within process calculi and it has recently been extended to the formalism of Petri nets.  
+%Petri nets (PNs)~\cite{PNs} are a graphical mathematical language that can be used for the specification and
+%analysis of discrete event systems. 
+%The first study of reversible computation within PNs was proposed in~\cite{PetriNets,BoundedPNs}. In these works, the
+%authors investigate the effects of adding \emph{reversed} versions of selected transitions in a PN
+%by reversing the directions of a transition's arcs. They then explore decidability problems regarding reachability and coverability in the resulting PNs. In
+%was proposed, called reversing Petri nets (RPNs).  In this work, RPNs are acyclic Petri net structures that  assume 
+RPNs are the first proposal for capturing reversible behavior directly in the Petri net model
+and they support reversible computation in all its forms
+(backtracking, causal-order reversibility and out-of-causal-order reversibility).
+RPNs  enable the reversal of each executed transition and assume tokens to be distinguished from each 
+other by an identity/type and to be persistent. Furthermore,
+during transitions tokens can be bonded together, with  the creation of bonds
+ considered to be the effect of a transition, whereas their destruction is the effect of
+the transition's reversal. The notion of bonds is especially useful for reasoning about biochemical
+systems as illustrated in the current paper through the case study of the autoprotolysis of water.
+RPNs have been shown to be closely related to Coloured Petri nets, as a subset of the former model
+has been encoded into the latter~\cite{RPNtoCPN}.
+%RPNs
+%have been extended with cycles~\cite{RPNJournal} and with a mechanism for controlling transition
+%reversal by associating transitions with conditions~\cite{RC19}. 
+
 \section{The autoprotolysis of water}
 
 We consider a reaction that transfers a hydrogen atom between two water molecules. Since the
