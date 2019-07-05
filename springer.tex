@@ -247,8 +247,8 @@ the modelling, analysis, and simulation of a diversity of biological systems inc
 biochemical reactions in metabolic pathways, gene expression, signal transduction, and neuronal processes~\cite{PNbiology,DBLP:journals/bib/Chaouiya07,DBLP:journals/nc/BaldanCMS10}. Indeed, PNs seem to be a natural framework for representing biochemical systems as themselves constitute a set of interdependent
 transitions/reactions which consume 
 and produce resources, and are represented graphically in a similar fashion to the systems
-in question. Furthemore, a PN model
-can be decomposed in order to gandle the overall complexity, and the abstraction level of a model
+in question. Furthermore, a PN model
+can be decomposed in order to handle the overall complexity, and the abstraction level of a model
 can vary from single molecules, to cells, to multicellular aggregations.
 Several specialized Petri net classes like qualitative, stochastic, continuous, or
 hybrid Petri nets and their coloured counterparts have been used to describe different
@@ -1331,21 +1331,28 @@ We have presented three formalisms to model chemical reactions. In CCB, we can m
 
 The bonding calculus is suitable for modelling in a natural and easy way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Moreover, we can verify various properties of the bonding compounds described by using the calculus.
 
-RPNs are a graphical
-formalism well-suited to model chemical reactions such
-as the autoprotolysis of water. At the same time, they are amenable for modelling
-other types of distributed systems and they have been used successfully for
-the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. Their extension in~\cite{RC19} also introduces
-a mechanism for controlling reversibility. This control is
-enforced with the aid of conditions associated with transitions, whose satisfaction/violation
-acts as a guard for the transition execution in the forward/backward direction, respectively. 
-The conditions are enunciated within a simple logical language expressing properties 
-relating to available tokens, and 
-may capture environmental or other conditions that determine a transition's
-reversal, e.g., changes in temperature. In future work, we plan to exploit recent work
-that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards
-the development of a methodology for the analysis of reversing Petri nets exploiting
-available tools.
+
+Reversing Petri nets are amenable for modelling
+a variety of distributed systems and they have been used successfully for
+the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. At the same time they are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
+has multi-party interactions, is inherently concurrent, and features reversible behaviour. 
+%As we have shown, RPNs are also well-suited to model biochemical phenomena such as the autoprotolysis of water and, as for PNs in general, their graphical nature allows them to be easily understood by non-computer-science experts.
+In particular, the feature of token multiplicity and
+the use of variables allows to non-deterministically
+select different combinations of atoms of a particular element when creating molecules. Also the possibility for
+transitions to break bonds allows to model a transition that simultaneously
+destructs  a water molecule and creates a hydronium whose  reversal results in the opposite effect. Furthermore,
+the collective token interpretation adopted in the framework, treating all tokens of the same type
+as equivalent, allows the reaction to reverse into two different water molecules than the original ones,
+i.e., using different instances of the atoms.
+Note that the presented model abstracts away the positive/negative charge of the atoms and
+captures the existence of electrons by the enablednes of transitions. A model at a lower
+level of abstraction would be possible by introducing tokens to represent the electrons  bonded to the associated
+atom tokens to illustrate the relevant charges.
+Their extension in~\cite{RC19} also introduces
+a mechanism for controlling reversibility%. This control is enforced with the aid of conditions associated with transitions, whose satisfaction/violation acts as a guard for the transition execution in the forward/backward direction, respectively. The conditions are enunciated within a simple logical language expressing properties relating to available tokens, and 
+ that may capture environmental or other conditions that determine a transition's
+reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of reversing Petri nets exploiting available tools.
 
 Considering the three formalisms mentioned, all can represent this reaction. CCB is quite close to the chemical concepts and can therefore model this reactions faithfully. In particular, it shows the linked forming and breaking of bonds. In the Bonding Calculus, this link is not expressed. Reversing Petri Nets are in comparison a high-level modelling, but still capture the breaking and forming together. It does this without representing details of the reaction, which CCB does. All calculi avoid a $H_3O^+$ molecule forming directly.
 
