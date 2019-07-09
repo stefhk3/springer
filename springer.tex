@@ -1333,16 +1333,23 @@ W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
 
 \section{Conclusion}
 
-We have presented three formalisms to model chemical reactions. In CCB, we can model a simple covalent chemical reaction. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. The same modelling of hydrogens and oxygens can be used to model a more complex reaction, involving carbon atoms as well \cite{KUHN201818}. This shows that the modelling implements general concepts and not only this particular situation. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}.
+We have presented three formalisms to model chemical reactions. In CCB, we can model a simple covalent chemical reaction. In particular, when modelling the autoprotolysis of water, we can include the concerted reaction and we can model that the reverse reaction can work on any of the hydrogens, not just the one transferred in the forward step. The same modelling of hydrogens and oxygens can be used to model a more complex reaction, involving carbon atoms as well \cite{KUHN201818}. This shows that the modelling implements general concepts and not only this particular situation. CCB can also be used to model situations beyond simple chemical reactions  \cite{merevcomp2018}. As mentioned, the reverse reaction can work by transferring any of the hydrogens of the hydronium. In our calculi, we can actually distinguish the hydrogens due to the subscripts used. When reversing the reaction in CCB, instead of the transition in Section~\ref{sec:ccb}, we could also have done this (writing the transition and the rewrite together):
+%
+\begin{flalign*}
+&(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1) \paral (h_3[5];p).H'_3) &&\\
+&\paral (h_4[4];p).H'_4  \paral (o_3,o_4[4],n).O'_2&&\\
+&\xrightarrow{\{ np[3], \underline{nh_{1}}[1]\}} \Rightarrow &&\\
+&(( (\boldsymbol{h_1[3]};p).H'_1 \paral (h_2[2];p).H'_2 \paral (\boldsymbol{o_1[5]},o_2[2],\boldsymbol{n}).O'_1) \paral (h_3[5];p).H'_3) &&\\
+&\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3[3]},o_4[4],\boldsymbol{n}).O'_2
+\end{flalign*}
+%
+The result is different from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. 
 
 The bonding calculus is suitable for modelling in a natural and easy way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Moreover, we can verify various properties of the bonding compounds described by using the calculus.
 
 
-Reversing Petri nets are amenable for modelling
-a variety of distributed systems and they have been used successfully for
-the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. At the same time they are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
+Reversing Petri nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
 has multi-party interactions, is inherently concurrent, and features reversible behaviour. 
-%As we have shown, RPNs are also well-suited to model biochemical phenomena such as the autoprotolysis of water and, as for PNs in general, their graphical nature allows them to be easily understood by non-computer-science experts.
 In particular, the feature of token multiplicity and
 the use of variables allows to non-deterministically
 select different combinations of atoms of a particular element when creating molecules. Also the possibility for
@@ -1354,25 +1361,15 @@ i.e., using different instances of the atoms.
 Note that the presented model abstracts away the positive/negative charge of the atoms and
 captures the existence of electrons by the enablednes of transitions. A model at a lower
 level of abstraction would be possible by introducing tokens to represent the electrons  bonded to the associated
-atom tokens to illustrate the relevant charges.
+atom tokens to illustrate the relevant charges. Their expressiveness offers the ability to model 
+a variety of distributed systems other than biochemical reactions. In particular, they have been used successfully for
+the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. 
 Their extension in~\cite{RC19} also introduces
-a mechanism for controlling reversibility%. This control is enforced with the aid of conditions associated with transitions, whose satisfaction/violation acts as a guard for the transition execution in the forward/backward direction, respectively. The conditions are enunciated within a simple logical language expressing properties relating to available tokens, and 
+a mechanism for controlling reversibility 
  that may capture environmental or other conditions that determine a transition's
 reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of reversing Petri nets exploiting available tools.
 
-Considering the three formalisms mentioned, all can represent this reaction. CCB is quite close to the chemical concepts and can therefore model this reactions faithfully. In particular, it shows the linked forming and breaking of bonds. In the Bonding Calculus, this link is not expressed. Reversing Petri nets are in comparison a high-level modelling, but still capture the breaking and forming together. \anna{Actually as stated above, this was in fact the \emph{chosen} level of abstraction. A lower level could have been chosen but it was not necessary.} It does this without representing details of the reaction, which CCB does. All calculi avoid a $H_3O^+$ molecule forming directly.
-
-As mentioned, the reverse reaction can work by transferring any of the hydrogens of the hydronium. In our calculi, we can actually distinguish the hydrogens due to the subscripts used. When reversing the reaction in CCB, instead of the transition in Section~\ref{sec:ccb}, we could also have done this (writing the transition and the rewrite together):
-%
-\begin{flalign*}
-&(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1) \paral (h_3[5];p).H'_3) &&\\
-&\paral (h_4[4];p).H'_4  \paral (o_3,o_4[4],n).O'_2&&\\
-&\xrightarrow{\{ np[3], \underline{nh_{1}}[1]\}} \Rightarrow &&\\
-&(( (\boldsymbol{h_1[3]};p).H'_1 \paral (h_2[2];p).H'_2 \paral (\boldsymbol{o_1[5]},o_2[2],\boldsymbol{n}).O'_1) \paral (h_3[5];p).H'_3) &&\\
-&\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3[3]},o_4[4],\boldsymbol{n}).O'_2
-\end{flalign*}
-%
-The result is different from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. All calculi presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. Reversing Petri Nets give exact rules and can therefore only execute one forward and reverse possibility.
+Considering the three formalisms mentioned, all can represent this reaction. CCB is quite close to the chemical concepts and can therefore model this reactions faithfully. In particular, it shows the linked forming and breaking of bonds. In the Bonding Calculus, this link is not expressed. All models avoid a $H_3O^+$ molecule forming directly. All models presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. 
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
