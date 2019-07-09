@@ -237,7 +237,7 @@ compared to higher-leverl models.
 
 
 Process calculi, originally designed for modelling concurrent computations, have been applied to model biochemical and biological systems. We can mention the $\pi$-calculus \cite{MilnerPi,Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. These approaches allow to model various biological entities (e.g., molecules, proteins) as interacting processes when describing a complex system. The process calculi are compositional, and so they allow to explicitly model the activity of the whole complex system by composing the activities of some smaller entities. Each term in the description of such a system has a
-counterpart in the biophysical system, and the behaviour of the whole system is obtained by following the operational semantics of the process calculi. On the other hand, our bonding calculus \cite{NaCo18} is different from these approaches we have mentioned.  \anna{In this last sentence and the following paragraphs there is specific mention on the bonding calculus or CCB (I will highlight some such points). A simultaneous reference to CCB/bonding calculus would be useful. At some point, possibly the conclusions, it might be good to make a more careful comparison between the two, both being process calculi.} In BioPEPA the authors use the abstraction ``processes as species'' by considering the concentrations of the involved processes. In the other calculi,  the abstraction ``processes as interactions'' is used similar to \anna{ours}, but processes are able to communicate values in order to interact (this is not the case in our approach).
+counterpart in the biophysical system, and the behaviour of the whole system is obtained by following the operational semantics of the process calculi. On the other hand, our bonding calculus \cite{NaCo18} is different from these approaches we have mentioned. 
 
 Another approach to model biological interactions is by using rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality} and the BioNetGen Language (BNGL) \cite{pmid19399430}. Just like in \anna{our bonding calculus}, $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM. Just like in BNGL, \anna{we} allow to use the molecule sites having the same name, while this is not possible in the $\kappa$-calculus. While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in \anna{our} bonding calculus \cite{NaCo18} a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus. Moreover, the number of rules is smaller because \anna{we} use generic rules.
 
@@ -513,8 +513,21 @@ We use some predicates and functions, which are formally defined in \cite{KUHN20
 \caption[Forward SOS rules for CCB.]{Forward SOS rules for CCB. The condition (*) is $\gamma(a,d)=c$, 
 and $b \in \mathcal{WA}$. Remember that $s$ is a mixed sequence of actions and past actions and $t$ is a sequence of purely past actions} \label{fig:fsos}
 \end{figure}
-
-
+The forward and reverse SOS rules for CCB are given in Figures~\ref{fig:fsos} and \ref{fig:reversesos}. 
+Figure \ref{fig:csos} contains the SOS rules that define the new concerted actions transitions. 
+The main rule is the rule \rulename{concert} that defines when a pair of concerted actions 
+takes place.  We also have two auxiliary rules \rulename{aux1} and \rulename{aux2} which 
+define only an auxiliary transition relation needed in the \rulename{concert} rule. The auxiliary rules are only applicable if a weak action is beyond the semicolon, whereas a weak action in the simple prefix is dealt with by standard rules and can therefore not become part of a concerted action. Note that the \rulename{concert} rule uses \emph{lookahead} \cite{Uli92}.
+Also note that transitions in \rulename{aux1} and \rulename{aux2} use the auxiliary labels $(b)[k]$ 
+for all $b \in \mWA$ and $k \in \Keys$. The rule \rulename{concert par} requires that $k$ is fresh in $Q$,
+correspondingly as in \rulename{par}. Moreover, we need to ensure that when we reverse $h$ with the key $l$
+in $P$ we do not leave out any actions with the key $l$ in $Q$ which make up a multiaction 
+communication with the key $l$. Hence, we also include the premise $\fresh{l}{Q}$ in \rulename{concert par}.
+The rule \rulename{concert act} requires, correspondingly as \rulename{act}, that $k$ is fresh in $t$.
+Our operational semantics guarantees that if a standard process evolves to $(t;b).P$, for some $P$, and
+$P$ reverses an action with the key $l$, then $l$ is fresh in $t$. Hence, we do not include $\fresh{l}{t}$
+in the premises of \rulename{concert act}.
+%
 \begin{figure}
 \[
 \begin{array}{ll}
@@ -611,38 +624,6 @@ and $\gamma(b,c)=e$ for some $c\in \mathcal{A}$, and 2. $\gamma(a,d)=f$.
 The condition (**) is $a, \underline{h}  \notin L \cup (L)$. 
 Recall that $t \in \mAK^*$, and $b \in \mathcal{WA}$.} \label{fig:csos}
 \end{figure}
-
-\begin{figure}
-\[
-\begin{array}{lll}
-\rulename{prom}: & (s,a,s';b[k]).P \Rightarrow (s,a[k],s';b).P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA} 
-\\[10pt]
-\rulename{move-r}: & (s,a,s',b[k],s'').P \Rightarrow (s,a[k],s',b,s'').P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA}
-\\[10pt]
-\rulename{move-l}: & (s,b[k],s',a,s'').P \Rightarrow (s,b,s',a[k],s'').P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA}
-\end{array}
-\] 
-\caption[Reduction rules for CCB.]{New reduction rules for CCB. Sequences $s, s', s''$ are members of $(\mathcal{A} \cup \mathcal{AK})^{*}$.} 
-\label{fig:reduction}
-\end{figure}
-\clearpage
-
-The forward and reverse SOS rules for CCB are given in Figures~\ref{fig:fsos} and \ref{fig:reversesos}. 
-Figure \ref{fig:csos} contains the SOS rules that define the new concerted actions transitions. 
-The main rule is the rule \rulename{concert} that defines when a pair of concerted actions 
-takes place.  We also have two auxiliary rules \rulename{aux1} and \rulename{aux2} which 
-define only an auxiliary transition relation needed in the \rulename{concert} rule. The auxiliary rules are only applicable if a weak action is beyond the semicolon, whereas a weak action in the simple prefix is dealt with by standard rules and can therefore not become part of a concerted action. Note that the \rulename{concert} rule uses \emph{lookahead} \cite{Uli92}.
-Also note that transitions in \rulename{aux1} and \rulename{aux2} use the auxiliary labels $(b)[k]$ 
-for all $b \in \mWA$ and $k \in \Keys$. The rule \rulename{concert par} requires that $k$ is fresh in $Q$,
-correspondingly as in \rulename{par}. Moreover, we need to ensure that when we reverse $h$ with the key $l$
-in $P$ we do not leave out any actions with the key $l$ in $Q$ which make up a multiaction 
-communication with the key $l$. Hence, we also include the premise $\fresh{l}{Q}$ in \rulename{concert par}.
-The rule \rulename{concert act} requires, correspondingly as \rulename{act}, that $k$ is fresh in $t$.
-Our operational semantics guarantees that if a standard process evolves to $(t;b).P$, for some $P$, and
-$P$ reverses an action with the key $l$, then $l$ is fresh in $t$. Hence, we do not include $\fresh{l}{t}$
-in the premises of \rulename{concert act}.
-%
-%
 Overall, the transitions in Figures~\ref{fig:fsos}--\ref{fig:csos} are labelled with $a[k] \in \mAK$, or with 
 $\underline{c}[l] \in \umAK$, or with concerted actions $(a[k], \underline{c}[l])$.
 %\} \in \mathcal{C}$.
@@ -661,6 +642,25 @@ that they are used as soon as they becomes applicable, a formal definiation is g
 We shall call henceforth the transitions derived by the forward SOS rules the \emph{forward transitions} 
 and, the transitions derived by the reverse SOS rules the \emph{reverse transitions}.
 Correspondingly, there are the \emph{concerted (action)} transitions. 
+
+\begin{figure}
+\[
+\begin{array}{lll}
+\rulename{prom}: & (s,a,s';b[k]).P \Rightarrow (s,a[k],s';b).P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA} 
+\\[10pt]
+\rulename{move-r}: & (s,a,s',b[k],s'').P \Rightarrow (s,a[k],s',b,s'').P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA}
+\\[10pt]
+\rulename{move-l}: & (s,b[k],s',a,s'').P \Rightarrow (s,b,s',a[k],s'').P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA}
+\end{array}
+\] 
+\caption[Reduction rules for CCB.]{New reduction rules for CCB. Sequences $s, s', s''$ are members of $(\mathcal{A} \cup \mathcal{AK})^{*}$.} 
+\label{fig:reduction}
+\end{figure}
+
+
+
+%
+%
 
 \subsubsection{The autoprotolysis of water in CCB}
 
@@ -1060,7 +1060,7 @@ during transitions tokens can be bonded with each other. The creation of bonds
 is considered to be the effect of a transition, whereas their destruction is the effect of
 the transition's reversal. RPNs
 have been extended with a mechanism for controlling transition
-reversal by associating transitions with conditions~\cite{CRPNs}. In this section we consider
+reversal by associating transitions with conditions~\cite{RC19}. In this section we consider
 a model allowing multiple tokens of the same type as well as the possibility for 
 transitions to break bonds. Thus, a transition may simultaneously create
 and destruct bonds, and its reversal results in the opposite effect. Formally, a RPN
