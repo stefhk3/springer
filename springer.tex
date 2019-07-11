@@ -1348,12 +1348,12 @@ The result is different from that in Section~\ref{sec:ccb}, but identical from a
 The bonding calculus is suitable for modelling in a natural and easy way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Moreover, we can verify various properties of the bonding compounds described by using the calculus.
 
 
-Reversing Petri nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
+Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent where during the execution of transitions tokens can be bonded/unbonded with each other, and the creation of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
 has multi-party interactions, is inherently concurrent, and features reversible behaviour. 
 In particular, the feature of token multiplicity and
 the use of variables allows to non-deterministically
 select different combinations of atoms of a particular element when creating molecules. Also the possibility for
-transitions to break bonds allows to model a transition that simultaneously
+transitions to break bonds allows to model concerted actions where a transition simultaneously
 destructs  a water molecule and creates a hydronium whose  reversal results in the opposite effect. Furthermore,
 the collective token interpretation adopted in the framework, treating all tokens of the same type
 as equivalent, allows the reaction to reverse into two different water molecules than the original ones,
@@ -1361,7 +1361,9 @@ i.e., using different instances of the atoms.
 Note that the presented model abstracts away the positive/negative charge of the atoms and
 captures the existence of electrons by the enablednes of transitions. A model at a lower
 level of abstraction would be possible by introducing tokens to represent the electrons  bonded to the associated
-atom tokens to illustrate the relevant charges. Their expressiveness offers the ability to model 
+atom tokens to illustrate the relevant charges. 
+
+Reversing Petri nets are a general purpose model where their expressiveness offers the ability to model 
 a variety of distributed systems other than biochemical reactions. In particular, they have been used successfully for
 the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. 
 Their extension in~\cite{RC19} also introduces
