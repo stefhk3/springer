@@ -1350,15 +1350,12 @@ The result is different from that in Section~\ref{sec:ccb}, but identical from a
 The bonding calculus is suitable for modelling in a natural and easy way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Moreover, we can verify various properties of the bonding compounds described by using the calculus.
 
 
-Reversing Petri nets are amenable for modelling
-a variety of distributed systems and they have been used successfully for
-the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. At the same time they are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
+Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent where during the execution of transitions tokens can be bonded/unbonded with each other, and the creation of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
 has multi-party interactions, is inherently concurrent, and features reversible behaviour. 
-%As we have shown, RPNs are also well-suited to model biochemical phenomena such as the autoprotolysis of water and, as for PNs in general, their graphical nature allows them to be easily understood by non-computer-science experts.
 In particular, the feature of token multiplicity and
 the use of variables allows to non-deterministically
 select different combinations of atoms of a particular element when creating molecules. Also the possibility for
-transitions to break bonds allows to model a transition that simultaneously
+transitions to break bonds allows to model concerted actions where a transition simultaneously
 destructs  a water molecule and creates a hydronium whose  reversal results in the opposite effect. Furthermore,
 the collective token interpretation adopted in the framework, treating all tokens of the same type
 as equivalent, allows the reaction to reverse into two different water molecules than the original ones,
@@ -1366,11 +1363,16 @@ i.e., using different instances of the atoms.
 Note that the presented model abstracts away the positive/negative charge of the atoms and
 captures the existence of electrons by the enablednes of transitions. A model at a lower
 level of abstraction would be possible by introducing tokens to represent the electrons  bonded to the associated
-atom tokens to illustrate the relevant charges.
+atom tokens to illustrate the relevant charges. 
+
+Reversing Petri nets are a general purpose model where their expressiveness offers the ability to model 
+a variety of distributed systems other than biochemical reactions. In particular, they have been used successfully for
+the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. 
 Their extension in~\cite{RC19} also introduces
-a mechanism for controlling reversibility%. This control is enforced with the aid of conditions associated with transitions, whose satisfaction/violation acts as a guard for the transition execution in the forward/backward direction, respectively. The conditions are enunciated within a simple logical language expressing properties relating to available tokens, and 
+a mechanism for controlling reversibility 
  that may capture environmental or other conditions that determine a transition's
 reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of reversing Petri nets exploiting available tools.
+
 
 Considering the three formalisms mentioned, all can represent this reaction. CCB is quite close to the chemical concepts and can therefore model this reactions faithfully. In particular, it shows the linked forming and breaking of bonds. In the Bonding Calculus, this link is not expressed. All models avoid a $H_3O^+$ molecule forming directly. All models presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. 
 
