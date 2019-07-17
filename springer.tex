@@ -948,20 +948,28 @@ $\mid\mid \{O_1 -^c H_1, O_1 -^c H_2, O_2 -^c H_3, O_2 -^c H_4\}$
 
 \noindent 
 where the molecules are those of hydrogen and oxygen that are described below:
+\vspace{1mm}
 
 $\MolHy_0(H_i) = \overline{c}(H_i).\MolHy_1(H_i)$
+\vspace{1mm}
 
 $\MolHy_1(H_i) = \underline{c}(H_i).\MolHy_0(H_i) + \overline{h^+}(H_i).\MolHy_2(H_i)$;
+\vspace{1mm}
 
 $\MolHy_2(H_i) = \underline{c}(H_i).\overline{c}(H_i).\underline{h^+}(H_i).\MolHy_{1}(H_i)$.
+\vspace{1mm}
 
 $\MolOxy_0(O_i) = \overline{c}(O_i).\MolOxy_1(O_i)$;
+\vspace{1mm}
 
 $\MolOxy_1(O_i) = \underline{c}(O_i).\MolOxy_0(O_i) +\overline{c}(O_i).\MolOxy_2(O_i)$;
+\vspace{1mm}
 
 $\MolOxy_2(O_i) = \underline{c}(O_i).\MolOxy_1(O_i) +\overline{h^-}(O_i).\MolOxy_3(O_i)$.
+\vspace{1mm}
 
 $\MolOxy_3(O_i) = \underline{h^-}(O_i).\MolOxy_2(O_i)$.
+\vspace{1mm}
 
 \noindent 
 Each molecule of water is a structure consisting of one molecule of oxygen 
@@ -1364,7 +1372,11 @@ a mechanism for controlling reversibility
 reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of reversing Petri nets exploiting available tools.
 
 
-Considering the three formalisms mentioned, all can represent this reaction. CCB is quite close to the chemical concepts and can therefore model this reactions faithfully. In particular, it shows the linked forming and breaking of bonds. In the Bonding Calculus, this link is not expressed. All models avoid a $H_3O^+$ molecule forming directly. All models presented use subscripts and enable the tracking of atoms. We can see that the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. 
+Considering the three formalisms mentioned, all can represent this reaction. We now evaluate their suitability for the modelling of covalent reactions as exemplified by the autoprotolysis of water. In order to do so, we first consider if all chemically valid interactions
+between the compounds of the reaction can be represented well in our formalisms. CCB shows the linked forming and breaking of bonds. This is due to it being quite close to the chemical concepts and can therefore model this reactions faithfully. RPNs can also express the concerted reaction. In the Bonding Calculus, this link is not expressed. All techniques can perform the forward reaction using any of the hydrogens. CCB and RPNs can perform the reverse reaction by tranferring any of the hydrogens, whereas the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. All models presented use subscripts and enable the tracking of atoms.
+
+The other way of assessing the suitability of our formalisms for this type of reactions is to ask
+if our calculus enables transitions which do not occur in reality. All of them avoid a $H_3O^+$ molecule forming directly (as in we have seen in CCSK). CCB allows one reaction which is not realistic: If there are many water molecules and therefore several hydroxide and water molecules at the same time, it is possible that the remaining hydrogen is transferred from the hydroxide to a water. In reality, this is not possible since the hydroxide is strongly negativly charged and no hydrogen bond can form.
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
