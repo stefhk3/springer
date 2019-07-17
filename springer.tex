@@ -170,7 +170,7 @@
 \newcommand{\type}{\mathit{type}}
 \begin{document}
 %
-\title{Reversibility in chemical reactions\thanks{The authors acknowledge partial support of COST Action IC1405 on Reversible Computation - extending horizons of computing.}}
+\title{Reversibility in Chemical Reactions\thanks{The authors acknowledge partial support of COST Action IC1405 on Reversible Computation - extending horizons of computing.}}
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
@@ -184,8 +184,9 @@
 %
 \institute{School of Computer Science and Informatics, De Montfort University, Leicester, UK\\ \email{\scriptsize stefan.kuhn@dmu.ac.uk} \and
 Romanian Academy, Institute of Computer Science, Ia\c si\\
- \email{\scriptsize bogdan.aman@iit.academiaromana-is.ro, gabriel@info.uaic.ro } \and
-A.I.Cuza University, Faculty of Computer Science, Ia\c si, Romania\\ 
+ \and
+A.I.Cuza University, Faculty of Computer Science, Ia\c si, Rom\^ania\\ 
+ \email{\scriptsize \{bogdan.aman, gabriel\}@info.uaic.ro }
 \and
 Department of Computer Science, University of Cyprus \\ \email{\scriptsize \{annap,kpsara01\}@cs.ucy.ac.cy}  \and 
 Department of Informatics, University of Leicester\\ 
@@ -293,7 +294,7 @@ has been encoded into the latter~\cite{RPNtoCPN}.
 %have been extended with cycles~\cite{RPNJournal} and with a mechanism for controlling transition
 %reversal by associating transitions with conditions~\cite{RC19}. 
 
-\section{The autoprotolysis of water}
+\section{The Autoprotolysis of Water}
 
 We consider a reaction that transfers a hydrogen atom between two water molecules. Since the
 reaction takes place in water it is also known as \emph{autoprotolysis of water}. The reaction is shown 
@@ -301,11 +302,11 @@ in Figure~\ref{fig:autoprotolysis}. Here, $O$ indicates an oxygen atom and $H$ a
 low rate, making pure water slightly conductive.
 
 \begin{figure}
-\centering
+\vspace{-2ex}\centering
 \includegraphics[height=2.5cm]{autoprotolysis_corr3}
-\caption{Autoprotolysis of water.}
+\vspace{-2ex}\caption{Autoprotolysis of water.}
 \label{fig:autoprotolysis}
-\end{figure}
+\vspace{-2ex}\end{figure}
 
 In order to model this reaction we need to understand its causes. % what it is that makes it happen.
 The main factor is that the oxygen in the water molecule is \emph{nucleophilic}, meaning it has the tendency to bond to another atomic nucleus, which would serve as an \emph{electrophile}. This is because oxygen has a high 
@@ -320,7 +321,7 @@ charges (this attraction is called a \emph{hydrogen bond}). Due to the nucleophi
 the oxygen, a bond can form to the hydrogen. This bond is formed out of 
 the electrons of one of the lone pairs of the oxygen. The large curved arrow in Figure~\ref{fig:autoprotolysis} indicate the movements of the electrons. Since a hydrogen atom cannot have more 
 than one bonds, 
-the creation of a new bond is compensated by breaking the existing hydrogen-oxygen bond (indicated by the small curved arrow. When this happens, the two electrons, which formed the original hydrogen-oxygen bond, remain with the oxygen. Since a hydrogen contains %consists of 
+the creation of a new bond is compensated by breaking the existing hydrogen-oxygen bond (indicated by the small curved arrow). When this happens, the two electrons, which formed the original hydrogen-oxygen bond, remain with the oxygen. Since a hydrogen contains %consists of 
 one electron and one proton, it is only the proton that is transferred, so the process can be called a proton transfer as well as a hydrogen transfer. The forming of the new bond and the breaking of the old bond are \emph{concerted}, meaning that %namely
 they happen together without a stable 
 intermediate configuration. As a result we have reached the state where one oxygen atom
@@ -328,25 +329,24 @@ has three bonds to hydrogen atoms and is positively charged, represented on the 
  Figure~\ref{fig:autoprotolysis}. This molecule is called \emph{hydronium} and is written as $\mathrm{H_3O^+}$. The other oxygen atom bonds to only one hydrogen and is negatively charged, having an 
 electron in surplus. This molecule is called a \emph{hydroxide} and is written as $\mathrm{OH^-}$. 
 
-We notice the reaction is reversible: the oxygen, which has lost a hydrogen, can 
+Notice the reaction is reversible: the oxygen that lost a hydrogen can 
 pull back one of the hydrogens from the other molecule, the  $\mathrm{H_3O^+}$ molecule. This is the case since the negatively 
 charged oxygen is a strong nucleophile and the hydrogens in the $\mathrm{H_3O^+}$ molecule are 
-all positively charged. Therefore, any of the hydrogens 
+all positively charged. Thus, any of~the hydrogens 
 %(not just the one which moved in the first instance) 
 can be removed, making both oxygens formally uncharged, and restoring the two water 
-molecules. In Figure~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are correspondent electron movements when going from right to left. These are not given in line with usual conventions, but can be inferred.
+molecules. In Figure~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are correspondent electron movements when going from right to left. These are not given in line with usual conventions, but can be~inferred.
 
 In this simple reaction, the forward and the reverse step consist of two steps each. The breaking of the old and the forming of the new bond occur simultaneously. This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. Furthermore, the reverse step can be done with a different atom to the one used during the forward step because each of the molecules are in a sense identical and in practice there does not exist a single ``reverse'' path corresponding to a forward one.%it is difficult to identify a  clear forward and reverse path. 
 
 It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``role''. This explains why any proton can be transferred in the reverse reaction and not just the one involved in the forward path.
 
-\section{Existing reversible formalisms}
+\section{Existing Reversible Formalisms}
 In order to see how accurately existing formalisms can capture the autoprotolysis of water, we model it in CCS with keys (CCSK) \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. 
 
 \subsection{Syntax of CCSK}
 
 The key idea of CCSK is to extend CCS to mark past actions with a key instead of discarding them. These keys can then be used to undo actions. The syntax is an extension of CCS, so every CCS process is a valid CCSK process as well. We illustrate the working of CCSK with an example. The process
-%
 $$a.\Nil \paral b.\Nil$$
 %
 is ready to perform $a$ or $b$, just like a CCS process. If we execute $a$, we get
@@ -357,16 +357,15 @@ where $1$ is a key. $a$ is now a past action. The process could next do $b$ and 
 %
 $$a[1].\Nil \paral b[2].\Nil$$
 %
-At this point, we now have the choice of undoing either $a$ or $b$. If we undo $b$, we get
+At this point, we have the choice of undoing either $a$ or $b$. If we undo $b$, we get
 %
 $$a[1].\Nil \paral b.\Nil$$
 %
 which is the same as the process after performing $a$, so we reversed back to this state. We could also have undone $b$ instead, which would have been a causally-consistent path, but not backtracking. The semantics of CCSK are specified by SOS rules (see \cite{Irek2007}).
 
-\subsection{The autoprotolysis of water in CSSK}
+\subsection{The Autoprotolysis of Water in CSSK}
 
 To model the system of two water molecules in CCSK, we first define oxygen and hydrogen atoms usinmg appropriate actions:
-
 %
 $$\begin{array}{lllllll}
 H & \bydef & \overline{a}.H'& \quad & O & \bydef & a.a.a.O'
@@ -387,13 +386,13 @@ It can also develop to a $OH^-$ and a $H_3O^+$. For this, three communications h
 $$( \overline{a}[1].H'_1 \paral \overline{a}[2].H'_2 \paral a[1].a.a.O'_1 \paral \overline{a}[3].H'_3 \paral \overline{a}[4].H'_4 \paral a[2].a[3].a[4].O'_2) 
 \; \setminus\{a\}.$$
 %
-Any of these bonds can be broken by undoing, which is the benefit of a reversible calculus. Thus we could go from the two water molecules to $OH$ and a $H_3O$ by breaking the bond between one of the hydrogen atoms and the oxygen atom it is bonded to and re-bonding to the other oxygen atom. A problem is that three hydrogen atoms could bond directly to an oxygen atom, without two waters ever existing. This would not happen in reality, since it is the partial charge of the water which enables the transfer. These charges are not modelled in this representation.
+Any of these bonds can be broken by undoing, which is the benefit of a reversible calculus. Thus we could go from the two water molecules to $OH$ and a~$H_3O$ by breaking the bond between one of the hydrogen atoms and the oxygen atom it~is bonded to and re-bonding to the other oxygen atom. However, three hydrogen atoms could bond directly to an oxygen atom, without two waters ever existing. This would not happen in reality, since it is the partial charge of the water which enables the transfer. These charges are not modelled in this representation.
 
 In order for the hydrogen transfer to happen, a spontaneous dissociation of a hydrogen atom would be needed. This hydrogen atom could then bind to another oxygen atom thus completing the transfer. Whilst such dissociations exist, it is a different mechanism than the transfer, which we want to model. The dissociation would also allow for protons to flow freely between water molecules, which is not the situation in reality. There could even be several water molecules loosing all of their protons without any of them being bonded, which is quite unrealistic. Finally, the hydrogen atoms bonded to one oxygen atom must dissolve in reverse order as they were bonded, which is not at all the case in the real world.
 
 Overall, we can model the final products in CCSK, but the processes taking place are not well represented.
 
-\section{New reversible formalisms}
+\section{New Eeversible Formalisms}
 \subsection{Calculus of Covalent Bonding}
 \label{sec:ccb}
 
@@ -429,7 +428,7 @@ below where $P$ is a process term:
 
 $$P ::=  S\, \lvert \, S\bydef P \ \bigm\lvert \ (s;b).P \ \bigm\lvert \ P\lvert Q \ \bigm\lvert \ P\restrict L $$
 
-The set of process identifiers (constants) $\PI$ contains typical elements $S$ and $T$. 
+The set of process identifiers (constants) $\PI$ contains typical elements $S$ and~$T$. 
 Each process identifier $S$ has a defining equation $S\bydef P$ where $P$ contains only forward 
 actions (and no past actions). There is also a special identifier
  $\Nil$, denoting the deadlocked process, which has no defining equation. For restrictions $L \subseteq \mA$ holds.
@@ -439,7 +438,7 @@ $(s;b).P$, where $s$ is a non-empty sequence of actions or past actions. This op
 extends the prefixing operator in \cite{Irek2012}. The action $b$ is a weak action
 and it can be omitted, in which case the prefixing is written as $(s).P$ and is called the
 \emph{simple prefix}. The simple prefix (which is still a sequence) is the prefixing operator in \cite{Irek2012}. 
-One of the actions in $s$ in $(s).P$ may be a weak action from $\mWA$. A weak action in $s$ is only allowed for the simple prefix, in the $(s;b)$ operator b is the only allowed weak action. If $s$ is a sequence that contains   
+One of the actions in~$s$ in $(s).P$ may be a weak action from $\mWA$. A weak action in $s$ is only allowed for the simple prefix, in the $(s;b)$ operator b is the only allowed weak action. If~$s$ is a sequence that contains   
 a single action, then the action is a strong action and the operator 
 is the prefixing operator of CCS \cite{MilnerBook}.
 We omit trailing $\Nil$s so, for example, $(s).\Nil$ is written as $(s)$. The new feature of the operator $(s;b).P$ is the execution of the weak action $b$, which
@@ -459,14 +458,16 @@ cannot communicate in $(a.P\paral b.Q)\setminus c$.
 Note that we do not use the usual relabelling 
 operator $[f]$, where $f: \mA \rightarrow \mA$, in CCB, which could be easily added.
 
-The set of \emph{process terms} is ranged over by $P,Q$ and $R$ and is denoted by $\Proc$. 
+The set $\Proc$ of \emph{process terms} is ranged over by $P,Q$ and $R$. 
 In the setting of CCB these terms are simply called \emph{processes}. We define the semantics of our calculus using SOS rules (Figures~\ref{fig:fsos}--\ref{fig:csos}) and rewrite rules (Figure~\ref{fig:reduction}).
 
-We use some predicates and functions, which are formally defined in \cite{KUHN201818}. Informally, a process $P$ is standard, written $\std{P}$, if it contains no past actions (hence no keys). A key $n$ is fresh in $Q$, written $\freshpred{n}(Q)$, if $Q$ contains no past action with the key $n$. Function $\mathsf{k}$ returns the keys in a sequence of actions, whereas $\mathsf{keys}$ returns the keys in a process, and $\mathsf{fn}$ gives the actions of a process which could be executed.
+We use some predicates and functions, which are formally defined in \cite{KUHN201818}. Informally, a process $P$ is standard, written $\std{P}$, if it contains no past actions (hence no keys). A key $n$ is fresh in $Q$, written $\freshpred{n}(Q)$, if $Q$ contains no past action with the key $n$. Function $\mathsf{k}$ returns the keys in a sequence of actions, 
+whereas $\mathsf{keys}$ returns the keys in a process, and $\mathsf{fn}$ gives the actions of a process 
+which could be executed.
 
 
 \begin{figure}
-\[
+\vspace{-4ex}\[
 \begin{array}{ll}
 \rulename{act1}\ 
 \Rule
@@ -509,13 +510,13 @@ We use some predicates and functions, which are formally defined in \cite{KUHN20
 \; S \bydef P
 \end{array}
 \] 
-\caption[Forward SOS rules for CCB.]{Forward SOS rules for CCB. The condition (*) is $\gamma(a,d)=c$, 
+\vspace{-3ex}\caption[Forward SOS rules for CCB.]{Forward SOS rules for CCB. The condition (*) is $\gamma(a,d)=c$, 
 and $b \in \mathcal{WA}$. Remember that $s$ is a mixed sequence of actions and past actions and $t$ is a sequence of purely past actions} \label{fig:fsos}
-\end{figure}
+\vspace{-2ex}\end{figure}
 
 
 \begin{figure}
-\[
+\vspace{-8ex}\[
 \begin{array}{ll}
 \rulename{rev act1}\
 \Rule
@@ -567,13 +568,13 @@ and $b \in \mathcal{WA}$. Remember that $s$ is a mixed sequence of actions and p
 \; S \bydef P'
 \end{array}
 \]
-\caption[Reverse SOS rules for CCB.]{Reverse SOS rules for CCB. The condition (*) is $\gamma(a,d)=c$, and $b \in \mathcal{WA}$. %Note that $\beta \in \mA \cup \mAK$.
+\vspace{-4ex}\caption[Reverse SOS rules for CCB.]{Reverse SOS rules for CCB. The condition (*) is $\gamma(a,d)=c$, and $b \in \mathcal{WA}$. %Note that $\beta \in \mA \cup \mAK$.
 } 
 \label{fig:reversesos}
-\end{figure}
+\vspace{-2ex}\end{figure}
 
 \begin{figure}
-\[
+\vspace{-2ex}\[
 \begin{array}{l}
 \rulename{aux1}\ 
 \Rule{\std{P} \quad \fresh{k}{t}}
@@ -605,14 +606,14 @@ and $b \in \mathcal{WA}$. Remember that $s$ is a mixed sequence of actions and p
 %
 \end{array}
 \] 
-\caption[SOS rules for concerted actions in CCB.]{SOS rules for concerted actions in CCB. The condition (*) is 1. $\alpha$ is $c$ or $(c)$ 
+\vspace{-2ex}\caption[SOS rules for concerted actions in CCB.]{SOS rules for concerted actions in CCB. The condition (*) is 1. $\alpha$ is $c$ or $(c)$ 
 and $\gamma(b,c)=e$ for some $c\in \mathcal{A}$, and 2. $\gamma(a,d)=f$. 
 The condition (**) is $a, \underline{h}  \notin L \cup (L)$. 
 Recall that $t \in \mAK^*$, and $b \in \mathcal{WA}$.} \label{fig:csos}
-\end{figure}
+\vspace{-2ex}\end{figure}
 
 \begin{figure}
-\[
+\vspace{-6ex}\[
 \begin{array}{lll}
 \rulename{prom}: & (s,a,s';b[k]).P \Rightarrow (s,a[k],s';b).P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA} 
 \\[5pt]
@@ -621,16 +622,16 @@ Recall that $t \in \mAK^*$, and $b \in \mathcal{WA}$.} \label{fig:csos}
 \rulename{move-l}: & (s,b[k],s',a,s'').P \Rightarrow (s,b,s',a[k],s'').P & \mbox{ if } a \in \mathcal{SA}, b \in \mathcal{WA}
 \end{array}
 \] 
-\caption[Reduction rules for CCB.]{New reduction rules for CCB. Sequences $s, s', s''$ are members of $(\mathcal{A} \cup \mathcal{AK})^{*}$.} 
+\vspace{-2ex}\caption[Reduction rules for CCB.]{New reduction rules for CCB. Sequences $s, s', s''$ are members of $(\mathcal{A} \cup \mathcal{AK})^{*}$.} 
 \label{fig:reduction}
-\end{figure}
-\clearpage
+\vspace{-2ex}\end{figure}
+%\clearpage
 
 The forward and reverse SOS rules for CCB are given in Figures~\ref{fig:fsos} and \ref{fig:reversesos}. 
 Figure \ref{fig:csos} contains the SOS rules that define the new concerted actions transitions. 
 The main rule is the rule \rulename{concert} that defines when a pair of concerted actions 
 takes place.  We also have two auxiliary rules \rulename{aux1} and \rulename{aux2} which 
-define only an auxiliary transition relation needed in the \rulename{concert} rule. The auxiliary rules are only applicable if a weak action is beyond the semicolon, whereas a weak action in the simple prefix is dealt with by standard rules and can therefore not become part of a concerted action. Note that the \rulename{concert} rule uses \emph{lookahead} \cite{Uli92}.
+define only an auxiliary transition relation needed in the \rulename{concert} rule. The auxiliary rules are only applicable if a weak action is beyond the semicolon, whereas a weak action in the simple prefix is dealt with by standard rules and can therefore not become part of a concerted action. Note that the \rulename{concert} rule uses \emph{lookahead}~\cite{Uli92}.
 Also note that transitions in \rulename{aux1} and \rulename{aux2} use the auxiliary labels $(b)[k]$ 
 for all $b \in \mWA$ and $k \in \Keys$. The rule \rulename{concert par} requires that $k$ is fresh in $Q$,
 correspondingly as in \rulename{par}. Moreover, we need to ensure that when we reverse $h$ with the key $l$
@@ -648,7 +649,7 @@ $\underline{c}[l] \in \umAK$, or with concerted actions $(a[k], \underline{c}[l]
 
 Next, we introduce our reduction relation which is given by the reduction (rewrite) rules 
 in Figure~\ref{fig:reduction}. We do not include the standard rules for simple operation like swapping parallel processes (see \cite{KUHN201818}). We add rules define {\em promotion} of actions. These are \rulename{prom}, \rulename{move-r}, and \rulename{move-l} which  
-promote weak bonds (here $b$) to strong bonds (here $a$).
+promote weak bonds (here~$b$) to strong bonds (here $a$).
 The rule \rulename{prom} applies to the full version of our prefix operator (with the ; construct), and
 \rulename{move-r} and \rulename{move-l} apply only to the simple prefix.
 These three rules are here to model what happens in chemical systems: a bond on a weak action is 
@@ -670,10 +671,10 @@ $$\begin{array}{lllllll}
 H & \bydef & (h;p).H' & \quad & O & \bydef & (o,o,n).O'
 \end{array}$$
 We use a general prefixing construct $(s;b).P$ where $s$ is a sequence of actions or executed 
-actions, and $b$ is a \emph{weak} action. The prefixing operator should not be used (as in the definition of $O$). In such a case at most one of the actions in the sequence can be a weak action. Informally, actions in $s$ can take place in any order 
+actions, and $b$ is a \emph{weak} action. The prefixing operator should not~be used (as in the definition of $O$). In such a case at most one of the actions in~the sequence can be a weak action. Informally, actions in $s$ can take place in any order 
 and $b$ can happen if
 all actions in $s$ have already taken place. Once $b$ takes place, it must be accompanied by
-undoing immediately one of the actions in $s$. The weak action in the sequence, as we shall see later, is important for rewriting operations.  
+undoing immediately one of the actions~in~$s$. The weak action in the sequence, as shown later, is important for rewriting~operations.  
 
 The synchronisation function $\gamma$ is:
 
@@ -711,10 +712,10 @@ Following a general principle in process calculi in the style of CCB we can move
 %
 Note the $\underline{h_i}$, $\underline{o_j}$, and $\underline{n}$ are not restricted:  this allows us to break bonds via concerted actions involving these actions. We will see an example of this in the next step. Notice that we leave out the restrictions to improve readability in the following description.
 
-Now actions $n$ in $O_1$ and $p$ in $H_3$ can combine (we use the new key $5$), representing a transfer of a proton from one atom 
-of oxygen ($O_2$ in our model) to another one ($O_1$ in our model). Since a hydrogen atom consists of a proton and an electron, and the electron stays in such a transfer, it can either be called a proton transfer or the transfer of a (positively charged) hydrogen atom. We perform the transfer of $H_3$ from $O_2$ to $O_1$. The creation of the bond with key $5$ from $O_1$ to $H_3$ forces us to break the bond with key $3$ (between $h_3$ and
-$o_3$) due to the property of the operator $(s;b).P$ discussed earlier. These two reactions happen almost simultaneously so we represent them as a pair of 
-\emph{concerted actions}. In line with the convention in process calculi, where the action performed is written above the transition arrow, we write a pair of reactions above the transition arrow, to express the concerted actions. We enclose them in $\{\}$ to indicate concerted actions:
+Now actions $n$ in $O_1$ and $p$ in $H_3$ combine (we use the new key $5$), representing a transfer of a proton from one atom 
+of oxygen ($O_2$ in our model) to another one ($O_1$ in our model). As a hydrogen atom consists of a proton and an electron, and the electron stays in such a transfer, it can either be called a proton transfer or the transfer of a (positively charged) hydrogen atom. We perform the transfer of $H_3$ from $O_2$ to $O_1$. The creation of the bond with key $5$ from $O_1$ to $H_3$ forces a break of the bond with key $3$ (between $h_3$ and
+$o_3$) due to the property~of the operator $(s;b).P$ discussed earlier. These two reactions happen almost simultaneously so we represent them as a pair of 
+\emph{concerted actions}. In line with the convention in process calculi, where the action performed is written above the transition arrow, we write a pair of reactions above the transition arrow, to express the concerted actions. We enclose them in $\{\}$ to mark concerted actions:
 \begin{flalign*}
 & (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1 \paral 
 (h_3[3];p).H'_3 &&\\
@@ -773,7 +774,7 @@ We can therefore apply the movement of restrictions the reverse way we applied i
 
 In this section we present shortly the bonding calculus \cite{NaCo18}, and 
 illustrate its expressiveness by modelling the autoprotolysis of water. 
-Let us consider the set $\mathbb{N}$ of natural numbers, the set 
+Let us consider the set~$\mathbb{N}$ of natural numbers, the set 
 $\mN=\{x,x^+,x^-,\dots\}$ of bond names, the set $\mM=\{a,b,\dots\}$ of 
 molecules and the set $\mP=\{P,Q,\ldots\}$ of processes. A multiset over 
 $\mN$ is defined as a partial function $N:\mN \rightarrow \N$. In bonding 
@@ -783,7 +784,7 @@ molecules $a$ and $b$ is denoted by $\{a-^x b\}$.
 The syntax of the bonding calculus syntax is presented in Fig.~\ref{table:syntax}.
 
 \begin{figure}
-\centering
+\vspace{-2ex}\centering
 %\vspace{-3ex}
 \bgroup
 \def\arraystretch{1.3}
@@ -812,21 +813,19 @@ Processes &$P$&$::= $&$\textbf{0} $ & {\sf (empty)}\\
 
 Definition & $A(a_1,\ldots,a_n)$&$::= $& $P$ & {\sf (recursion)}\\
 
-{ } \\ 
-
 System & $S$ & $::=$ & $ P \; ||\; L$ . \\
 \end{tabular}
 \egroup
-\caption{Syntax of the Bonding Calculus}\label{table:syntax}
-\end{figure}
+\vspace{-2ex}\caption{Syntax of the Bonding Calculus}\label{table:syntax}
+\vspace{-2ex}\end{figure}
 %\vspace{-3ex}
 
 A bond prefix $\overline{x}(b)$ is used to indicate the availability of 
 a molecule with name~$b$ to create a new bond with name $x$, while an unbond 
 prefix $\underline{x}(b)$ indicates the availability of $b$ to destroy an 
-existing bond $x$. The process of creating or breaking a bond leads to an 
-update of the global bond memory $L$. Since several similar bonds can exist 
-between the same molecules, $L$ is actually a multiset of bonds.
+existing bond $x$. Creating or breaking a bond leads to an 
+update of the global bond memory $L$. As several similar bonds can exist 
+between the same molecules, $L$ is actually a multiset of~bonds.
 
 The process $\textbf{0}$ denotes inactivity. The availability to perform an 
 action $\alpha$, and then to continue the execution as process $P$ is denoted 
@@ -838,7 +837,7 @@ between them by using appropriate actions.
 As we work with bonds, we use the function $\Bumpeq: \mathcal{M}\times 
 \N^{\mN} \times \mathcal{M} \rightarrow Bool$ to check whether between two 
 molecules there exist certain bonds. For example, $a\Bumpeq^N b$ checks for the 
-existence of all bonds in $N$ between the molecules $a$ and $b$; it 
+existence of all bonds in $N$ between the molecules $a$ and~$b$; it 
 returns true when such bonds exist, and false otherwise. When we consider 
 $N=\emptyset$, then $a\Bumpeq^{\emptyset}b$ checks if at least a bond 
 exists between the two molecules. When $b=\varepsilon$, then $a\Bumpeq^N 
@@ -867,38 +866,27 @@ $A(a_1,\ldots,a_n)=P$, where $a_i \neq a_j$ for all $i\neq j \in
 =P\{b_1/a_1,\ldots,b_n/a_n\}$, where $\{b_i/a_i\}$ denotes the replacement 
 of variable $a_i$ by value $b_i$. A system $S$ is given as a parallel 
 composition of a process $P$ and the multiset of bonds $L$.
-\smallskip
 
 The structural congruence relation $\equiv$ is the least congruence such 
-that $(\mP,+,{\bf 0})$ and $(\mP,\mid,{\bf 0})$ are commutative monoids 
-and the unfolding law $A(b_1,\ldots,b_n) \equiv 
+that\linebreak $(\mP,+,{\bf 0})$ and $(\mP,\mid,{\bf 0})$ are commutative monoids 
+and the unfolding law\linebreak  $A(b_1,\ldots,b_n) \equiv 
 P\{b_1/a_1,\ldots,b_n/a_n\}$ holds whenever $A(a_1,\ldots,a_n)$ = $P$.
 
-The calculus presented in \cite{NaCo18} was intended to model only the 
+The calculus presented in \cite{NaCo18} was intended to model the 
 creation and breaking of the covalent bonds. In order to be able to model 
 both covalent and hydrogen bonds, we apply a minor update to the 
 operational semantics in \cite{NaCo18} because we need two instances of the 
 rules used to create and to break bonds. The only difference between the 
-two instances of the same rule is given by the names of the bonds 
+two instances of the same rule is given by the names of~the bonds 
 appearing in the interacting processes, and by the fact that a bond cannot 
 be created using the names $x^+$ and $x^-$ if other bonds exist between 
-the same molecules; more details about this restriction will be given in 
+the same molecules; more details about this restriction are given in 
 the example below.
 
-The operational semantics of the bonding calculus is given in Table~\ref{table:semantics}.
-
-The rules {\sf (CREATE1)} and {\sf (CREATE2)} describe the creation of a 
-new bond $\{a-^x b\}$, while the rules {\sf (REMOVE1)} and {\sf (REMOVE2)} 
-describe the breaking of a bond $\{a-^x b\}$; if there exist two bonds 
-$\{a-^x b\}$ in~$L$, then any of the these bonds is broken. The rule 
-{\sf (PAR}) is used to compose processes in parallel, while the rules 
-{\sf (TRUE}) and {\sf (FALSE}) choose one of the branches of the testing 
-process based on the result of the checking. The rule {\sf (IDE)} describes 
-the recursion, while the {\sf (STRUCT)} rule indicates the fact that we reason 
-up to the structural congruence.
+The operational semantics of the bonding calculus is given in Figure~\ref{table:semantics}.
 
 \begin{figure}
-\begin{center}
+\vspace{-4ex}\begin{center}
 %\vspace{-5ex}
 \begin{tabular}{c}
 \vspace{1ex}
@@ -927,11 +915,21 @@ Q)\ || \ L  \xrightarrow{} Q\ || \ L}$\\[10pt]
 \end{center}
   \vspace{-2ex}\caption{Operational Semantics of the Bonding Calculus.}
   \label{table:semantics}
-\vspace{-3ex}
+\vspace{-4ex}
 \end{figure}
 
-Next we illustrate the expressiveness of the bonding calculus by modelling the 
-autoprotolysis of water. We use two types of bond names, namely $c$ and $h$, 
+The rules {\sf (CREATE1)} and {\sf (CREATE2)} describe the creation of a 
+new bond $\{a-^x b\}$, while the rules {\sf (REMOVE1)} and {\sf (REMOVE2)} 
+describe the breaking of a bond $\{a-^x b\}$; if there exist two bonds 
+$\{a-^x b\}$ in~$L$, then any of the these bonds is broken. The rule 
+{\sf (PAR}) is used to compose processes in parallel, while the rules 
+{\sf (TRUE}) and {\sf (FALSE}) choose one of the branches of the testing 
+process based on the result of the checking. The rule {\sf (IDE)} describes 
+the recursion, while the {\sf (STRUCT)} rule indicates the fact that we reason 
+up to the structural congruence.
+
+
+\subsubsection{The autoprotolysis of water in Bonding Calculus}We use two types of bond names, namely $c$ and $h$, 
 to stand for the covalent and hydrogen bonds, respectively. Using our  
 calculus, the system composed of two molecules of water is described by:
 
@@ -1001,7 +999,7 @@ that will interact in the next step, and bold the actions to be executed):
 \end{center}
 
 \noindent 
-This leads to the following system, where we again bold the processes to be~executed:
+This leads to the next system, where we again bold the processes to be~executed:
 \begin{center}$\MolOxy_3(O_1) \mid \MolHy_1(H_1) \mid \MolHy_1(H_2) $
 \end{center}
 
@@ -1048,7 +1046,7 @@ followed by the breaking of the hydrogen bond $O_1-^h H_4$:
 \noindent 
 The obtained system contains again two water molecules of water.
 
-\subsection{Reversing Petri nets}
+\subsection{Reversing Petri Nets}
 In this section we present reversing Petri nets (RPNs), an extension of Petri nets
 developed for modelling reversing computations, and we employ the formalism
 to model the autoprotolysis of water. Reversing Petri nets~\cite{RPNs} are 
@@ -1163,7 +1161,7 @@ tokens/bonds cannot be cloned into more than one outgoing places.
 
 As with standard Petri nets the association of token/bond instances to places is called a \emph{marking}  such that 
 $M: P\rightarrow 2^{A_I\cup B_I}$, where we assume that if $(u,v)\in M(x)$ then $u, v\in M(x)$. 
-In addition, we employ the notion of a \emph{history}, which assigns a memory to each
+In addition, we employ the notion of a \emph{history}, which~assigns a memory to each
 transition $H : T\rightarrow \mathbb{N}$. 
 Intuitively, a history of $H(t) = 0$ for some $t \in T$ captures that the transition has not taken place, or 
 every execution of it has been reversed, and a history
@@ -1182,13 +1180,13 @@ set $C$.
 During the forward execution of a transition in a RPN, 
 a set of tokens and bonds, as specified by the incoming arcs of the transition, are selected and
 moved to the outgoing places of the transition, as specified by the transition's outgoing arcs, possibly
-forming or destructing bonds, as necessary. Given, however, the presence of multiple instances of the same token
+forming or destructing bonds, as necessary. Due to the presence of multiple instances of the same token
 type, it is possible that different token instances are selected during the transition's execution.  
 
 
 A transition is forward-enabled in a state $\state{M}{H}$ of a \PN if there exists a selection of token instances 
-available at the incoming places of the transition that 
-match the requirements  on the transitions incoming arcs. Formally:
+available at the incoming places of the transition 
+matching the requirements  on the transitions incoming arcs. Formally:
 
 \begin{definition}\label{fenabled}{\rm
 		Given a \RPN $(P,T, A, A_V, B, F)$, a state $\state{M}{H}$, and a transition $t$, we say that $t$ is 
@@ -1311,14 +1309,14 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 
 We now return to the RPN autoprotolysis model and in Fig.~\ref{execution} we present
 a possible execution of the model. The first net in this sequence shows the system after 
-the execution of transition $t_1$ with enabling assignment $U(h)=H_1, U(o)=O_1$. Note
+the execution of transition $t_1$ with enabling assignment $U(h)=H_1$,\linebreak $U(o)=O_1$. Note
 that the term $[1]$ written over transition $t_1$ captures that at this point $H(t_1)=1$ 
 since the transition has been executed once.
 This notation is generally used for histories in the graphical representation with occasional
 missing histories corresponding to histories equal to $0$.
 Subsequently,
-we have the model after execution of transition $t_2$ with enabling assignment $U(h)=H_2,
-U(o)=O_1$, creating the bond $O_1-H_2$, thus forming the first water molecule. A second
+we have the model after execution of transition $t_2$ with enabling assignment $U(h)=H_2$,
+$U(o)=O_1$, creating the bond $O_1-H_2$, thus forming the first water molecule. A second
 execution of transitions $t_1$ and $t_2$ results in the second molecule of water in the system,
 placed again at place $y$, as shown in the third net in the figure. At this state, transition
 $t_3$ is forward-enabled and,  with enabling assignment $U(o_1)=O_1, U(o_2)=O_2, U(h_1)=H_1, 
@@ -1338,6 +1336,9 @@ In CCB, we can actually distinguish different instances of the same process and 
 \begin{flalign*}
 &(( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n[5]).O'_1) \paral (h_3[5];p).H'_3) &&\\
 &\paral (h_4[4];p).H'_4  \paral (o_3,o_4[4],n).O'_2&&\\
+\end{flalign*}
+
+\begin{flalign*}
 &\xrightarrow{\{ np[3], \underline{nh_{1}}[1]\}} \Rightarrow &&\\
 &(( (\boldsymbol{h_1[3]};p).H'_1 \paral (h_2[2];p).H'_2 \paral (\boldsymbol{o_1[5]},o_2[2],\boldsymbol{n}).O'_1) \paral (h_3[5];p).H'_3) &&\\
 &\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3[3]},o_4[4],\boldsymbol{n}).O'_2
@@ -1345,7 +1346,7 @@ In CCB, we can actually distinguish different instances of the same process and 
 %
 The result is different from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. In CCB, we can trace the atoms as well as show which results are identical from a chemical point of view (see Section 6.5 of \cite{KUHN201818}).
 
-The bonding calculus is suitable for modelling in a natural and easy way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Moreover, we can verify various properties of the bonding compounds described by using the calculus.
+The bonding calculus is suitable for modelling in a natural way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Also, we can verify various properties of the bonding compounds described by using the calculus.
 
 
 Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent where during the execution of transitions tokens can be bonded/unbonded with each other, and the creation of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
@@ -1354,7 +1355,7 @@ In particular, the feature of token multiplicity and
 the use of variables allows to non-deterministically
 select different combinations of atoms of a particular element when creating molecules. Also the possibility for
 transitions to break bonds allows to model concerted actions where a transition simultaneously
-destructs  a water molecule and creates a hydronium whose  reversal results in the opposite effect. Furthermore,
+destructs  a water molecule and creates a hydronium whose  reversal results in the opposite effect. Moreover,
 the collective token interpretation adopted in the framework, treating all tokens of the same type
 as equivalent, allows the reaction to reverse into two different water molecules than the original ones,
 i.e., using different instances of the atoms.
