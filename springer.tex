@@ -237,11 +237,11 @@ makes a more accurate depiction of the reversibility in place, and allows a more
 compared to higher-leverl models.
 
 
-Process calculi, originally designed for modelling concurrent computations, have been applied to model biochemical and biological systems. We can mention the $\pi$-calculus \cite{MilnerPi,Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. These approaches allow to model various biological entities (e.g., molecules, proteins) as interacting processes when describing a complex system. The process calculi are compositional, and so they allow to explicitly model the activity of the whole complex system by composing the activities of some smaller entities. Each term in the description of such a system has a counterpart in the biophysical system, and the behaviour of the whole system is obtained by following the operational semantics of the process calculi. On the other hand, the bonding calculus \cite{NaCo18} is different from these approaches mentioned above. 
-% \anna{In this last sentence and the following paragraphs there is specific mention on the bonding calculus or CCB (I will highlight some such points). A simultaneous reference to CCB/bonding calculus would be useful. At some point, possibly the conclusions, it might be good to make a more careful comparison between the two, both being process calculi.} 
-In BioPEPA the abstraction ``processes as species'' is used by considering the concentrations of the involved processes. In the other calculi,  the abstraction ``processes as interactions'' is used similar as in bonding calculus, but processes are able to communicate values in order to interact (this is not the case in the bonding calculus). 
+Process calculi, originally designed for modelling concurrent computations, have been applied to model biochemical and biological systems. We can mention the $\pi$-calculus \cite{MilnerPi,Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. These approaches allow to model various biological entities (e.g., molecules, proteins) as interacting processes when describing a complex system. The process calculi are compositional, and so they allow to explicitly model the activity of the whole complex system by composing the activities of some smaller entities. Each term in the description of such a system has a counterpart in the biophysical system, and the behaviour of the whole system is obtained by following the operational semantics of the process calculi. On the other hand, the Bonding Calculus \cite{NaCo18} is different from these approaches mentioned above. 
+% \anna{In this last sentence and the following paragraphs there is specific mention on the Bonding Calculus or CCB (I will highlight some such points). A simultaneous reference to CCB/Bonding Calculus would be useful. At some point, possibly the conclusions, it might be good to make a more careful comparison between the two, both being process calculi.} 
+In BioPEPA the abstraction ``processes as species'' is used by considering the concentrations of the involved processes. In the other calculi,  the abstraction ``processes as interactions'' is used similar as in Bonding Calculus, but processes are able to communicate values in order to interact (this is not the case in the Bonding Calculus). 
 
-Another approach to model biological interactions is by using rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality} and the BioNetGen Language (BNGL) \cite{pmid19399430}. Just like in bonding calculus, $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM. Just like in BNGL, bonding calculus allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus. While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in the  bonding calculus \cite{NaCo18} a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus. Moreover, the number of rules is smaller in bonding calculus due to the use of generic rules.
+Another approach to model biological interactions is by using rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality} and the BioNetGen Language (BNGL) \cite{pmid19399430}. Just like in Bonding Calculus, $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM. Just like in BNGL, Bonding Calculus allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus. While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in the  Bonding Calculus \cite{NaCo18} a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus. Moreover, the number of rules is smaller in Bonding Calculus due to the use of generic rules.
 
 Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no explicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are  RCCS \cite{danos2004ccsr} and CCSK \cite{Irek2007}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of the forward action, which is not the case in other calculi. Actions can be undone in exactly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables the modelling of out-of-causal-order reversibility. In biological and chemical systems such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailed view. This suggests that this is a case of emergent behaviour.
 
@@ -271,14 +271,14 @@ of mechanisms involving two distinct transitions,
 one for the forward and one for the reverse version of a reaction. This
 may result in expanded models and state spaces and less natural and/or less accurate
 models of  reversible behavior. In this study we consider
-a recently-introduced extension of Petri nets called reversing Petri nets (RPNs)~\cite{RPNs}.
+a recently-introduced extension of Petri nets called Reversing Petri Nets (RPNs)~\cite{RPNs}.
 %A large amount of work has focused on providing a formal understanding of reversibility within process calculi and it has recently been extended to the formalism of Petri nets.  
 %Petri nets (PNs)~\cite{PNs} are a graphical mathematical language that can be used for the specification and
 %analysis of discrete event systems. 
 %The first study of reversible computation within PNs was proposed in~\cite{PetriNets,BoundedPNs}. In these works, the
 %authors investigate the effects of adding \emph{reversed} versions of selected transitions in a PN
 %by reversing the directions of a transition's arcs. They then explore decidability problems regarding reachability and coverability in the resulting PNs. In
-%was proposed, called reversing Petri nets (RPNs).  In this work, RPNs are acyclic Petri net structures that  assume 
+%was proposed, called Reversing Petri Nets (RPNs).  In this work, RPNs are acyclic Petri net structures that  assume 
 RPNs are the first proposal for capturing reversible behavior directly in the Petri net model
 and they support reversible computation in all its forms
 (backtracking, causally-consistent reversibility and out-of-causal-order reversibility).
@@ -772,7 +772,7 @@ We can therefore apply the movement of restrictions the reverse way we applied i
 
 \subsection{Bonding Calculus}
 
-In this section we present shortly the bonding calculus \cite{NaCo18}, and 
+In this section we present shortly the Bonding Calculus \cite{NaCo18}, and 
 illustrate its expressiveness by modelling the autoprotolysis of water. 
 Let us consider the set~$\mathbb{N}$ of natural numbers, the set 
 $\mN=\{x,x^+,x^-,\dots\}$ of bond names, the set $\mM=\{a,b,\dots\}$ of 
@@ -781,7 +781,7 @@ $\mN$ is defined as a partial function $N:\mN \rightarrow \N$. In bonding
 calculus each molecule has a unique name, and the bond $x$ between two 
 molecules $a$ and $b$ is denoted by $\{a-^x b\}$.
 
-The syntax of the bonding calculus syntax is presented in Fig.~\ref{table:syntax}.
+The syntax of the Bonding Calculus syntax is presented in Fig.~\ref{table:syntax}.
 
 \begin{figure}
 \vspace{-2ex}\centering
@@ -883,7 +883,7 @@ be created using the names $x^+$ and $x^-$ if other bonds exist between
 the same molecules; more details about this restriction are given in 
 the example below.
 
-The operational semantics of the bonding calculus is given in Figure~\ref{table:semantics}.
+The operational semantics of the Bonding Calculus is given in Figure~\ref{table:semantics}.
 
 \begin{figure}
 \vspace{-4ex}\begin{center}
@@ -1047,9 +1047,9 @@ followed by the breaking of the hydrogen bond $O_1-^h H_4$:
 The obtained system contains again two water molecules of water.
 
 \subsection{Reversing Petri Nets}
-In this section we present reversing Petri nets (RPNs), an extension of Petri nets
+In this section we present Reversing Petri Nets (RPNs), an extension of Petri nets
 developed for modelling reversing computations, and we employ the formalism
-to model the autoprotolysis of water. Reversing Petri nets~\cite{RPNs} are 
+to model the autoprotolysis of water. Reversing Petri Nets~\cite{RPNs} are 
 Petri net structures that allow transitions to be reversed. They assume 
 tokens to be distinguished from each other by an identity/type and to be persistent. Furthermore,
 during transitions tokens can be bonded with each other. The creation of bonds
@@ -1098,10 +1098,14 @@ to fire when placed on arcs incoming the transition, and the effects of the tran
 outgoing arcs. 
 Graphically, a RPN is portrayed as a directed bipartite graph where token instances are indicated by $\bullet$, places by
 circles, transitions by boxes, and bond instances by lines between token instances. 
-\begin{figure}[t]
+\begin{figure}
 	\centering
-	\includegraphics[width=12cm]{model.png}
-	\caption{RPN model of the autoprotolysis of water}
+	\subfigure{\includegraphics[width=10cm]{model.png}}\\
+\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
+	\subfigure{\includegraphics[width=10cm]{aftert1.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
+	\subfigure{\includegraphics[width=10cm]{aftert2.png}}\\	\caption{RPN model of the autoprotolysis of water}
 	\label{RPNmodel}
 \end{figure}
 
@@ -1292,17 +1296,13 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 	\centering
 	%\subfigure{\includegraphics[width=6.3cm]{model.png}}
 	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert1.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert2.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
 	%\subfigure{\includegraphics[width=6.6cm]{aftert12.png}}
 	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert22.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=10cm]{aftert22.png}}\\\vspace{-0.25cm}
 	\subfigure{\includegraphics[width=.5cm]{arrowt3.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert3.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=10cm]{aftert3.png}}\\\vspace{-0.25cm}
 	\subfigure{\includegraphics[width=.5cm]{arrowt3r.png}}
-	\subfigure{\includegraphics[width=7.2cm]{aftert3r.png}}
+	\subfigure{\includegraphics[width=10cm]{aftert3r.png}}
 	\caption{Execution of the RPN autoprotolysis of water model.}
 	\label{execution}
 \end{figure}
@@ -1346,10 +1346,10 @@ In CCB, we can actually distinguish different instances of the same process and 
 %
 The result is different from that in Section~\ref{sec:ccb}, but identical from a chemical point of view, since the hydrogens are all identical. On the other hand a technique called isotopic labelling can be used to trace atoms by using different isotopes of, in this case hydrogen, confirming that the different options happen in reality. In CCB, we can trace the atoms as well as show which results are identical from a chemical point of view (see Section 6.5 of \cite{KUHN201818}).
 
-The bonding calculus is suitable for modelling in a natural way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Also, we can verify various properties of the bonding compounds described by using the calculus.
+The Bonding Calculus is suitable for modelling in a natural way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Also, we can verify various properties of the bonding compounds described by using the calculus.
 
 
-Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent where during the execution of transitions tokens can be bonded/unbonded with each other, and the creation of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
+Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent where during the execution of transitions tokens can be bonded/unbonded with each other, and the creation of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri Nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
 has multi-party interactions, is inherently concurrent, and features reversible behaviour. 
 In particular, the feature of token multiplicity and
 the use of variables allows to non-deterministically
@@ -1364,13 +1364,13 @@ captures the existence of electrons by the enablednes of transitions. A model at
 level of abstraction would be possible by introducing tokens to represent the electrons  bonded to the associated
 atom tokens to illustrate the relevant charges. 
 
-Reversing Petri nets are a general purpose model where their expressiveness offers the ability to model 
+Reversing Petri Nets are a general purpose model where their expressiveness offers the ability to model 
 a variety of distributed systems other than biochemical reactions. In particular, they have been used successfully for
 the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. 
 Their extension in~\cite{RC19} also introduces
 a mechanism for controlling reversibility 
  that may capture environmental or other conditions that determine a transition's
-reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of reversing Petri nets exploiting available tools.
+reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
 
 
 Considering the three formalisms mentioned, all can represent this reaction. We now evaluate their suitability for the modelling of covalent reactions as exemplified by the autoprotolysis of water. In order to do so, we first consider if all chemically valid interactions
