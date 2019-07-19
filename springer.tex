@@ -1105,11 +1105,11 @@ circles, transitions by boxes, and bond instances by lines between token instanc
 	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
 	\subfigure{\includegraphics[width=10cm]{aftert1.png}}\\\vspace{-0.25cm}
 	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=10cm]{aftert2.png}}\\	\caption{RPN model the formation of two water molecules.}
+	\subfigure{\includegraphics[width=10cm]{aftert2.png}}\\	\caption{RPN model of the formation of a water molecule.}
 	\label{RPNmodel}
 \end{figure}
 
-Fig.~\ref{RPNmodel} shows the graphical representation of the forming of two water molecules as an RPN.
+Fig.~\ref{RPNmodel} shows the graphical representation of the forming of a water molecule as an RPN.
 In this model, we assume two token types, $H$ for hydrogen
 and $O$ for oxygen. They are instantiated via four token instances of $H$ ($H_1$, $H_2$, $H_3$, and $H_4$) and two token instances of
 $O$, ($O_1$ and $O_2$). The net consists of five places and three transitions and the edges between
@@ -1125,14 +1125,21 @@ the formation of a water molecule by selecting an oxygen token from place $x$ an
 a hydrogen token from place $v$ and forming a bond between them, placing the resulting component at place $y$. Note that the selected oxygen instance in this transition will be connected to a hydrogen token via a bond 
 created by transition $t_1$; this bond is preserved and the component resulting from the creation of
 the new $o-h$ bond will be transferred to place $y$. (Details about execution of the model will follow the
-description of RPN semantics.)
-Finally, transition $t_3$ models the autoprotolysis reaction: assuming the existence of two distinct oxygen
+description of RPN semantics.) Note
+that the term $[1]$ written over transition $t_1$ captures that at this point $H(t_1)=1$ 
+since the transition has been executed once.
+This notation is generally used for histories in the graphical representation with occasional
+missing histories corresponding to histories equal to $0$. In the third net,
+we have the model after execution of transition $t_2$ with enabling assignment $U(h)=H_2$,
+$U(o)=O_1$, creating the bond $O_1-H_2$, thus forming the first water molecule. In Fig.~\ref{execution} a second
+execution of transitions $t_1$ and $t_2$ results in the second molecule of water in the system,
+placed again at place $y$, as shown in the second net in the figure. Finally, transition $t_3$ models the autoprotolysis reaction: assuming the existence of two distinct oxygen
 instances, as required by the variables $o_1$ and $o_2$ on the incoming arc of the transition, connected
 with hydrogen instances as specified in $F(y,t_3)$, the transition breaks the bond $o_2-h_3$ and forms the
 bond  $o_1-h_3$.  As such, assuming the existence of two water molecules at place $y$, the transition
 will form  a hydronium  (H$_3^+$O) and a hydroxin (OH$^-$) molecule in place $z$ of the net.
 The reversibility semantics of RPNs ensures that  reversing the transition $t_3$ will result in the re-creation
-of  two water molecules placed at $y$, while the use of variables allows the formation of water molecules consisting
+of  two water molecules placed at $y$, while the use of variables allows the formation of water molescules consisting
 of different bonds between the hydrogen and oxygen instances, as will be explained in the sequel.
 
 
@@ -1308,20 +1315,11 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 \end{figure}
 
 We now return to the RPN autoprotolysis model and in Fig.~\ref{execution} we present
-a possible execution of the model. The first net in this sequence shows the system after 
-the execution of transition $t_1$ with enabling assignment $U(h)=H_1$,\linebreak $U(o)=O_1$. Note
-that the term $[1]$ written over transition $t_1$ captures that at this point $H(t_1)=1$ 
-since the transition has been executed once.
-This notation is generally used for histories in the graphical representation with occasional
-missing histories corresponding to histories equal to $0$.
-Subsequently,
-we have the model after execution of transition $t_2$ with enabling assignment $U(h)=H_2$,
-$U(o)=O_1$, creating the bond $O_1-H_2$, thus forming the first water molecule. A second
-execution of transitions $t_1$ and $t_2$ results in the second molecule of water in the system,
-placed again at place $y$, as shown in the third net in the figure. At this state, transition
+a possible execution of the model. The second net in this sequence shows the system after 
+the execution of transition $t_1$ and $t_2$ twice each. At this state, transition
 $t_3$ is forward-enabled and,  with enabling assignment $U(o_1)=O_1, U(o_2)=O_2, U(h_1)=H_1, 
 U(h_2)=H_2,U(h_3)=H_3,U(h_4)=H_4$, we have the creation of the hydronium and hydroxide
-depicted at place $z$ in the fourth net of the figure. At this stage  transition $t_3$ is
+depicted at place $z$ in the second net of the figure. At this stage  transition $t_3$ is
 now reverse-enabled and the last net in the figure illustrates the state resulting after
 reversing $t_3$ with reversal enabling assignment $W(o_1)=O_1, W(o_2)=O_2, W(h_1)=H_1, 
 W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
