@@ -234,7 +234,7 @@ broken before the end of the reactions.  Thus, the allowed level of detail
 %we have on
 %chemical  reactions  makes more obvious the use of  reversibility compared to higher level models.  In many cases we have the additional benefit of good
 makes a more accurate depiction of the reversibility in place, and allows a more thorough understanding of the underlying reaction mechanisms 
-compared to higher-leverl models.
+compared to higher-lever models.
 
 
 Process calculi, originally designed for modelling concurrent computations, have been applied to model biochemical and biological systems. We can mention the $\pi$-calculus \cite{MilnerPi,Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. These approaches allow to model various biological entities (e.g., molecules, proteins) as interacting processes when describing a complex system. The process calculi are compositional, and so they allow to explicitly model the activity of the whole complex system by composing the activities of some smaller entities. Each term in the description of such a system has a counterpart in the biophysical system, and the behaviour of the whole system is obtained by following the operational semantics of the process calculi. On the other hand, the Bonding Calculus \cite{NaCo18} is different from these approaches mentioned above. 
@@ -255,13 +255,13 @@ the modelling, analysis, and simulation of a diversity of biological systems inc
 biochemical reactions in metabolic pathways, gene expression, signal transduction, and neuronal processes~\cite{PNbiology,DBLP:journals/bib/Chaouiya07,DBLP:journals/nc/BaldanCMS10}. Indeed, PNs seem to be a natural framework for representing biochemical systems as they constitute a set of interdependent
 transitions/reactions which consume 
 and produce resources, and are represented graphically in a similar fashion to the systems
-in question. Furthermore, a PN model
+in question. A PN model, similarly to other formal models, 
 can be decomposed in order to handle the overall complexity, and the abstraction level of a model
 can vary from single molecules, to cells, to multicellular aggregations.
 Several specialized Petri net classes like qualitative, stochastic, continuous, or
 hybrid Petri nets and their coloured counterparts have been used to describe different
 systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
-At the same time, PNs enable a wide range of analysis techniques, 
+At the same time, PNs are associated with a wide range of analysis techniques and the associated tool support, 
 such as determining states of equilibrium, conflicting evolutions, 
 and reachable states. 
 
@@ -269,7 +269,7 @@ As far as reversibility is concerned, classical PNs and their extensions do not
 directly handle reversibility. Modelling reversible reactions in these formalisms requires the employment
 of mechanisms involving two distinct transitions,
 one for the forward and one for the reverse version of a reaction. This
-may result in expanded models and state spaces and less natural and/or less accurate
+may result in expanded models and less natural and/or less accurate
 models of  reversible behavior. In this study we consider
 a recently-introduced extension of Petri nets called Reversing Petri Nets (RPNs)~\cite{RPNs}.
 %A large amount of work has focused on providing a formal understanding of reversibility within process calculi and it has recently been extended to the formalism of Petri nets.  
@@ -1098,42 +1098,6 @@ to fire when placed on arcs incoming the transition, and the effects of the tran
 outgoing arcs. 
 Graphically, a RPN is portrayed as a directed bipartite graph where token instances are indicated by $\bullet$, places by
 circles, transitions by boxes, and bond instances by lines between token instances. 
-\begin{figure}
-	\centering
-	\subfigure{\includegraphics[width=10cm]{model.png}}\\
-\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
-	\subfigure{\includegraphics[width=10cm]{aftert1.png}}\\\vspace{-0.25cm}
-	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=10cm]{aftert2.png}}\\	\caption{RPN model the formation of two water molecules.}
-	\label{RPNmodel}
-\end{figure}
-
-Fig.~\ref{RPNmodel} shows the graphical representation of the forming of two water molecules as an RPN.
-In this model, we assume two token types, $H$ for hydrogen
-and $O$ for oxygen. They are instantiated via four token instances of $H$ ($H_1$, $H_2$, $H_3$, and $H_4$) and two token instances of
-$O$, ($O_1$ and $O_2$). The net consists of five places and three transitions and the edges between
-them are associated with token variables and bonds, where we assume that $\type(o)=\type(o_1)=\type(o_2) = O$
-and $\type(h)=\type(h_1)=\type(h_2)=\type(h_3)=\type(h_4)=H$. 
-Looking at the transitions, transition $t_1$ models the formation of a bond between a hydrogen
-token and an oxygen token. Precisely, the transition stipulates a selection of two such
-molecules with the use
-of variables $o$ and $h$ on the incoming arcs of the transition which are bonded
-together, as described in the outgoing arc of the transition.
-Subsequently, transition $t_2$ completes
-the formation of a water molecule by selecting an oxygen token from place $x$ and
-a hydrogen token from place $v$ and forming a bond between them, placing the resulting component at place $y$. Note that the selected oxygen instance in this transition will be connected to a hydrogen token via a bond 
-created by transition $t_1$; this bond is preserved and the component resulting from the creation of
-the new $o-h$ bond will be transferred to place $y$. (Details about execution of the model will follow the
-description of RPN semantics.)
-Finally, transition $t_3$ models the autoprotolysis reaction: assuming the existence of two distinct oxygen
-instances, as required by the variables $o_1$ and $o_2$ on the incoming arc of the transition, connected
-with hydrogen instances as specified in $F(y,t_3)$, the transition breaks the bond $o_2-h_3$ and forms the
-bond  $o_1-h_3$.  As such, assuming the existence of two water molecules at place $y$, the transition
-will form  a hydronium  (H$_3^+$O) and a hydroxin (OH$^-$) molecule in place $z$ of the net.
-The reversibility semantics of RPNs ensures that  reversing the transition $t_3$ will result in the re-creation
-of  two water molecules placed at $y$, while the use of variables allows the formation of water molecules consisting
-of different bonds between the hydrogen and oxygen instances, as will be explained in the sequel.
 
 
 In order to introduce the semantics of RPNs we need to introduce some notations. Note that in 
@@ -1292,6 +1256,44 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 		\right.
 		\]
 }\end{definition}	
+
+
+
+\begin{figure}
+	\centering
+	\subfigure{\includegraphics[width=10cm]{model.png}}\\
+	\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
+	\subfigure{\includegraphics[width=10cm]{aftert1.png}}\\\vspace{-0.25cm}
+	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
+	\subfigure{\includegraphics[width=10cm]{aftert2.png}}\\	\caption{RPN model the formation of two water molecules.}
+	\label{RPNmodel}
+\end{figure}
+
+\textbf{The autoprotolysis of water in RPNs } Fig.~\ref{RPNmodel} shows the graphical representation of the forming of two water molecules as an RPN.
+In this model, we assume two token types, $H$ for hydrogen
+and $O$ for oxygen. They are instantiated via four token instances of $H$ ($H_1$, $H_2$, $H_3$, and $H_4$) and two token instances of
+$O$, ($O_1$ and $O_2$). The net consists of five places and three transitions and the edges between
+them are associated with token variables and bonds, where we assume that $\type(o)=\type(o_1)=\type(o_2) = O$
+and $\type(h)=\type(h_1)=\type(h_2)=\type(h_3)=\type(h_4)=H$. 
+Looking at the transitions, transition $t_1$ models the formation of a bond between a hydrogen
+token and an oxygen token. Precisely, the transition stipulates a selection of two such
+molecules with the use
+of variables $o$ and $h$ on the incoming arcs of the transition which are bonded
+together, as described in the outgoing arc of the transition.
+Subsequently, transition $t_2$ completes
+the formation of a water molecule by selecting an oxygen token from place $x$ and
+a hydrogen token from place $v$ and forming a bond between them, placing the resulting component at place $y$. Note that the selected oxygen instance in this transition will be connected to a hydrogen token via a bond 
+created by transition $t_1$; this bond is preserved and the component resulting from the creation of
+the new $o-h$ bond will be transferred to place $y$.
+Finally, transition $t_3$ models the autoprotolysis reaction: assuming the existence of two distinct oxygen
+instances, as required by the variables $o_1$ and $o_2$ on the incoming arc of the transition, connected
+with hydrogen instances as specified in $F(y,t_3)$, the transition breaks the bond $o_2-h_3$ and forms the
+bond  $o_1-h_3$.  As such, assuming the existence of two water molecules at place $y$, the transition
+will form  a hydronium  (H$_3^+$O) and a hydroxin (OH$^-$) molecule in place $z$ of the net.
+The reversibility semantics of RPNs ensures that  reversing the transition $t_3$ will result in the re-creation
+of  two water molecules placed at $y$, while the use of variables allows the formation of water molecules consisting
+of different bonds between the hydrogen and oxygen instances. 
 \begin{figure}
 	\centering
 	%\subfigure{\includegraphics[width=6.3cm]{model.png}}
@@ -1307,9 +1309,7 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 	\label{execution}
 \end{figure}
 
-We now return to the RPN autoprotolysis model and in Fig.~\ref{execution} we present
-a possible execution of the model. The first net in this sequence shows the system after 
-the execution of transition $t_1$ with enabling assignment $U(h)=H_1$,\linebreak $U(o)=O_1$. Note
+The first net in Fig.~\ref{execution}  shows the system after the execution of transition $t_1$ with enabling assignment $U(h)=H_1$, $U(o)=O_1$. Note
 that the term $[1]$ written over transition $t_1$ captures that at this point $H(t_1)=1$ 
 since the transition has been executed once.
 This notation is generally used for histories in the graphical representation with occasional
