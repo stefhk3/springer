@@ -211,14 +211,21 @@ reaction rates by modelling and simulating networks of reactions, in order to
 analyse or even predict the common paths through the network.  Reversibility
 was not considered explicitly.  Later on
 reversibility  started  to  be  taken  into  account,  since  it  plays  a  crucial  role  in
-many processes, typically by going back to a previous state in the system.  For
-example,  reversibility is needed to model directly when a gene is regulated by a protein binding to it and unbinding from it.  Such examples can
-be modelled by backtracking the computation along the executed path of action that led to the current state.  Beyond
-backtracking and causally-consistent reversibility, there is a more general form of reversibility, known as out-of-causal-order reversibility, which makes it possible to get
-to states which cannot be reached by forward reactions alone.  Such sequences
+many processes, typically by going back to a previous state in the system. Two common types of reversibility 
+are backtracking and causally-consistent reversibility. Backtracking executes exactly the reverse order of the 
+foward execution, and causally-consistent reversibility executes effects before causes, but not necessarily in exact reverse 
+order. Beyond backtracking and causally-consistent reversibility, there is a more general form of reversibility, known as out-of-causal-order reversibility, which makes it possible to get to states which cannot be reached by forward reactions alone.  Such sequences
 of forward and reverse reaction steps are important as they lead to new chemical
 structures and new reactions, which would not be possible without out-of-causal-order
-reversibility.
+reversibility. A typical example is use of a catalyst $C$, which enables compound $A$ and $B$ to combine, which would normally not happen 
+or be very unlikely. Ths could be written as:
+
+$$ A + B + C \rightarrow A+ BC \rightarrow ABC \rightarrow AB + C$$
+
+Here, bond from $B$ to $C$ is undone before its effect, the bond from $A$ to $B$. This is out-of-causal order reversibility, and it enables 
+the formation of the new compound $AB$, which would not be possible otherwise. The modelling of such reactions has been a focus of this work. For more formal definitions of the various types of reversibility see \cite{Irek2012}.
+
+We compare three formalisms in this chapter, the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, the Bonding Calculus \cite{NaCo18}, and Reversing Petri Nets (RPNs)~\cite{RPNs}. We discuss their usage, using a chemical reaction, the autoprotolysis of water, as an example. The organisation of the paper is as follows: In the rest of this section, we review the existing literature. In the next section, we introduce the reaction we are using as the example throughout. This followed by a section for each formalism, introducing the formalism and explaining how they can deal with the the autoprotolysis of water. The conclusion contains the comparison and briefly introduces the software support.
 
 Looking at proteins and other macromolecules means working at relatively
 high  levels  of  abstraction.   It  also  means  that  such  biological  entities  are  often  difficult  to  represent  as  there  is  still  no  complete  understanding  of  their
@@ -228,7 +235,7 @@ interesting examples of out-of-causal-order reversibility. %we  have studied che
 %studies  for  the  modelling  of  reversibility. Specifically,  we  can  find  interesting
 %examples  of  the  out-of-causal  order  reversibility  in  many  chemical  reactions,
 %and can 
-The presented techniques enable one to model the intermediate steps of such reactions where some bonds are
+The discussed techniques enable one to model the intermediate steps of such reactions where some bonds are
 only ``helping'' to achieve the overall aim of the reaction:  specifically, they are only formed to be
 broken before the end of the reactions.  Thus, the allowed level of detail 
 %we have on
@@ -237,13 +244,11 @@ makes a more accurate depiction of the reversibility in place, and allows a more
 compared to higher-level models.
 
 
-Process calculi, originally designed for modelling concurrent computations, have been applied to model biochemical and biological systems. We can mention the $\pi$-calculus \cite{MilnerPi,Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. These approaches allow to model various biological entities (e.g., molecules, proteins) as interacting processes when describing a complex system. The process calculi are compositional, and so they allow to explicitly model the activity of the whole complex system by composing the activities of some smaller entities. Each term in the description of such a system has a counterpart in the biophysical system, and the behaviour of the whole system is obtained by following the operational semantics of the process calculi. On the other hand, the Bonding Calculus \cite{NaCo18} is different from these approaches mentioned above. 
-% \anna{In this last sentence and the following paragraphs there is specific mention on the Bonding Calculus or CCB (I will highlight some such points). A simultaneous reference to CCB/Bonding Calculus would be useful. At some point, possibly the conclusions, it might be good to make a more careful comparison between the two, both being process calculi.} 
-In BioPEPA the abstraction ``processes as species'' is used by considering the concentrations of the involved processes. In the other calculi,  the abstraction ``processes as interactions'' is used similar as in Bonding Calculus, but processes are able to communicate values in order to interact (this is not the case in the Bonding Calculus). 
+Process calculi, originally designed for modelling concurrent computations, have been applied to model biochemical and biological systems. We can mention the $\pi$-calculus \cite{MilnerPi,Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. These approaches allow to model various biological entities (e.g., molecules, proteins) as interacting processes when describing a complex system. The process calculi are compositional, and so they allow to explicitly model the activity of the whole complex system by composing the activities of some smaller entities. Each term in the description of such a system has a counterpart in the biophysical system, and the behaviour of the whole system is obtained by following the operational semantics of the process calculi.
 
-Another approach to model biological interactions is by using rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality} and the BioNetGen Language (BNGL) \cite{pmid19399430}. Just like in Bonding Calculus, $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM. Just like in BNGL, Bonding Calculus allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus. While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in the  Bonding Calculus \cite{NaCo18} a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus. Moreover, the number of rules is smaller in Bonding Calculus due to the use of generic rules.
+Another approach to model biological interactions is by using rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality} and the BioNetGen Language (BNGL) \cite{pmid19399430}. $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM. BNGL allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus.  $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM.
 
-Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no explicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are  RCCS \cite{danos2004ccsr} and CCSK \cite{Irek2007}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of the forward action, which is not the case in other calculi. Actions can be undone in exactly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables the modelling of out-of-causal-order reversibility. In biological and chemical systems such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailed view. This suggests that this is a case of emergent behaviour.
+Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no explicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are  amongst others RCCS \cite{danos2004ccsr}, CCSK \cite{Irek2007}, or reversible $\pi$ \cite{Lanese_controllingreversibility,Lanese_controlled}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of the forward action, which is not the case in other calculi. Actions can be undone in exactly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables the modelling of out-of-causal-order reversibility. In biological and chemical systems such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailed view. This suggests that this is a case of emergent behaviour.
 
 Petri nets (PNs)~\cite{PNs} are another formalism that has been widely used to model and reason
 about a wide range of applications featuring concurrency and distribution. They are a graphical 
@@ -270,36 +275,14 @@ directly handle reversibility. Modelling reversible reactions in these formalism
 of mechanisms involving two distinct transitions,
 one for the forward and one for the reverse version of a reaction. This
 may result in expanded models and less natural and/or less accurate
-models of  reversible behavior. In this study we consider
-a recently-introduced extension of Petri nets called Reversing Petri Nets (RPNs)~\cite{RPNs}.
-%A large amount of work has focused on providing a formal understanding of reversibility within process calculi and it has recently been extended to the formalism of Petri nets.  
-%Petri nets (PNs)~\cite{PNs} are a graphical mathematical language that can be used for the specification and
-%analysis of discrete event systems. 
-%The first study of reversible computation within PNs was proposed in~\cite{PetriNets,BoundedPNs}. In these works, the
-%authors investigate the effects of adding \emph{reversed} versions of selected transitions in a PN
-%by reversing the directions of a transition's arcs. They then explore decidability problems regarding reachability and coverability in the resulting PNs. In
-%was proposed, called Reversing Petri Nets (RPNs).  In this work, RPNs are acyclic Petri net structures that  assume 
-RPNs are the first proposal for capturing reversible behavior directly in the Petri net model
-and they support reversible computation in all its forms
-(backtracking, causally-consistent reversibility and out-of-causal-order reversibility).
-RPNs  enable the reversal of each executed transition and assume tokens to be distinguished from each 
-other by an identity/type and to be persistent. Furthermore,
-during transitions tokens can be bonded together, with  the creation of bonds
- considered to be the effect of a transition, whereas their destruction is the effect of
-the transition's reversal. The notion of bonds is especially useful for reasoning about biochemical
-systems as illustrated in the current paper. % through the case study of the autoprotolysis of water.
-RPNs have been shown to be closely related to Coloured Petri Nets, as a subset of the former model
-has been encoded into the latter~\cite{RPNtoCPN}.
-%RPNs
-%have been extended with cycles~\cite{RPNJournal} and with a mechanism for controlling transition
-%reversal by associating transitions with conditions~\cite{RC19}. 
+models of  reversible behavior.
 
 \section{The Autoprotolysis of Water}
 
 We consider a reaction that transfers a hydrogen atom between two water molecules. Since the
 reaction takes place in water it is also known as \emph{autoprotolysis of water}. The reaction is shown 
 in Fig.~\ref{fig:autoprotolysis}. Here, $O$ indicates an oxygen atom and $H$ a hydrogen atom. The lines indicate bonds. Charges on atoms are shown by $\oplus$ and $\ominus$. The meaning of the curved arrows and the dots will be explained in the next paragraph. The reaction is reversible and it takes place at a relatively 
-low rate, making pure water slightly conductive.
+low rate, making pure water slightly conductive. We use this as an example reaction, since it is small and manageable, but has interesting aspects to model.
 
 \begin{figure}
 \vspace{-2ex}\centering
@@ -341,58 +324,7 @@ In this simple reaction, the forward and the reverse step consist of two steps e
 
 It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative or coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``role''. This explains why any proton can be transferred in the reverse reaction and not just the one involved in the forward path.
 
-\section{Existing Reversible Formalisms}
-In order to see how accurately existing formalisms can capture the autoprotolysis of water, we model it in CCS with keys (CCSK) \cite{Irek2007}. CCSK is a variation of the Calculus of Communicating Systems which includes reversibility. 
-
-\subsection{Syntax of CCSK}
-
-The key idea of CCSK is to extend CCS to mark past actions with a key instead of discarding them. These keys can then be used to undo actions. The syntax is an extension of CCS, so every CCS process is a valid CCSK process as well. We illustrate the working of CCSK with an example. The process
-$$a.\Nil \paral b.\Nil$$
-%
-is ready to perform $a$ or $b$, just like a CCS process. If we execute $a$, we get
-%
-$$a[1].\Nil \paral b.\Nil$$
-%
-where $1$ is a key. $a$ is now a past action. The process could next do $b$ and we get
-%
-$$a[1].\Nil \paral b[2].\Nil$$
-%
-At this point, we have the choice of undoing either $a$ or $b$. If we undo $b$, we get
-%
-$$a[1].\Nil \paral b.\Nil$$
-%
-which is the same as the process after performing $a$, so we reversed back to this state. We could also have undone $b$ instead, which would have been a causally-consistent path, but not backtracking. The semantics of CCSK are specified by SOS rules (see \cite{Irek2007}).
-
-\subsection{The Autoprotolysis of Water in CSSK}
-
-To model the system of two water molecules in CCSK, we first define oxygen and hydrogen atoms usinmg appropriate actions:
-%
-$$\begin{array}{lllllll}
-H & \bydef & \overline{a}.H'& \quad & O & \bydef & a.a.a.O'
-\end{array}$$
-%
-Here $H'$ and $O'$ are synonyms of $\Nil$ and help to identify processes. The oxygen atom is modelled with three prefixes and a hydrogen atom with the corresponding co-name. As in CCS, these can synchronise. A synchronisation (represented by a key) forms a bond until undone. In our modelling, the actions make sure the oxygen atom can bond to two or three hydrogen atoms as required and a hydrogen atom can bond to exactly one other atom. We can then model our system of two oxygen atoms and four hydrogen atoms as follows:
-%
-$$( \overline{a}.H'_1 \paral \overline{a}.H'_2 \paral a.a.a.O'_1 \paral \overline{a}.H'_3 \paral \overline{a}.H'_4 \paral a.a.a.O'_2) 
-\; \setminus\{a\}.$$
-%
-This system can now develop into two water molecules by performing four communications of $a$ and $\overline{a}$, so that two hydrogen atoms are bonded to each oxygen atom. 1,..,4 are communication keys:
-%
-$$( \overline{a}[1].H'_1 \paral \overline{a}[2].H'_2 \paral a[1].a[2].a.O'_1 \paral \overline{a}[3].H'_3 \paral \overline{a}[4].H'_4 \paral a[3].a[4].a.O'_2) 
-\; \setminus\{a\}.$$
-%
-It can also develop to a $OH^-$ and a $H_3O^+$. For this, three communications happen with one oxygen atom and the remaining hydrogen atom could go to the other oxygen atom:
-%
-$$( \overline{a}[1].H'_1 \paral \overline{a}[2].H'_2 \paral a[1].a.a.O'_1 \paral \overline{a}[3].H'_3 \paral \overline{a}[4].H'_4 \paral a[2].a[3].a[4].O'_2) 
-\; \setminus\{a\}.$$
-%
-Any of these bonds can be broken by undoing, which is the benefit of a reversible calculus. Thus we could go from the two water molecules to $OH$ and a~$H_3O$ by breaking the bond between one of the hydrogen atoms and the oxygen atom it~is bonded to and re-bonding to the other oxygen atom. However, three hydrogen atoms could bond directly to an oxygen atom, without two waters ever existing. This would not happen in reality, since it is the partial charge of the water which enables the transfer. These charges are not modelled in this representation.
-
-In order for the hydrogen transfer to happen, a spontaneous dissociation of a hydrogen atom would be needed. This hydrogen atom could then bind to another oxygen atom thus completing the transfer. Whilst such dissociations exist, it is a different mechanism than the transfer, which we want to model. The dissociation would also allow for protons to flow freely between water molecules, which is not the situation in reality. There could even be several water molecules loosing all of their protons without any of them being bonded, which is quite unrealistic. Finally, the hydrogen atoms bonded to one oxygen atom must dissolve in reverse order as they were bonded, which is not at all the case in the real world.
-
-Overall, we can model the final products in CCSK, but the processes taking place are not well represented.
-
-\section{New Eeversible Formalisms}
+\section{New Reversible Formalisms}
 \subsection{Calculus of Covalent Bonding}
 \label{sec:ccb}
 
@@ -426,7 +358,7 @@ the semantics of CCB. They denote the execution of a weak action, which makes it
 We now define the Calculus of Covalent Bonding. The syntax of CCB is given 
 below where $P$ is a process term:
 
-$$P ::=  S\, \lvert \, S\bydef P \ \bigm\lvert \ (s;b).P \ \bigm\lvert \ P\lvert Q \ \bigm\lvert \ P\restrict L $$
+$$P ::=  S \ \bigm\lvert \ S\bydef P \ \bigm\lvert \ (s;b).P \ \bigm\lvert \ P\lvert Q \ \bigm\lvert \ P\restrict L $$
 
 The set of process identifiers (constants) $\PI$ contains typical elements $S$ and~$T$. 
 Each process identifier $S$ has a defining equation $S\bydef P$ where $P$ contains only forward 
@@ -438,7 +370,7 @@ $(s;b).P$, where $s$ is a non-empty sequence of actions or past actions. This op
 extends the prefixing operator in \cite{Irek2012}. The action $b$ is a weak action
 and it can be omitted, in which case the prefixing is written as $(s).P$ and is called the
 \emph{simple prefix}. The simple prefix (which is still a sequence) is the prefixing operator in \cite{Irek2012}. 
-One of the actions in~$s$ in $(s).P$ may be a weak action from $\mWA$. A weak action in $s$ is only allowed for the simple prefix, in the $(s;b)$ operator b is the only allowed weak action. If~$s$ is a sequence that contains   
+Exactly one of the actions in~$s$ in $(s).P$ may be a weak action from $\mWA$. A weak action in $s$ is only allowed for the simple prefix, in the $(s;b)$ operator b is the only allowed weak action. If~$s$ is a sequence that contains   
 a single action, then the action is a strong action and the operator 
 is the prefixing operator of CCS \cite{MilnerBook}.
 We omit trailing $\Nil$s so, for example, $(s).\Nil$ is written as $(s)$. The new feature of the operator $(s;b).P$ is the execution of the weak action $b$, which
@@ -455,8 +387,6 @@ which is the new feature of our calculus.  We also have the ACP-like restriction
 $\setminus L$, where $L$ is a set of labels. It prevents actions from taking place and, due to 
 the synchronisation algebra used, it also blocks communication. If $\gamma(a,b)=c$ then $a.P$ and $b.Q$
 cannot communicate in $(a.P\paral b.Q)\setminus c$.
-Note that we do not use the usual relabelling 
-operator $[f]$, where $f: \mA \rightarrow \mA$, in CCB, which could be easily added.
 
 The set $\Proc$ of \emph{process terms} is ranged over by $P,Q$ and $R$. 
 In the setting of CCB these terms are simply called \emph{processes}. We define the semantics of our calculus using SOS rules (Figures~\ref{fig:fsos}--\ref{fig:csos}) and rewrite rules (Fig.~\ref{fig:reduction}).
@@ -629,9 +559,10 @@ Recall that $t \in \mAK^*$, and $b \in \mathcal{WA}$.} \label{fig:csos}
 
 The forward and reverse SOS rules for CCB are given in Figures~\ref{fig:fsos} and \ref{fig:reversesos}. 
 Figure \ref{fig:csos} contains the SOS rules that define the new concerted actions transitions. 
-The main rule is the rule \rulename{concert} that defines when a pair of concerted actions 
-takes place.  We also have two auxiliary rules \rulename{aux1} and \rulename{aux2} which 
-define only an auxiliary transition relation needed in the \rulename{concert} rule. The auxiliary rules are only applicable if a weak action is beyond the semicolon, whereas a weak action in the simple prefix is dealt with by standard rules and can therefore not become part of a concerted action. Note that the \rulename{concert} rule uses \emph{lookahead}~\cite{Uli92}.
+The rule \rulename{concert} defines when a pair of concerted actions 
+takes place. This enables the linking of forming and breaking of bonds, and therefore a degree of control over 
+the reversing of actions. The modlling in the next section will give examples of the application. We also have two auxiliary rules \rulename{aux1} and \rulename{aux2} which 
+define only an auxiliary transition relation needed in the \rulename{concert} rule. The auxiliary rules are only applicable if a weak action is beyond the semicolon, whereas a weak action in the simple prefix is dealt with by standard rules and can therefore not become part of a concerted action. Note that the \rulename{concert} rule uses \emph{lookahead}~\cite{Uli92}. Lookahead is a property of SOS rules, where a variable appears both on the right hand side and on the left hand side of a transition in the premisses. e. g. $P'$ and $Q'$ in \rulename{concert}. 
 Also note that transitions in \rulename{aux1} and \rulename{aux2} use the auxiliary labels $(b)[k]$ 
 for all $b \in \mWA$ and $k \in \Keys$. The rule \rulename{concert par} requires that $k$ is fresh in $Q$,
 correspondingly as in \rulename{par}. Moreover, we need to ensure that when we reverse $h$ with the key $l$
@@ -670,11 +601,8 @@ representing negative and positive charges, respectively. $H'$ and $O'$ are proc
 $$\begin{array}{lllllll}
 H & \bydef & (h;p).H' & \quad & O & \bydef & (o,o,n).O'
 \end{array}$$
-We use a general prefixing construct $(s;b).P$ where $s$ is a sequence of actions or executed 
-actions, and $b$ is a \emph{weak} action. The prefixing operator should not~be used (as in the definition of $O$). In such a case at most one of the actions in~the sequence can be a weak action. Informally, actions in $s$ can take place in any order 
-and $b$ can happen if
-all actions in $s$ have already taken place. Once $b$ takes place, it must be accompanied by
-undoing immediately one of the actions~in~$s$. The weak action in the sequence, as shown later, is important for rewriting~operations.  
+We use the general prefixing construct $(s;b).P$ explained above, where $O'$ is a simple prefix with $n$ being a wek 
+action. The weak action in the sequence, as shown later, is important for rewriting~operations.  
 
 The synchronisation function $\gamma$ is:
 
@@ -780,6 +708,10 @@ molecules and the set $\mP=\{P,Q,\ldots\}$ of processes. A multiset over
 $\mN$ is defined as a partial function $N:\mN \rightarrow \N$. In bonding 
 calculus each molecule has a unique name, and the bond $x$ between two 
 molecules $a$ and $b$ is denoted by $\{a-^x b\}$.
+
+TODO Bogdan: I moved this from the introduction, could you embed it into the flow of your text? On the other hand, the Bonding Calculus \cite{NaCo18} is different from these approaches mentioned above. In BioPEPA the abstraction ``processes as species'' is used by considering the concentrations of the involved processes. In the other calculi,  the abstraction ``processes as interactions'' is used similar as in Bonding Calculus, but processes are able to communicate values in order to interact (this is not the case in the Bonding Calculus).
+Just like in BNGL, Bonding Calculus allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus. While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in the  Bonding Calculus \cite{NaCo18} a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus.
+While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in the  Bonding Calculus \cite{NaCo18} a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus. Moreover, the number of rules is smaller in Bonding Calculus due to the use of generic rules.
 
 The syntax of the Bonding Calculus syntax is presented in Fig.~\ref{table:syntax}.
 
@@ -1049,15 +981,49 @@ The obtained system contains again two water molecules of water.
 \subsection{Reversing Petri Nets}
 In this section we present Reversing Petri Nets (RPNs), an extension of Petri nets
 developed for modelling reversing computations, and we employ the formalism
-to model the autoprotolysis of water. Reversing Petri Nets~\cite{RPNs} are 
+to model the autoprotolysis of water. 
+
+TODO Anna - I moved this from the introduction, could you make this flow with your text? In this study we consider
+a recently-introduced extension of Petri nets called Reversing Petri Nets (RPNs)~\cite{RPNs}.
+%A large amount of work has focused on providing a formal understanding of reversibility within process calculi and it has recently been extended to the formalism of Petri nets.  
+%Petri nets (PNs)~\cite{PNs} are a graphical mathematical language that can be used for the specification and
+%analysis of discrete event systems. 
+%The first study of reversible computation within PNs was proposed in~\cite{PetriNets,BoundedPNs}. In these works, the
+%authors investigate the effects of adding \emph{reversed} versions of selected transitions in a PN
+%by reversing the directions of a transition's arcs. They then explore decidability problems regarding reachability and coverability in the resulting PNs. In
+%was proposed, called Reversing Petri Nets (RPNs).  In this work, RPNs are acyclic Petri net structures that  assume 
+RPNs are the first proposal for capturing reversible behavior directly in the Petri net model
+and they support reversible computation in all its forms
+(backtracking, causally-consistent reversibility and out-of-causal-order reversibility).
+RPNs  enable the reversal of each executed transition and assume tokens to be distinguished from each 
+other by an identity/type and to be persistent. Furthermore,
+during transitions tokens can be bonded together, with  the creation of bonds
+ considered to be the effect of a transition, whereas their destruction is the effect of
+the transition's reversal. The notion of bonds is especially useful for reasoning about biochemical
+systems as illustrated in the current paper. % through the case study of the autoprotolysis of water.
+RPNs have been shown to be closely related to Coloured Petri Nets, as a subset of the former model
+has been encoded into the latter~\cite{RPNtoCPN}.
+%RPNs
+%have been extended with cycles~\cite{RPNJournal} and with a mechanism for controlling transition
+%reversal by associating transitions with conditions~\cite{RC19}. 
+
+
+Reversing Petri Nets~\cite{RPNs} are 
 Petri net structures that allow transitions to be reversed. They assume 
 tokens to be distinguished from each other by an identity/type and to be persistent. Furthermore,
 during transitions tokens can be bonded with each other. The creation of bonds
 is considered to be the effect of a transition, whereas their destruction is the effect of
 the transition's reversal. RPNs
 have been extended with a mechanism for controlling transition
-reversal by associating transitions with conditions~\cite{RC19}. In this section we consider
-a model allowing multiple tokens of the same type as well as the possibility for 
+reversal by associating transitions with conditions~\cite{RC19}. Reversing Petri Nets are a general purpose model where their expressiveness offers the ability to model 
+a variety of distributed systems other than biochemical reactions. In particular, they have been used successfully for
+the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. The modeling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
+a mechanism for controlling reversibility 
+ that may capture environmental or other conditions that determine a transition's
+reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
+
+In this section we consider
+a model suitable for describing chemical reactions by allowing multiple tokens of the same type as well as the possibility for 
 transitions to break bonds. Thus, a transition may simultaneously create
 and destruct bonds, and its reversal results in the opposite effect. Formally, a RPN
 is defined as follows:
@@ -1266,11 +1232,11 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 	\subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
 	\subfigure{\includegraphics[width=10cm]{aftert1.png}}\\\vspace{-0.25cm}
 	\subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
-	\subfigure{\includegraphics[width=10cm]{aftert2.png}}\\	\caption{RPN model the formation of two water molecules.}
+	\subfigure{\includegraphics[width=10cm]{aftert2.png}}\\	\caption{RPN model of the formation of a water molecule.}
 	\label{RPNmodel}
 \end{figure}
 
-\textbf{The autoprotolysis of water in RPNs } Fig.~\ref{RPNmodel} shows the graphical representation of the forming of two water molecules as an RPN.
+\textbf{The autoprotolysis of water in RPNs } Fig.~\ref{RPNmodel} shows the graphical representation of the forming of a water molecule as an RPN.
 In this model, we assume two token types, $H$ for hydrogen
 and $O$ for oxygen. They are instantiated via four token instances of $H$ ($H_1$, $H_2$, $H_3$, and $H_4$) and two token instances of
 $O$, ($O_1$ and $O_2$). The net consists of five places and three transitions and the edges between
@@ -1364,19 +1330,20 @@ captures the existence of electrons by the enablednes of transitions. A model at
 level of abstraction would be possible by introducing tokens to represent the electrons  bonded to the associated
 atom tokens to illustrate the relevant charges. 
 
-Reversing Petri Nets are a general purpose model where their expressiveness offers the ability to model 
-a variety of distributed systems other than biochemical reactions. In particular, they have been used successfully for
-the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. The modeling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
-a mechanism for controlling reversibility 
- that may capture environmental or other conditions that determine a transition's
-reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
-
 
 Considering the three formalisms mentioned, all can represent this reaction. We now evaluate their suitability for the modelling of covalent reactions as exemplified by the autoprotolysis of water. In order to do so, we first consider if all chemically valid interactions
 between the compounds of the reaction can be represented well in our formalisms. CCB shows the linked forming and breaking of bonds. This is due to it being quite close to the chemical concepts and can therefore model this reactions faithfully. RPNs can also express the concerted reaction. In the Bonding Calculus, this link is not expressed. All techniques can perform the forward reaction using any of the hydrogens. CCB and RPNs can perform the reverse reaction by tranferring any of the hydrogens, whereas the Bonding Calculus is restricted because the reverse reaction must transfer exactly the hydrogen used in the forward reaction. All models presented use subscripts and enable the tracking of atoms.
 
 The other way of assessing the suitability of our formalisms for this type of reactions is to ask
 if our calculus enables transitions which do not occur in reality. All of them avoid a $H_3O^+$ molecule forming directly (as in we have seen in CCSK). CCB allows one reaction which is not realistic: If there are many water molecules and therefore several hydroxide and water molecules at the same time, it is possible that the remaining hydrogen is transferred from the hydroxide to a water. In reality, this is not possible since the hydroxide is strongly negativly charged and no hydrogen bond can form.
+
+There are also a number of tools for simulation and analysis. Regarding Bonding Calculus, we can simulate various bonding descriptions by
+using an existing software platform called UPPAAL (as shown in [1]). These
+simulations can predict the dynamics of systems such that the validity of
+certain assumptions can be tested. Moreover, we can verify various properties of
+the bonding compounds described by using the calculus. For CCS, there is a simulation tool presented in 
+\cite{10.1007/978-3-319-99498-7_8}. This allows a modelling much closer to normal chemical notation than a 
+programming language would.
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
