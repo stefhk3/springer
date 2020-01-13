@@ -225,7 +225,7 @@ $$ A + B + C \rightarrow A+ BC \rightarrow ABC \rightarrow AB + C$$
 Here, bond from $B$ to $C$ is undone before its effect, the bond from $A$ to $B$. This is out-of-causal order reversibility, and it enables 
 the formation of the new compound $AB$, which would not be possible otherwise. The modelling of such reactions has been a focus of this work. For more formal definitions of the various types of reversibility see \cite{Irek2012}.
 
-We compare three formalisms in this chapter, the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, the Bonding Calculus \cite{NaCo18}, and Reversing Petri Nets (RPNs)~\cite{RPNs}. We discuss their usage, using a chemical reaction, the autoprotolysis of water, as an example. The organisation of the paper is as follows: In the rest of this section, we review the existing literature. In the next section, we introduce the reaction we are using as the example throughout. This followed by a section for each formalism, introducing the formalism and explaining how they can deal with the the autoprotolysis of water. The conclusion contains the comparison and briefly introduces the software support.
+We compare three formalisms in this chapter, the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, the Bonding Calculus \cite{NaCo18}, and Reversing Petri Nets (RPNs)~\cite{RPNs}. We discuss their usage, using a chemical reaction, the autoprotolysis of water, as an example. The organisation of the paper is as follows: In the rest of this section, we review the existing literature. In the next section, we introduce the reaction we are using as the example throughout. This followed by a section for each formalism, introducing the formalism and explaining how they can deal with the the autoprotolysis of water. The conclusion contains the comparison and briefly introduces the software support available.
 
 Looking at proteins and other macromolecules means working at relatively
 high  levels  of  abstraction.   It  also  means  that  such  biological  entities  are  often  difficult  to  represent  as  there  is  still  no  complete  understanding  of  their
@@ -248,7 +248,7 @@ Process calculi, originally designed for modelling concurrent computations, have
 
 Another approach to model biological interactions is by using rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality} and the BioNetGen Language (BNGL) \cite{pmid19399430}. $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM. BNGL allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus.  $\kappa$ and BNGL formalisms can be used to model interactions between proteins, while this is not true in BIOCHAM.
 
-Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no explicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are  amongst others RCCS \cite{danos2004ccsr}, CCSK \cite{Irek2007}, or reversible $\pi$ \cite{Lanese_controllingreversibility,Lanese_controlled}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of the forward action, which is not the case in other calculi. Actions can be undone in exactly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables the modelling of out-of-causal-order reversibility. In biological and chemical systems such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour. It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailed view. This suggests that this is a case of emergent behaviour.
+Most of the formalisms mentioned do not explicitly deal with reversibility. If an action is the reverse of something done before, there is no explicit knowledge of that in the model. Attempts at modelling reversibility in process calculi are  amongst others RCCS \cite{danos2004ccsr}, CCSK \cite{Irek2007}, or reversible $\pi$ \cite{Lanese_controllingreversibility,Lanese_controlled}. Both are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions and enabling an undo of those. So a reverse action is the reverse execution of the forward action, which is not the case in other calculi. Actions can be undone in exactly the reverse order as they were executed forward (backtracking) or in a causally-consistent order, which can be different from the forward execution, as long as effects are undone before their causes. The Calculus of Covalent Bonding (CCB) \cite{KUHN201818} enables the modelling of out-of-causal-order reversibility. In biological and chemical systems such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour.
 
 Petri nets (PNs)~\cite{PNs} are another formalism that has been widely used to model and reason
 about a wide range of applications featuring concurrency and distribution. They are a graphical 
@@ -266,9 +266,7 @@ can vary from single molecules, to cells, to multicellular aggregations.
 Several specialized Petri net classes like qualitative, stochastic, continuous, or
 hybrid Petri nets and their coloured counterparts have been used to describe different
 systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
-At the same time, PNs are associated with a wide range of analysis techniques and the associated tool support, 
-such as determining states of equilibrium, conflicting evolutions, 
-and reachable states. 
+
 
 As far as reversibility is concerned, classical PNs and their extensions do not
 directly handle reversibility. Modelling reversible reactions in these formalisms requires the employment
@@ -330,7 +328,7 @@ It should be noted that there are two types of bonding modelled here. Firstly, w
 
 In this section we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, concentrating on the new general 
 prefixing operator $(s;b).P$ which produces pairs of \emph{concerted} actions,
-while presenting an intuitive model of the autoprotolysis of water. This shows the strengths of CCB compared to previous calculi.
+while presenting an intuitive model of the autoprotolysis of water.
 
 \subsubsection{Definition of CCB}\label{sec:calculusdef}
 
@@ -1343,7 +1341,9 @@ simulations can predict the dynamics of systems such that the validity of
 certain assumptions can be tested. Moreover, we can verify various properties of
 the bonding compounds described by using the calculus. For CCS, there is a simulation tool presented in 
 \cite{10.1007/978-3-319-99498-7_8}. This allows a modelling much closer to normal chemical notation than a 
-programming language would.
+programming language would. Petri Nets are also associated with a wide range of analysis techniques and the associated tool support, 
+such as determining states of equilibrium, conflicting evolutions, 
+and reachable states. 
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
