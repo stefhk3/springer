@@ -3,7 +3,7 @@
 % Version 2.20 of 2017/10/04
 %
 \documentclass[runningheads]{llncs}
-%
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{amsmath}
 %\usepackage{psfrag}
@@ -266,9 +266,9 @@ can vary from single molecules, to cells, to multicellular aggregations.
 Several specialized Petri net classes like qualitative, stochastic, continuous, or
 hybrid Petri nets and their coloured counterparts have been used to describe different
 systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
-At the same time, PNs are associated with a wide range of analysis techniques and the associated tool support, 
-such as determining states of equilibrium, conflicting evolutions, 
-and reachable states. 
+%As in other formalisms, PNs are associated with a wide range of analysis techniques and the associated tool support, 
+%such as determining states of equilibrium, conflicting evolutions, 
+%and reachable states. 
 
 As far as reversibility is concerned, classical PNs and their extensions do not
 directly handle reversibility. Modelling reversible reactions in these formalisms requires the employment
@@ -979,12 +979,12 @@ followed by the breaking of the hydrogen bond $O_1-^h H_4$:
 The obtained system contains again two water molecules of water.
 
 \subsection{Reversing Petri Nets}
-In this section we present Reversing Petri Nets (RPNs), an extension of Petri nets
+
+
+\textcolor{blue}{
+In this section we present Reversing Petri Nets (RPNs)~\cite{RPNs}, an extension of Petri nets
 developed for modelling reversing computations, and we employ the formalism
 to model the autoprotolysis of water. 
-
-TODO Anna - I moved this from the introduction, could you make this flow with your text? In this study we consider
-a recently-introduced extension of Petri nets called Reversing Petri Nets (RPNs)~\cite{RPNs}.
 %A large amount of work has focused on providing a formal understanding of reversibility within process calculi and it has recently been extended to the formalism of Petri nets.  
 %Petri nets (PNs)~\cite{PNs} are a graphical mathematical language that can be used for the specification and
 %analysis of discrete event systems. 
@@ -999,29 +999,37 @@ RPNs  enable the reversal of each executed transition and assume tokens to be di
 other by an identity/type and to be persistent. Furthermore,
 during transitions tokens can be bonded together, with  the creation of bonds
  considered to be the effect of a transition, whereas their destruction is the effect of
-the transition's reversal. The notion of bonds is especially useful for reasoning about biochemical
-systems as illustrated in the current paper. % through the case study of the autoprotolysis of water.
-RPNs have been shown to be closely related to Coloured Petri Nets, as a subset of the former model
-has been encoded into the latter~\cite{RPNtoCPN}.
+the transition's reversal. 
+}
+%The notion of bonds is especially useful for reasoning about biochemical
+%systems as illustrated in the current paper. % through the case study of the autoprotolysis of water.
+%RPNs have been shown to be closely related to Coloured Petri Nets, as a subset of the former model
+%has been encoded into the latter~\cite{RPNtoCPN}.
 %RPNs
 %have been extended with cycles~\cite{RPNJournal} and with a mechanism for controlling transition
 %reversal by associating transitions with conditions~\cite{RC19}. 
+%
+%
+%Reversing Petri Nets~\cite{RPNs} are 
+%Petri net structures that allow transitions to be reversed. They assume 
+%tokens to be distinguished from each other by an identity/type and to be persistent. Furthermore,
+%during transitions tokens can be bonded with each other. The creation of bonds
+%is considered to be the effect of a transition, whereas their destruction is the effect of
+%the transition's reversal.
 
 
-Reversing Petri Nets~\cite{RPNs} are 
-Petri net structures that allow transitions to be reversed. They assume 
-tokens to be distinguished from each other by an identity/type and to be persistent. Furthermore,
-during transitions tokens can be bonded with each other. The creation of bonds
-is considered to be the effect of a transition, whereas their destruction is the effect of
-the transition's reversal. RPNs
-have been extended with a mechanism for controlling transition
-reversal by associating transitions with conditions~\cite{RC19}. Reversing Petri Nets are a general purpose model where their expressiveness offers the ability to model 
-a variety of distributed systems other than biochemical reactions. In particular, they have been used successfully for
-the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}. The modeling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
-a mechanism for controlling reversibility 
+%RPNs have been extended with a mechanism for controlling transition
+%reversal by associating transitions with conditions~\cite{RC19}.
+ Reversing Petri Nets are a general purpose model and their expressiveness offers the ability to model 
+a variety of distributed systems other than biochemical reactions.
+ In particular, they have been used successfully for
+the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}.
+% The modeling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
+The latter introduces, a mechanism for controlling reversibility 
  that may capture environmental or other conditions that determine a transition's
-reversal, e.g., changes in temperature. In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
-
+reversal, e.g., changes in temperature. 
+%In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
+%
 In this section we consider
 a model suitable for describing chemical reactions by allowing multiple tokens of the same type as well as the possibility for 
 transitions to break bonds. Thus, a transition may simultaneously create
@@ -1343,7 +1351,11 @@ simulations can predict the dynamics of systems such that the validity of
 certain assumptions can be tested. Moreover, we can verify various properties of
 the bonding compounds described by using the calculus. For CCS, there is a simulation tool presented in 
 \cite{10.1007/978-3-319-99498-7_8}. This allows a modelling much closer to normal chemical notation than a 
-programming language would.
+programming language would. \textcolor{blue}{ 
+	%As in other formalisms, Petri nets are also associated with a wide range of analysis techniques and the associated tool support, such as determining states of equilibrium, conflicting evolutions, and reachable states.
+	 Revering Petri nets have also been shown to be closely related to Coloured Petri Nets, as a subset of the former model has been encoded into the latter~\cite{RPNtoCPN}. 
+	 %As future goal we plan on implemennting
+	 Thus, an algorithmic translation can be implemented that transforms RPNs to CPNs in an automated manner using the transformation techniques discussed in~\cite{RPNtoCPN}. This allows RPNs to exploit tools, such as CPNTools, that support traditional models of Petri nets.}
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
