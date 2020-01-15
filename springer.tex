@@ -1336,9 +1336,11 @@ if our calculus enables transitions which do not occur in reality. All of them a
 There are also a number of tools for simulation and analysis. Regarding Bonding Calculus, we can simulate various bonding descriptions by
 using an existing software platform called UPPAAL (as shown in [1]). For CCS, there is a simulation tool presented in 
 \cite{10.1007/978-3-319-99498-7_8}. This allows a modelling much closer to normal chemical notation than a 
-programming language would. Petri Nets are also associated with a wide range of analysis techniques and the associated tool support, 
-such as determining states of equilibrium, conflicting evolutions, 
-and reachable states. 
+programming language would. \textcolor{blue}{ 
+	%As in other formalisms, Petri nets are also associated with a wide range of analysis techniques and the associated tool support, such as determining states of equilibrium, conflicting evolutions, and reachable states.
+	 Revering Petri nets have also been shown to be closely related to Coloured Petri Nets, as a subset of the former model has been encoded into the latter~\cite{RPNtoCPN}. 
+	 %As future goal we plan on implemennting
+	 Thus, an algorithmic translation can be implemented that transforms RPNs to CPNs in an automated manner using the transformation techniques discussed in~\cite{RPNtoCPN}. This allows RPNs to exploit tools, such as CPNTools, that support traditional models of Petri nets.}
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
