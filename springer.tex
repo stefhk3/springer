@@ -225,10 +225,10 @@ $$ A + B + C \rightarrow A+ BC \rightarrow ABC \rightarrow AB + C$$
 Here, bond from $B$ to $C$ is undone before its effect, the bond from $A$ to $B$. This is out-of-causal order reversibility, and it enables 
 the formation of the new compound $AB$, which would not be possible otherwise. The modelling of such reactions has been a focus of this work. For more formal definitions of the various types of reversibility see \cite{Irek2012}.
 
-We compare three formalisms in this chapter, the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, the Bonding Calculus \cite{NaCo18}, and Reversing Petri Nets (RPNs)~\cite{RPNs}. We discuss their expressivness by using a chemical reaction, the autoprotolysis of water, as an example. The organisation of the paper is as follows. In the rest of this section, we review the existing literature. In the next section, we introduce the reaction we are using as the example throughout. This is followed by a section introducing the formalism and explaining how they can deal with the autoprotolysis of water. The conclusion contains the comparison and briefly introduces the software support available.
+We compare three formalisms in this chapter, the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, the Bonding Calculus \cite{NaCo18}, and Reversing Petri Nets (RPNs)~\cite{RPNs}. These formalisms has been published before elsewhere, as indicated. The contribution of this chapter is a comparative overview of the three formalisms, a discussion of their expressivness, and a demonstration of their use on a common usecase, the autoprotolysis of water.
 
-Looking at proteins and other macromolecules means working at relatively
-high  levels  of  abstraction.   It  also  means  that  such  biological  entities  are  often  difficult  to  represent  as  there  is  still  no  complete  understanding  of  their
+This usecase is a chemical reaction involving small molecules. It is different from biological processes, involving proteins and other macromolecules. Such processes required working at relatively
+high  levels  of  abstraction.   Furthermore,  such  biological  entities  are  often  difficult  to  represent  as  there  is  still  no  complete  understanding  of  their
 behaviour.  Also their interactions with other similar molecules are hard to enumerate as they are sometimes not fully understood. This could also mean that some aspects of reversibility are not clearly modelled since  too  much
 detail is abstracted away. Therefore,  new modelling techniques are needed in order to capture reversible behavior when studying biological systems. In this chapter, we present techniques to this effect and concentrate on chemical reactions, a domain that offers
 interesting examples of out-of-causal-order reversibility. %we  have studied chemical  reactions  when studying reversibility in the context of living systems. We have done this using techniques which have mostly been applied to higher-level biological systems. This is justified since chemical reactions involve various forms of reversibility and offer good case
@@ -274,6 +274,8 @@ of mechanisms involving two distinct transitions,
 one for the forward and one for the reverse version of a reaction. This
 may result in expanded models and less natural and/or less accurate
 models of  reversible behavior.
+
+The organisation of the paper is as follows. In the rest of this section, we review the existing literature. In the next section, we introduce the reaction we are using as the example throughout. This is followed by a section introducing the formalism and explaining how they can deal with the autoprotolysis of water. The conclusion contains the comparison and briefly introduces the software support available.
 
 \section{The Autoprotolysis of Water}
 
