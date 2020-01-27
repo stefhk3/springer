@@ -204,7 +204,8 @@ This exercise demonstrates that the formalisms, developed for expressing advance
 reversibility, are able to model autoprotolysis of water very accurately. Characteristics and 
 expressiveness of the three formalisms are discussed and illustrated.
 
-\keywords{ Reversibility \and Reaction Modelling \and Process calculi \and Bonding Calculus \and Calculus of Covalent Bonding \and Reversing Petri Nets }
+\keywords{ Reversible Computation \and Reaction Modelling %\and Process Calculi 
+\and Calculus of Covalent Bonding \and Bonding Calculus \and Reversing Petri Nets }
 \end{abstract}
 %
 %
@@ -275,7 +276,7 @@ makes a more accurate depiction of the reversibility possible, and allows a more
 compared to higher-level models.
 
 
-\paragraph{Related Work.} Process calculi, originally designed for modelling concurrent computations, have been applied to biochemical and biological systems. We can mention the $\pi$-calculus \cite{MilnerPi,Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. 
+\paragraph{Related Work.} Process calculi, originally designed for modelling concurrent computations, have been applied to biochemical and biological systems. We can mention the $\pi$-calculus \cite{Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. 
 %These approaches allow to model various biological entities (e.g., molecules, proteins) as interacting processes when describing a complex system. The process calculi are compositional, and so they allow to explicitly model the activity of the whole complex system by composing the activities of some smaller entities. Each term in the description of such a system has a counterpart in the biophysical system, and the behaviour of the whole system is obtained by following the operational semantics of the process calculi.
 
 Another way to model biochemical reactions is with rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality} and the BioNetGen Language (BNGL) \cite{pmid19399430}. 
@@ -287,7 +288,7 @@ Most of the formalisms mentioned above do not explicitly represent reversibility
 the reverse of another action performed before, there is no explicit knowledge of that in the model. 
 Attempts at modelling reversibility in process calculi include, amongst others,
 RCCS \cite{danos2004ccsr}, CCSK \cite{Irek2007}, and reversible 
-$\pi$ \cite{Lanese_controllingreversibility,Lanese_controlled}. CCSK and RCCS are based on the Calculus of Communicating Systems (CCS) \cite{MilnerBook}. They extend CCS by keeping track of past actions 
+$\pi$ \cite{Lanese_controllingreversibility,Lanese_controlled}. CCSK and RCCS are based on the Calculus of Communicating Systems (CCS) \cite{Milner1980}. They extend CCS by keeping track of past actions 
 and enabling an undo of those. So a reverse action is the reverse execution of the forward action.
 %, which is not the case in other calculi. 
 These calculi support backtracking and causally-consistent reversibility. However, the Calculus 
@@ -430,7 +431,7 @@ and it can be omitted, in which case the prefixing is written as $(s).P$ and is 
 \emph{simple prefix}. The simple prefix (which is still a sequence) is the prefixing operator in \cite{Irek2012}. 
 Exactly one of the actions in~$s$ in $(s).P$ may be a weak action from $\mWA$. A weak action in $s$ is only allowed for the simple prefix, in the $(s;b)$ operator b is the only allowed weak action. If~$s$ is a sequence that contains   
 a single action, then the action is a strong action and the operator 
-is the prefixing operator of CCS \cite{MilnerBook}.
+is the prefixing operator of CCS \cite{Milner1980}.
 We omit trailing $\Nil$s so, for example, $(s).\Nil$ is written as $(s)$. The new feature of the operator $(s;b).P$ is the execution of the weak action $b$, which
 can happen only after all the actions in $s$ have taken place. Performing $b$ then forces
 undoing one of the past actions in $s$ (by the \rulename{concert} rule in Fig.~\ref{fig:csos}). 
@@ -1498,7 +1499,7 @@ One way or the other, please provide a short explanations for the BC and RPNs.}
 
 There are a number of software tools for our formalisms that can aid simulation and analysis. Regarding Bonding Calculus, we can simulate various bonding descriptions by
 using an existing software platform called UPPAAL (as shown in [1]). For CCB, there 
-is a simulation tool presented in \cite{10.1007/978-3-319-99498-7_8}. It allows much closer form 
+is a simulation tool presented in \cite{merevcomp2018}. It allows much closer form 
 of representation of chemical notation than that possible with a typical programming language.
 	%As in other formalisms, Petri nets are also associated with a wide range of analysis techniques and the associated tool support, such as determining states of equilibrium, conflicting evolutions, and reachable states.
 	 Revering Petri nets have been shown to be closely related to Coloured Petri Nets, as a subset of the former model has been encoded into the latter~\cite{RPNtoCPN}. 
