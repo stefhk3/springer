@@ -8,8 +8,16 @@
 
 \maketitle
 
-{\Large We would like to thank the reviewers for their helpful comments. We have done a number of changes as indicated below, and are confident the paper is improved. In the following, the original comments are given in \textbf{bold} and our comments follow in normal font.}
+We would like to thank the reviewers for their helpful comments and suggestions. 
+We have done a number of changes as indicated below, and are confident that the paper is much improved. 
+We have rewritten the Introduction, including more motivation and the related work paragraphs.
+We have removed some material showing how autoprotolysis of water can be modelled in CCSK, 
+and discussing its shortcomings. Section 3 is now rebalanced, with much less material on CCB 
+and more on the other two formalisms. Each formalism is briefly introduced and then 
+its operational semantics recalled. This is followed by three models of our case study reaction.
+The conclusions section is also rewritten. There is more on comparison between the formalisms, and information on software tools for them.
 
+In the following, the original comments are given in \textbf{bold} and our comments follow in normal font.\\[4pt]
 
 
 SUBMISSION: 2
@@ -47,38 +55,45 @@ We have changed the introduction to make the purpose and organization of the pap
 
 \textbf{I think that the paper needs a throughout revision that includes a more suitable organisation of the content. Indeed, the paper is a bit unbalanced, some of the formalisms are introduced with a huge amount of details, others are merely sketched.}
 
-We have shortened the presentation of CCB in order to make the paper more balanced.
+We have shortened the presentation of CCB and expanded somewhat the presentation of the other two formalisms
+in order to make the paper more balanced.
 
 \textbf{The paper also contains a series of remarks/assertions that need to be better justified (see the detailed comments below).}
 
 \textbf{Detailed comments in order of appearance}
 
-We comment on these below.
+We comment on these below.\\
 
-==Section 1
+== Section 2\\
 
 \textbf{1) A discussion on reversibility and its meaning is missing. 
 I have the impression that reversibility in biology/chemistry does not have the same meaning as in computer science. The fact that "reactions" can be read in both directions does not mean (in my opinion) that if the right to left side of the reaction is used this has to be considered as a backtrack (with the usual meaning of backtracking an action in computer science).}
+
+We have added some discussion on this in the Introduction.
 
 \textbf{There is a quick comment about this and the end of section 2: " This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. Furthermore, the reverse step can be done with a different atom to the one used during the forward step because each of the molecules are in a sense identical and in practice there does not exist a single “reverse” path corresponding to a forward one."}
 
 \textbf{This is an important point it should be developed more in detail. }
 
-TODO all This is certainly true, but I don't think we can do it. If I try to explain it, she will complain it's not clear etc. 
+We have added more discussion of these points, including in the evaluation part of the conclusions section.
 
 \textbf{2) What is out-of-causal-order reversibility? Why is it interesting to mention it? No definition is given in the introduction and the term is not used anywhere else.}
 
-We have added an informal definition and given references for further reference.
+We have
+added an informal definition in the Introduction and supported it with a catalytic reaction 
+example. We have also given pointers for further reading.
 
 \textbf{3) There is a whole discussion on modelling proteins, but then the paper only focuses on chemical reactions. 
 The authors should decide what they want to model and explain what are the features that they want to model.}
 
-We have changed the example to be more of a chemical nature, but have kept the section discussing why we are not doing macromolecules. We have also made it clear why we discuss this.
+We have changed the presentation of the paper to address more specifically chemical reactions.
+But we felt it was helpful to discuss why we are not modelling in this paper macromolecules. 
+We have also made it clear why we discuss this.
 
 \textbf{The second paragraph on page 2 is indeed unclear:
 My schematic understanding of it is 1) biological entities and their interactions are poorly understood 2) reversibility is also poorly understood 3) As a consequence we need more tools that model reversibility and 4) as a conclusion the authors tackle chemical reactions.}
 
-This is correct, we hope this is now clear.
+This is correct, we hope this is now more clear.
 
 \textbf{I am missing here why you need tools for reversibility if the biologist do not have enough information on the subject and why the authors may limit their focus on chemical reactions if they aim at biological interactions?}
 
@@ -93,14 +108,18 @@ We intend this to be an overview, and it does mention different things. Still, t
  In what is it different?  what is the Bonding calculus?
 How can you compare a rewriting formalism such as $\kappa$ to a process-oriented one as the bonding calculus and saying that "Moreover, the number of rules is smaller in Bonding Calculus". The authors are comparing the size of a program (its syntax) with the size of the semantics.}
 
-We have removed the reference to the Bonding calculus from the introduction, and put it in the section about the bonding calculus, where it fits better. The statement about size has been removed. The purpose of it was to highlight the fact that in process
-calculi the rules are mainly templates that are executed by proper
-substitutions, while in rule-based calculi this is not possible (and thus all
-rules need to be stated in the semantics). However, to avoid confusion, we have removed it.
+We have removed the reference to the Bonding Calculus from the Introduction, and put it in the subsection 
+about the Bonding Calculus, where it fits better. The statement about size has been removed. 
+The purpose of it was to highlight the fact that in process
+calculi the rules are mainly templates (or rule schemas) that can be instantiated using
+substitution, while in rule-based calculi this is not possible (and thus all
+rules need to be stated specifically in the semantics). However, to avoid confusion, we have removed 
+this part.
 
 \textbf{4) "Attempts at modelling reversibility in process calculi are RCCS [8] and CCSK [22]." What about the other attempts? For instance, those based on the pi-calculus?}
 
-We have made it clear that these are examples and have added reversible $\pi$. TODO Irek you mentioned bioambients, I don't think they have explicit reversibility, if you are sure, we can add it, I am not.
+We have made it clear that these are examples and have added reversible $\pi$. 
+%TODO Irek you mentioned bioambients, I don't think they have explicit reversibility, if you are sure, we can add it, I am not.
 
 \textbf{5) what do you mean with these sentences? "It should be emphasized that this is visible at a certain level of detail, whilst there is no causality in a more detailed view. This suggests that this is a case of emergent behaviour"}
 
@@ -113,20 +132,24 @@ We have addressed this comment.
 
 \textbf{7) "PNs enable a wide range of analysis techniques, such as determining states of equilibrium, conflicting evolutions, and reachable states."
 Again analysis techniques are not peculiar of PN, they exist also for other formalisms.}
-The sentence has been changed to address the reviewer's comment and it has now been moved to the conclusions. 
+
+The sentence has been changed to address the reviewer's comment and it has now been moved to the conclusions
+section. 
 
 \textbf{8) The authors affirm: 
 "This may result in expanded models and state spaces" Can you show that in a calculus with reversibility the state space is smaller than that one of a calculus where reversibility is explicit?}
-Removed.
 
-== Section 2: 
+Removed.\\
+
+== Section 2:\\ 
 
 \textbf{1) why did the authors choose this example? What are its essential features?}
 
-The example is small and manageable, but sufficiently complex. We have added this to the text.
+This example was chosen to be fairly small and manageable, but sufficiently complex to exhibit the need for
+reversibility. We have added an explanation to that effect at the beginning of the section.\\
 
+== Section 3:\\
 
-== Section 3:
 \textbf{1) what is the aim of this section?}
 
 \textbf{2) The authors claim that the autoprotolysis of water cannot be modelled in CCSK.
@@ -136,14 +159,17 @@ This kind of statement is quite delicate in computer science, as we usually deal
 
 \textbf{If the authors could add a more insightful discussion on reversibility, this section could be removed, or adjusted to be used as an example of Computer Science reversibility against biological reversibility.}
 
-We have removed this section completly.
+As we said above, we have restructured the paper in such a way that there was no need for this section.
+Hence, we have removed this section completely.\\
 
-== Section 4
+== Section 4 (now new Section 3):\\
+
 \textbf{1) correct the typo in the title}
 
-Done
+Done.\\
 
-== Section 4.1
+== Section 4.1\\
+
 \textbf{1) "This shows the strengths of CCB compared to previous calculi."
 Not really, this only shows as remarked above that the previous encoding was not correct.}
 
@@ -152,25 +178,26 @@ We have removed that statement.
 \textbf{2) page 8 syntax of CCB "S|S = P" is the bar a parallel operator or a separator? 
 I have the impression that it should be a separator, maybe the author should add some space to mark the distinction}
 
-Changed as requested.
+We have changed this as requested.
 
 \textbf{3) "One of the actions in s in (s).P may be a weak action from WA" Do the authors mean that there is only one weak action or that weak actions may exist in s?}
 
-Only one, we have clarified that.
+There may be at most one weak action, we have clarified that.
 
 \textbf{4) Since the authors are just recalling the definition of the language, the following remark can be removed:
-"Note that we do not use the usual relabelling operator [f], where f : A -> A, in CCB, which could be easily added."}
+"Note that we do not use the usual relabeling operator [f], where f : A -> A, in CCB, which could be easily added."}
 
-Removed
+Removed.
 
 \textbf{5) In figures 2 and 4 side conditions are added as a comment in the caption, I think it would be better to have side conditions just next to the corresponding rules}
 
-We have decided to write the rules in tabular fashion, and we think that having the conditions in there would make them more difficult to read. We would therefore like to keep them as they are.
+We have decided to write the rules in tabular fashion, and we think that having the conditions in there would make them more difficult to display and read. We would therefore like to keep the presentation of the rules
+as they are.
 
 \textbf{6) A lot of syntax is given.  The authors are very precise on what are the set of names and on what the variables names range over, but no intuition is given on the more important part, the semantics.
 For instance: "The main rule is the rule concert that defines when a pair of concerted actions takes place." Why is this the main rule, what is the intuition behind concerted actions?}
 
-We have added more intuiton and cut down the description of the syntax, also to make the paper more balanced overall.
+We have added more intuition and cut down the description of the syntax, also to make the paper more balanced overall.
 
 \textbf{7) Note that the concert rule uses lookahead [31].
 What is lookahead? Is this important here and why?}
@@ -186,7 +213,7 @@ There is no involvement of likelihoods here. The only effect is that strong acti
 
 \textbf{Should be integrated (removing repetitions) to the previous part explaining the language, not in the example.}
 
-We have removed that paragraph here.
+We have removed that paragraph.
 
 \textbf{Section 4.3
 This section is organised differently from other sections, it would be better to be more uniform}
@@ -198,7 +225,7 @@ This is actually what I would have liked to read in the introduction, there is a
 Still, there are assertions that are too strong and that need to be better justified (e.g. the last sentence in the conclusion).}
 
 We have moved a section about applications of Petri Nets to the section about Petri nets. Now the conclusion has a discussion of each formalism describing the advantages and then finishes with a comparison of the three formalisms. We have also modified the introduction to make the organization of the paper clear there.
-TODO which assertations does she mean? I can't see that.
+%TODO which assertations does she mean? I can't see that.
 
 ----------------------- REVIEW 2 ---------------------
 
@@ -214,14 +241,22 @@ SCORE: 0 (borderline paper)
 
 ----- TEXT:
 
-This paper presents 3 (semi) reversible calculi, namely the Calculus of Covalent Bonding (CCB), the Bonding Calculus (BC) and Reversing Petri Nets (RPNs), with an illustration of the expressiveness of these calculi with a chemical reaction.
+This paper presents three (semi) reversible calculi, namely the Calculus of Covalent Bonding (CCB), 
+the Bonding Calculus (BC) and Reversing Petri Nets (RPNs), and provides an illustration of 
+the expressiveness of these calculi via a model of a chemical reaction.
 
-The paper can be seen as a state of the art paper that could be useful for a reader interested in the above mentioned calculi. Each section presents their operational semantics as well as their use to model the running example of water autoprotolysis.
+This is case study paper that could be useful to a reader interested in the above mentioned or similar 
+formalisms. Each subsection of Section~3 presents their operational semantics as well as their 
+use to model the running example of water autoprotolysis.
 
 \textbf{It is not totally apparent why using any of these calculi would put a chemist in a better position than modeling directly in a full-fledged programming language (like python) as none of these calculi come equipped with a particular proof or analysis technique.  One can imagine though, that since these language are either CCS-like, graph rewriting like, or PT net like, it is possible to adapt technique from these fields. Nothing is presented in this paper that would support this idea though.}
 
-We have added a paragraph in the conclusion about the tools, which exist. It should be clear that these tools are better than using a programming language directly, since they have a language much closer to chemistry. We did not have this, as the main purpose of each section was to present the operational semantics of each approach as well as its use to model the running example of water autoprotolysis. We think that the paragraph added is a valuable addition. 
-% We have also added a few sentenses about tools associated with Petri nets and our transformation to traditional models
+We have added a paragraph in the conclusion about the tools, which exist. It should be clearer now
+that these tools are better than using a programming language directly, since they support
+languages which are much closer to chemical notation. We did not have this material before, 
+as the main purpose of each subsection was to present the operational semantics of each approach 
+as well as its use to model the running example of water autoprotolysis. We think that the new
+paragraph on software tools is a valuable addition. 
 
 ----------------------- REVIEW 3 ---------------------
 
@@ -239,7 +274,12 @@ SCORE: 0 (borderline paper)
 
 Comment from Ivan Lanese <ivan.lanese@gmail.com> who is the editor handling this paper. Reviews are non-anonymous, reviewer 1 is Cinzia Di Giusto <cinzia.digiusto@gmail.com>, reviewer 2 is Jean Krivine <jean.krivine@irif.fr>. Please direct any questions or comments to the editor.
 
-Reviewer 1 provides a detailed review containing many suggestions on how to improve the paper. I expect that the paper will undergo a deep revision answering (many of) the comments from reviewer 1.
+{\bf
+Reviewer 1 provides a detailed review containing many suggestions on how to improve the paper. 
+I expect that the paper will undergo a deep revision answering (many of) the comments from reviewer 1.}
+
+We have addressed all the comments and suggestions of Reviewers 1 and 2.
+
 
 
 
