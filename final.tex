@@ -230,7 +230,7 @@ order. Beyond backtracking and causally-consistent reversibility, there is a mor
 of forward and reverse reaction steps are important as they lead to new chemical
 structures and new reactions, which would not be possible without out-of-causal-order
 reversibility~\cite{Irek2012}. A typical example is use of a catalyst $C$, which enables compound 
-$A$ and $B$ to combine, which would normally not happen or be very unlikely without the presence 
+$A$ and $B$ to combine, a combination that would normally not happen or be very unlikely without the presence 
 of $C$. Firstly, catalyst $C$ binds with $B$ resulting in a compound $BC$. Then $A$ combines with $BC$
 creating $ABC$. Finally, with its job done, $C$ breaks away from $ABC$, leaving $A$ and $B$ bonded. 
 This sequence of reactions can be written as follows:
@@ -243,7 +243,7 @@ is undone before its effect, namely the bond from $A$ to $B$.
 %This is out-of-causal order reversibility, and it enables 
 %the formation of the new compound $AB$, which would not be possible otherwise. 
 The modelling of such reactions is the focus of this work. For motivation, formal definitions and
-illustrating example of the various types of reversibility refer to~\cite{danos2004ccsr,Irek2007,LaneseMS10,Irek2012}.
+illustrating examples of the various types of reversibility refer to~\cite{danos2004ccsr,Irek2007,LaneseMS10,Irek2012}.
 
 \paragraph{Contribution.} This chapter presents and compares three formalisms, the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, the Bonding Calculus \cite{NaCo18}, and Reversing Petri Nets (RPNs)~\cite{RPNs}, that have been developed during COST Action IC1405. These models are variations of existing formalisms and are set out to study reversible computation by allowing systems to reverse at any time leading to previously visited states or even new ones without the need of additional forward actions. The contribution of this chapter is a comparative overview of the three formalisms, a discussion of their expressiveness, and a demonstration of their use on a common case study, namely the autoprotolysis of water
 reaction.
@@ -300,7 +300,7 @@ about a wide range of applications featuring concurrency and distribution. They 
 language  associated with 
 a rich mathematical theory and supported by a variety of tools. Their use in systems 
 biology dates back to~\cite{DBLP:conf/ismb/ReddyML93,DBLP:journals/jsamas/HofestadtH94}.
-Since then they have been widely employed for
+Since then, they have been widely employed for
 the modelling, analysis, and simulation of 
 biochemical reactions in metabolic pathways, gene expression, signal transduction, and neuronal processes~\cite{PNbiology,DBLP:journals/bib/Chaouiya07,DBLP:journals/nc/BaldanCMS10}. Indeed, PNs seem to be a natural framework for representing biochemical systems as they constitute a set of interdependent
 transitions/reactions which consume 
@@ -326,14 +326,14 @@ where the intention is not to return to a state via arbitrary execution but to r
 \paragraph{Paper organization.} In the next section, we introduce the autoprotolysis of water 
 reaction, which will be modelled using our three formalisms. This is followed by a section 
 introducing the formalisms, their syntax and, informally, their operational semantics. We also 
-give there models of the autoprotolysis of water using the formalisms. The conclusion contains 
+give three models of the autoprotolysis of water using the formalisms. The conclusion contains 
 a comparison of the formalisms and the models of our example reaction, and we also 
 briefly discuss software support for the formalisms.
 
 \section{The Autoprotolysis of Water}
 
 We consider a chemical reaction that transfers a hydrogen atom between two water molecules. This
-reaction is known as \emph{autoprotolysis of water} and is shown 
+reaction is known as the \emph{autoprotolysis of water} and is shown 
 in Fig.~\ref{fig:autoprotolysis}. There, $O$ indicates an oxygen atom and $H$ a hydrogen atom. The lines indicate bonds. Positive and negative charges on atoms are shown by $\oplus$ and $\ominus$
 respectively. The meaning of the curved arrows and the dots will be explained in the next paragraphs.
 The reaction is reversible and it takes place at a relatively 
@@ -348,7 +348,7 @@ interesting aspects to represent.
 \label{fig:autoprotolysis}
 \vspace{-2ex}\end{figure}
 
-In order to model the reaction we need to understand its why it takes place and what causes it.
+In order to model the reaction we need to understand why it takes place and what causes it.
 % what it is that makes it happen.
 The main reason is that the oxygen in the water molecule is \emph{nucleophilic}, meaning it has the tendency to bond to another atomic nucleus, which would serve as an \emph{electrophile}. This is because oxygen has a high 
 electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell, which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pairs} of two electrons each, which can form new bonds (lone pairs are shown in Fig.~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
@@ -1148,18 +1148,18 @@ In this subsection we present Reversing Petri Nets (RPNs)~\cite{RPNs}, an extens
 
 %RPNs have been extended with a mechanism for controlling transition
 %reversal by associating transitions with conditions~\cite{RC19}.
-Reversing Petri Nets are a general purpose model and their expressiveness offers the ability to model 
+Reversing Petri Nets are a general-purpose model and their expressiveness offers the ability to model 
 a variety of distributed systems other than biochemical reactions.
 In particular, they have been used successfully for
 the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}.
 % The modeling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
-The latter introduces, a mechanism for controlling reversibility 
+The latter introduces a mechanism for controlling reversibility 
 that may capture environmental or other conditions that determine a transition's
 reversal, for example, changes in temperature. 
 %In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
 %
 In this section we consider
-a model suitable for describing chemical reactions by allowing multiple tokens of the same type as well as the possibility for 
+an extension of the RPNs of~\cite{RPNs} suitable for describing chemical reactions by allowing multiple tokens of the same type as well as the possibility for 
 transitions to break bonds. Thus, a transition may simultaneously create
 and destruct bonds, and its reversal results in the opposite effect. Formally, a RPN
 is defined as follows:
@@ -1195,7 +1195,7 @@ Token instances correspond to the basic entities that occur in a system and they
 stand-alone elements but as computation proceeds they may also merge together to form \emph{bond 
 	instances}. 
 Places and transitions have the standard meaning and are connected
-via directed arcs which are labelled by a set of elements from $A_V \cup (A_V \times A_V) \cup \overline{A}
+via directed arcs, which are labelled by a set of elements from $A_V \cup (A_V \times A_V) \cup \overline{A}
 \cup \overline{B}$.  Intuitively, these labels express the requirements for a transition
 to fire when placed on arcs incoming the transition, and the effects of the transition when placed on the
 outgoing arcs. 
@@ -1205,8 +1205,8 @@ circles, transitions by boxes, and bond instances by lines between token instanc
 
 Before we recall the semantics of RPNs we need to introduce some notations. Note that in 
 the sequel we omit the discussion of negative tokens and negative bonds as they are not relevant to our
-case study. We also restrict  our attention to causal reversibility which allows some simplifications
-of the exposition and, in particular, of the history function defined below.
+case study.  
+%We also restrict  our attention to causal reversibility which allows some simplifications of the exposition and, in particular, of the history function defined below.
 We write 
 $\circ t =   \{x\in P\mid  F(x,t)\neq \emptyset\}$ and  
 $ t\circ = \{x\in P\mid F(t,x)\neq \emptyset\}$
@@ -1236,14 +1236,14 @@ In addition, we employ the notion of a \emph{history}, which~assigns a memory to
 transition $H : T\rightarrow \mathbb{N}$. 
 Intuitively, a history of $H(t) = 0$ for some $t \in T$ captures that the transition has not taken place, or 
 every execution of it has been reversed, and a history
-of $ H(t)=k, k>0$, captures that the transition was executed  $k$ times that have not been  reversed.
+of $ H(t)=k, k>0$, captures that the transition had $k$ forward executions that have not been  reversed.
 Note that $H(t)>1$ may
 arise due to the consecutive execution of the transition with different token
 instances. A pair of a marking and a history, $\state{M}{H}$, describes a \emph{state} of a RPN 
 with $\state{M_0}{H_0}$ the initial state, where $H_0(t) = 0$ for all $t\in T$. 
 
 Finally, we define $\connected(a_i,C)$, where $a_i\in A_I$ and $C\subseteq 2^{A_I\cup B_I}$,
-to be the tokens connected
+to be the token instances connected
 to $a_i$  as well as the bonds creating these connections according to 
 set $C$. 
 
@@ -1332,7 +1332,7 @@ Thus, a transition $t$ is reverse-enabled in $\state{M}{H}$ if
 (1) the transition has been executed and (2) there exists a type-respecting assignment of token instances,
 from the instances in the out-places of the transition, to the variables on the outgoing
 edges of the transition, and where the instances are connected with bonds as required by
-the transition's outgoing edges.  Also we do not recreate bonds when going backwards. 
+the transition's outgoing edges.  Also we do not recreate existing bonds when going backwards. 
 We refer to $W$ as a reversal enabling assignment.
 To implement the reversal of a transition $t$ according to a reversal enabling assignment $W$, 
 the selected instances are relocated from  the outgoing places of the transition to the incoming places,
@@ -1427,7 +1427,7 @@ execution of transitions $t_1$ and $t_2$ results in the second molecule of water
 placed again at place $y$, as shown in the third net in the figure. At this state, transition
 $t_3$ is forward-enabled and,  with enabling assignment $U(o_1)=O_1, U(o_2)=O_2, U(h_1)=H_1, 
 U(h_2)=H_2,U(h_3)=H_3,U(h_4)=H_4$, we have the creation of the hydronium and hydroxide
-depicted at place $z$ in the fourth net of the figure. At this stage  transition $t_3$ is
+depicted at place $z$ in the fourth net of the figure. At this stage, transition $t_3$ is
 now reverse-enabled and the last net in the figure illustrates the state resulting after
 reversing $t_3$ with reversal enabling assignment $W(o_1)=O_1, W(o_2)=O_2, W(h_1)=H_1, 
 W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
@@ -1461,13 +1461,13 @@ The result is different from that in Section~\ref{sec:ccb}, but identical from a
 The Bonding Calculus is suitable for modelling in a natural way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Also, we can verify various properties of the bonding compounds described by using the calculus.
 
 
-Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent where during the execution of transitions tokens can be bonded/unbonded with each other, and the creation of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri Nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
+Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent where during the execution of transitions tokens can be bonded/unbonded with each other, and the creation/destruction of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri Nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
 has multi-party interactions, is inherently concurrent, and features reversible behaviour. 
 In particular, the feature of token multiplicity and
 the use of variables allows to non-deterministically
 select different combinations of atoms of a particular element when creating molecules. Also the ability
 of 
-transitions to break bonds allows to model concerted actions where a transition simultaneously
+transitions to break bonds allows to model concerted actions where where, for example a transition simultaneously
 destructs  a water molecule and creates a hydronium whose  reversal results in the opposite effect. Moreover,
 the collective token interpretation adopted in the framework, treating all tokens of the same type
 as equivalent, allows the reaction to reverse into two different water molecules than the original ones,
@@ -1478,7 +1478,7 @@ level of abstraction would be possible by introducing tokens to represent the el
 atom tokens to illustrate the relevant charges. 
 
 
-The three presented formalisms can model our example chemical reaction fairly well but, as expected, 
+The three presented formalisms can model our example fairly well but, as expected, 
 there are some differences. In order to evaluate each formalism, we first consider if all 
 chemically valid interactions between the compounds of the reaction can be represented well in 
 our formalisms. CCB shows the linked forming and breaking of bonds. This is due to it being quite close to the chemical concepts and can therefore model this reactions faithfully. RPNs can also express the concerted reaction. In the Bonding Calculus, this link is not expressed. Each of the formalisms 
@@ -1494,24 +1494,34 @@ one reaction which is not realistic:
 If there are many water molecules and therefore several hydroxide and water molecules at the same time, 
 it is possible that the remaining hydrogen is transferred from the hydroxide to a water. In reality, 
 this is not possible since the hydroxide is strongly negatively charged and no hydrogen bond can form.
-Due to the nondeterministic behaviour of processes written with `+' operator such as those for
-hydrogen and oxygen in subsection~3.2, the Bonding for Calculus has the corresponding problem as CCB.
+Due to the nondeterministic behaviour of processes written with the `+' operator, such as those for
+hydrogen and oxygen in Subsection~3.2, the Bonding Calculus also presents the same problem.
+However, this is not the case for RPNs since, on the one hand, a transition's conditions make restrictions
+on the types of molecules
+that will participate in a transition firing or its reversal and, on the other hand, places impose a form of locality
+for molecules. For instance, in the autoprotolysis example, each place is the location of specific types of molecules,
+e.g., transition $t_3$ modeling the autoprotolysis reaction is only applied on water molecules and its reversal
+only on pairs of a hydronium and a hydroxite molecule, as required.
+% water molecules cannot in the autoprotolysis the model, only water molecules occur in place $y$ and thus a hydroxide molecule cannot be involved in the execution of transition $t_3$ modeling the autoprotolysis reaction.
 %
 %
-{\bf TODO: Now, I have added a sentence about BC, how about RPNs? 
-I would be surprised to hear if it avoids such unwanted 
-or other unwanted reactions. So, for a fairer comparison, we must write something for other formalisms. 
-If such unwanted reactions can be avoided there, it would be very interesting to read why. 
-One way or the other, please provide a short explanations for RPNs.}
+%{\bf TODO: Now, I have added a sentence about BC, how about RPNs? 
+%I would be surprised to hear if it avoids such unwanted 
+%or other unwanted reactions. So, for a fairer comparison, we must write something for other formalisms. 
+%If such unwanted reactions can be avoided there, it would be very interesting to read why. 
+%One way or the other, please provide a short explanations for RPNs.}
 
-There are a number of software tools for our formalisms that can aid simulation and analysis. Regarding Bonding Calculus, we can simulate various bonding descriptions by
+There are a number of software tools  that can aid simulation and analysis for our formalisms. Regarding the Bonding Calculus, we can simulate various bonding descriptions by
 using an existing software platform called UPPAAL (as shown in [1]). For CCB, there 
-is a simulation tool presented in \cite{merevcomp2018}. It allows much closer form 
+is a simulation tool presented in \cite{merevcomp2018}. It allows a much closer form 
 of representation of chemical notation than that possible with a typical programming language.
 	%As in other formalisms, Petri nets are also associated with a wide range of analysis techniques and the associated tool support, such as determining states of equilibrium, conflicting evolutions, and reachable states.
-	 Revering Petri nets have been shown to be closely related to Coloured Petri Nets, as a subset of the former model has been encoded into the latter~\cite{RPNtoCPN}. 
+Reversing Petri nets have been shown to be closely related to Coloured Petri Nets, as a subset 
+of the former model has been encoded into the latter~\cite{RPNtoCPN}. 
 	 %As future goal we plan on implementing
-	 Thus, an algorithmic translation can be implemented that transforms RPNs to CPNs in an automated manner using the transformation techniques discussed in~\cite{RPNtoCPN}. This allows RPNs to exploit tools, such as CPNTools, that support traditional models of Petri nets.
+Thus, an algorithmic translation can be implemented that transforms RPNs to CPNs in an automated
+manner using the transformation techniques discussed in~\cite{RPNtoCPN}. This allows RPNs to 
+exploit tools such as CPNTools that support traditional models of Petri nets.
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
