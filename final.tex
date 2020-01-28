@@ -1489,13 +1489,19 @@ All models presented use subscripts and enable the tracking of atoms.
 
 The other criterion for assessing the suitability of our formalisms for this type of reactions is 
 to ask if they enable in the produced model any transitions which usually do not occur in reality. 
-All of them avoid a $H_3O^+$ molecule forming directly. CCB allows one reaction which is not realistic: If there are many water molecules and therefore several hydroxide and water molecules at the same time, it is possible that the remaining hydrogen is transferred from the hydroxide to a water. In reality, this is not possible since the hydroxide is strongly negatively charged and no hydrogen bond can form.
+All of them avoid a $H_3O^+$ molecule forming directly. CCB allows one reaction which is not realistic: 
+If there are many water molecules and therefore several hydroxide and water molecules at the same time, 
+it is possible that the remaining hydrogen is transferred from the hydroxide to a water. In reality, 
+this is not possible since the hydroxide is strongly negatively charged and no hydrogen bond can form.
+Due to the nondeterministic behaviour of processes written with `+' operator such as those for
+hydrogen and oxygen in subsection~3.2, the Bonding for Calculus has the corresponding problem as CCB.
 %
 %
-{\bf TODO: how about the other formalisms? I would be surprised to hear if they avoid such unwanted 
-reactions. So, for a more balanced presentation, we must write something for other formalisms. 
+{\bf TODO: Now, I have added a sentence about BC, how about RPNs? 
+I would be surprised to hear if it avoids such unwanted 
+or other unwanted reactions. So, for a fairer comparison, we must write something for other formalisms. 
 If such unwanted reactions can be avoided there, it would be very interesting to read why. 
-One way or the other, please provide a short explanations for the BC and RPNs.}
+One way or the other, please provide a short explanations for RPNs.}
 
 There are a number of software tools for our formalisms that can aid simulation and analysis. Regarding Bonding Calculus, we can simulate various bonding descriptions by
 using an existing software platform called UPPAAL (as shown in [1]). For CCB, there 
