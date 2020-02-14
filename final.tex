@@ -316,20 +316,28 @@ transitions/reactions which consume
 and produce resources, and are represented graphically in a similar fashion to the systems
 in question. A PN model%, similarly to other formal models, 
 can be decomposed in order to handle the overall complexity, and the abstraction level of a model
-can vary from single molecules, to cells, to multicellular aggregations.
+can vary from single molecules, to cells,and to multicellular aggregations.
 Several specialized Petri net classes like qualitative, stochastic, continuous, or
-hybrid Petri nets and their coloured counterparts have been used to describe different
+hybrid Petri nets and their coloured counterparts have been used to describe different chemical 
 systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
 
 
-%As far as reversibility is concerned, 
-Classical PNs and their extensions do not directly handle reversibility. 
-Modelling reversible reactions in these formalisms requires the employment
-of mechanisms involving two distinct transitions,
+Even though classical PNs and their extensions have been extensively used to model biochemical systems they cannot directly handle reversibility. Specifically, when  modelling reversible reactions in these formalisms it is required to employ mechanisms involving two distinct transitions,
 one for the forward and one for the reverse version of a reaction. This
 may result in expanded models and less natural and/or less accurate
 models of  reversible behaviour. It is also in contrast to the notion of reversible computation, 
-where the intention is not to return to a state via arbitrary execution but to reverse the effect of already executed transitions. For this reason, the formalism of reversing Petri nets~\cite{RPNs} allows systems to reverse at any time leading to previously visited states or even new ones without the need of additional forward actions. 
+where the intention is not to return to a state via arbitrary execution but to reverse the effect of already executed transitions. For this reason, the formalism of reversing Petri nets~\cite{RPNs} allows systems to reverse at any time leading to previously visited states or even new ones without the need of additional forward actions. %RPNs have been extended with a mechanism for controlling transition
+%reversal by associating transitions with conditions~\cite{RC19}.
+RPNs are a general-purpose model and their expressiveness offers the ability to model 
+a variety of distributed systems other than biochemical reactions.
+In particular, they have been used successfully for
+the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}.
+% The modeling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
+The latter introduces a mechanism for controlling reversibility 
+that may capture environmental or other conditions that determine a transition's
+reversal, for example, changes in temperature. 
+%In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
+%
 
 
 \paragraph{Paper organization.} In the next section, we introduce the autoprotolysis of water 
@@ -398,7 +406,7 @@ involved in the forward path.
 \label{sec:ccb}
 
 In this subsection we introduce the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, 
-concentrating on the new general prefixing operator $(s;b).P$ which, together with an generalised composition operator, produces pairs of \emph{concerted} actions. Then we present a CCB 
+concentrating on the new general prefixing operator $(s;b).P$ which, together with a generalised composition operator, produces pairs of \emph{concerted} actions. Then we present a CCB 
 model of the autoprotolysis of water.
 
 \subsubsection{Definition of CCB}\label{sec:calculusdef}
@@ -1129,14 +1137,7 @@ In this subsection we present Reversing Petri Nets (RPNs)~\cite{RPNs}, an extens
 	%authors investigate the effects of adding \emph{reversed} versions of selected transitions in a PN
 	%by reversing the directions of a transition's arcs. They then explore decidability problems regarding reachability and coverability in the resulting PNs. In
 	%was proposed, called Reversing Petri Nets (RPNs).  In this work, RPNs are acyclic Petri net structures that  assume 
-	RPNs are the first proposal for capturing reversible behaviour directly in the Petri net model
-	and they support reversible computation in all its forms
-	(backtracking, causally-consistent reversibility and out-of-causal-order reversibility).
-	RPNs  enable the reversal of each executed transition and assume tokens to be distinguished from each 
-	other by an identity/type and to be persistent. Furthermore,
-	during transitions tokens can be bonded together, with  the creation of bonds
-	considered to be the effect of a transition, whereas their destruction is the effect of
-	the transition's reversal. 
+	
 
 %The notion of bonds is especially useful for reasoning about biochemical
 %systems as illustrated in the current paper. % through the case study of the autoprotolysis of water.
@@ -1158,20 +1159,27 @@ In this subsection we present Reversing Petri Nets (RPNs)~\cite{RPNs}, an extens
 
 %RPNs have been extended with a mechanism for controlling transition
 %reversal by associating transitions with conditions~\cite{RC19}.
-Reversing Petri Nets are a general-purpose model and their expressiveness offers the ability to model 
-a variety of distributed systems other than biochemical reactions.
-In particular, they have been used successfully for
-the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}.
+%Reversing Petri Nets are a general-purpose model and their expressiveness offers %the ability to model 
+%a variety of distributed systems other than biochemical reactions.
+%In particular, they have been used successfully for
+%the modelling of a transaction-processing system~\cite{RPNs}, and a novel %antenna selection  algorithm~\cite{RC19}.
 % The modeling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
-The latter introduces a mechanism for controlling reversibility 
-that may capture environmental or other conditions that determine a transition's
-reversal, for example, changes in temperature. 
+%The latter introduces a mechanism for controlling reversibility 
+%that may capture environmental or other conditions that determine a transition's
+%reversal, for example, changes in temperature. 
 %In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
 %
-In this section we consider
-an extension of the RPNs of~\cite{RPNs} suitable for describing chemical reactions by allowing multiple tokens of the same type as well as the possibility for 
+RPNs~\cite{RPNs}  are the first proposal for capturing reversible behaviour directly in the Petri net model
+and they support reversible computation in all its forms
+(backtracking, causally-consistent reversibility and out-of-causal-order reversibility).
+RPNs  enable the reversal of each executed transition and assume tokens to be distinguished from each 
+other by an identity/type and to be persistent. Furthermore,
+during transitions tokens can be bonded together, with  the creation of bonds
+considered to be the effect of a transition, whereas their destruction is the effect of
+the transition's reversal. In this section we consider
+an extension of the RPNs of suitable for describing chemical reactions by allowing multiple tokens of the same type as well as the possibility for 
 transitions to break bonds. Thus, a transition may simultaneously create
-and destruct bonds, and its reversal results in the opposite effect. Formally, a RPN
+and destruct bonds, and its reversal results in the opposite effect. Formally, an RPN
 is defined as follows:
 
 \begin{definition}{\rm
@@ -1209,12 +1217,11 @@ via directed arcs, which are labelled by a set of elements from $A_V \cup (A_V \
 \cup \overline{B}$.  Intuitively, these labels express the requirements for a transition
 to fire when placed on arcs incoming the transition, and the effects of the transition when placed on the
 outgoing arcs. 
-Graphically, a RPN is portrayed as a directed bipartite graph where token instances are indicated by $\bullet$, places by
+Graphically, an RPN is portrayed as a directed bipartite graph where token instances are indicated by $\bullet$, places by
 circles, transitions by boxes, and bond instances by lines between token instances. 
 
 
-Before we recall the semantics of RPNs we need to introduce some notations. Note that in 
-the sequel we omit the discussion of negative tokens and negative bonds as they are not relevant to our
+Before we recall the semantics of RPNs we need to introduce some notation. Note that in this work we omit the discussion of negative tokens and negative bonds as they are not relevant to our
 case study.  
 %We also restrict  our attention to causal reversibility which allows some simplifications of the exposition and, in particular, of the history function defined below.
 We write 
@@ -1249,7 +1256,7 @@ every execution of it has been reversed, and a history
 of $ H(t)=k, k>0$, captures that the transition had $k$ forward executions that have not been  reversed.
 Note that $H(t)>1$ may
 arise due to the consecutive execution of the transition with different token
-instances. A pair of a marking and a history, $\state{M}{H}$, describes a \emph{state} of a RPN 
+instances. A pair of a marking and a history, $\state{M}{H}$, describes a \emph{state} of an RPN 
 with $\state{M_0}{H_0}$ the initial state, where $H_0(t) = 0$ for all $t\in T$. 
 
 Finally, we define $\connected(a_i,C)$, where $a_i\in A_I$ and $C\subseteq 2^{A_I\cup B_I}$,
@@ -1258,7 +1265,7 @@ to $a_i$  as well as the bonds creating these connections according to
 set $C$. 
 
 \paragraph{Forward Execution.}
-During the forward execution of a transition in a RPN, 
+During the forward execution of a transition in an RPN, 
 a set of tokens and bonds, as specified by the incoming arcs of the transition, are selected and
 moved to the outgoing places of the transition, as specified by the transition's outgoing arcs, possibly
 forming or destructing bonds, as necessary. Due to the presence of multiple instances of the same token
@@ -1472,13 +1479,13 @@ The result is different from that in Section~\ref{sec:ccb}, but identical from a
 The Bonding Calculus is suitable for modelling in a natural way the autoprotolysis of water by using only bond and unbond actions. Simulations by using a software platform can describe the dynamics of the bonding systems, and so it is possible to test the validity of some underlying assumptions. Also, we can verify various properties of the bonding compounds described by using the calculus.
 
 
-Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent where during the execution of transitions tokens can be bonded/unbonded with each other, and the creation/destruction of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri Nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
+Reversing Petri Nets are Petri net structures that assume tokens to be distinct and persistent. During the execution of transitions individual tokens can be bonded/unbonded with each other, and the creation/destruction of these bonds is considered to be the effect of a transition, whereas their destruction/creation is the effect of the transition’s reversal. Reversing Petri Nets are a natural choice to model and analyse biochemical reaction systems, such as the autoprotolysis of water, which by nature
 has multi-party interactions, is inherently concurrent, and features reversible behaviour. 
 In particular, the feature of token multiplicity and
 the use of variables allows to non-deterministically
 select different combinations of atoms of a particular element when creating molecules. Also the ability
 of 
-transitions to break bonds allows to model concerted actions where where, for example a transition simultaneously
+transitions to break bonds allows to model concerted actions where, for example a transition simultaneously
 destructs  a water molecule and creates a hydronium whose  reversal results in the opposite effect. Moreover,
 the collective token interpretation adopted in the framework, treating all tokens of the same type
 as equivalent, allows the reaction to reverse into two different water molecules than the original ones,
