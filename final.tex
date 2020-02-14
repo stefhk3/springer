@@ -786,14 +786,14 @@ illustrate its expressiveness by modelling the autoprotolysis of water.
 
 \subsubsection{Definition of the Bonding Calculus}
 
-The abstraction ``processes as interactions'' from process calculi is used in the Bonding Calculus, but processes are not able to communicate values in order to interact. Just like in BNGL, the Bonding Calculus allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus. While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in the  Bonding Calculus a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus.
+The abstraction ``processes as interactions'' from process calculi is used in the Bonding Calculus, but processes are not able to communicate values in order to interact. Just like in the BNGL \cite{pmid19399430}, the Bonding Calculus allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus. While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in the  Bonding Calculus a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus.
 
 The syntax of the Bonding Calculus syntax is presented in Fig.~\ref{table:syntax}. 
 Let us consider the set~$\mathbb{N}$ of natural numbers, the set 
 $\mN=\{x,x^+,x^-,\dots\}$ of bond names, the set $\mM=\{a,b,\dots\}$ of 
 molecules and the set $\mP=\{P,Q,\ldots\}$ of processes. A multiset over 
-$\mN$ is defined as a partial function $N:\mN \rightarrow \N$. In bonding 
-calculus each molecule has a unique name, and the bond $x$ between two 
+$\mN$ is defined as a partial function $N:\mN \rightarrow \N$. In the Bonding 
+Calculus each molecule has a unique name, and the bond $x$ between two 
 molecules $a$ and $b$ is denoted by $\{a-^x b\}$.
 
 \begin{figure}
