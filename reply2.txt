@@ -7,33 +7,29 @@ The paper is massively improved from the previous version, and the response to t
 
 Section 1. The whole block of text "Such biological processes require ... interesting examples of out-of-causal-order reversibility." was restructured in response to reviewer comments, but it however *still* detracts from the main flow of the text, and is thus confusing to the reader. One option would be to put this whole piece of text in a footnote (since it provides complementary information that can be ignored while reading). Otherwise delete it (as the text works fine without it).
 
-> I moved this to a footnote as suggested. We could also remove it - I like discussing this, but I don't mind.
+SK> this has been rewritten
 
 Section 1. The typography of the "Related Work" \subsubsection or \paragraph (not sure which it is) isn't working to tell the reader that the whole set of paragraphs that follow all belong to related work. Consider having a whole separate \section "Related Work" that comes after the "Paper organization" paragraph, or to use a \subsection* or similar that more clearly shows what is going on.
 
-> I made these subsections. Alternatively, we could make the related work a section, but I think like this it looks good.
+SK> I made these into subsections.
 
 Section 1. The two paragraphs "Petri nets (PNs)..." and "Classical PNs and their extensions" feel a bit repetitive. The second paragraph does not seem like a continuation of the first, but feel like it was written independently and for this reason the two paragraphs come across as two independent discussion of the same area (petri nets).
-
-> I think these address different things. And we do discuss previously first process calculi and then how they relate to reversibility, the same is here done for PNs. So I think this makes sense. Any ideas how we could rework this? We could remove the second paragraph, but it is important to say what was done so far.
 
 A&K> We have rewritten slightly to make the transition smoother. One point that arises is whether a reference to the Bonding Calculus should be made in this section. There are references to CCB and RPNs (including some related work) but none to the Bonding Calculus.
 
 Section 3.1. The figures 2,3,4,5 are all on one page. The vertical spacing however seems to be broken, as they flow together and it's hard to see where one figure stops and another continues. Could you perhaps move one or more of the figures to a separate page, to make it more readable? Moreover, in the caption of Fig. 4, part of the condition is apparently written in plain English i.e. "The condition (*) is 1. ..., and 2. ..." - why the use of plain English here as opposed to something more formal? Consider writing it formally instead, as it is a little hard to read, but perhaps more vertical space would have helped.
 
-> I have rearranged the figures to be on separate pages and I have reworded the conditions (please check I got them right). This is a bit tricky, since a little bit more space suddenly makes the fomulas be on a sepate page, this is as good as I managed. 
+SK> I have rearranged the figures to be on separate pages and I have reworded the conditions. 
 
 Section 3.3. The start of this section is not parallel with the other two subsections, as it gets into much more details about RPNs that in the parallel subsections 3.1 and 3.2 did because their background mateiral had already been covered. Indeed, there is a signifiant amount of related work here that really should have gone into the "Related Work" part of the paper, again to provide a clean and quick start of the subsection similar to the other two subsections.
 
-> I am not sure here. This is about RPNs (not Petri Nets in general), so it isn't really related work, it is the work. Perhaps we could move the fist paragraph to related work. The "Definition of RPNs" can't go there, and the other sections start with definition of CCB/bonding calculus as well. So I am unsure here?
 
-A&K> We have moved discussion of related work to 1.2.
+A&K> We have moved discussion of related work to Section 1.2.
 
 Section 4. This is not a conclusion in the usual sense. Normally a conclusion would sum up what we've read and provide perspective. There is far too much going on here. The last paragraph that introduces new information about software tools is nice but definitely does not have a concluding feel to it! I would strongly suggest to rename this section to "Analysis" or something similar and then add a new, short one-paragraph conclusion section that sums up the main results of the paper (rather than producing them, which is essentially what the current Section 4 is doing).
 
-> I have renamed that Results (if we have to do the "usual thing", then do the usual thing) and added a short conclusion. Please check. If you want another heading then results, feel free to change.
 
-A&K> We proposed "Evaluation" as an alternative - "Results" somewhat creates the expectation of something more specific.
+A&K> We propose to call the section "Evaluation".
 
 *** Minor typos/fixes
 
@@ -41,15 +37,15 @@ General:
 
 Nitpicking, but please consider to avoid using references as nouns. For example, try reading the text "The out-of-causal-order reversibility was first addressed in CCSK extended with controller processes in [28], and in the context of reversible event structures first in [27] and then in [26, 37]." aloud. The use of "[28]" is not ideal: contrast what you just read with "The out-of-causal-order reversibility was first addressed by Phillips et al. in CCSK extended with controller processes [28], and in the context of reversible..."
 
-> I've tried to catch these all. There are two left where changing it is tricky, since it really points to the reference.
+SK> I've tried to catch these all.
 
 Author names:
 
 Some author names include their Orcid IDs but not all, and the Orcid IDs take up a significant amound of visual space. Consider having Orcid IDs for all authors or none, and too use a less visually obtrusive display format see e.g. https://orcid.org/content/journal-article-display-guidelines
 
-> The \orcidID{} notation is part of the Springer template, and it will probably be translated into links automatically (see other lncs papers for comparison). In any case, we should not come up with an individual solution per paper. We have therefore left the ORCIDS as they are to be dealt with by the publisher.
+SK> The \orcidID{} notation is part of the Springer template, and it will probably be translated into links automatically (see other lncs papers for comparison). In any case, we should not come up with an individual solution per paper. We have therefore left the ORCIDS as they are to be dealt with by the publisher.
 
-A&K > We have added our Orcid IDs.
+A&K plus IU > We have added our Orcid IDs.
 
 Abstract:
 
@@ -57,7 +53,7 @@ Abstract:
 
 "This exercise demonstrates that the formalisms," -> "This exercise demonstrates that these formalisms,"
 
-> Changed, also changed everything else below except where there is a comment
+All> Changed, also changed everything else below. Additioanlly, there are some comments as well.
 
 Section 1:
 
@@ -74,8 +70,6 @@ The two paragraphs "Process calculi, originally designed" and "Another way to mo
 "from single molecules, to cells, to multicellular aggregations." -> "from single molecules, to cells, and to multicellular aggregations."
 
 "been used to describe different systems" -?-> "been used to describe different chemical systems" (would be more precise this way)
-
-> Anna, Kyriaki: Is this really chemical systems? It refers to petri nets, so please check.
 
 A&K> Fixed
 
@@ -97,7 +91,7 @@ Section 3.2:
 
 "used in Bonding Calculus" -> "used in the Bonding Calculus", similar corrections multiple places, in general do this in the text (but not the title): whenever you write "Bonding Calculus" you should have "the" in front (as you do in some places but not all).
 
-> I tried to find them all, sorry if I missed something.
+SK> I tried to find them all, sorry if I missed any.
 
 "Just like in BNGL": what is BNGL? Put a reference.
 
@@ -119,9 +113,7 @@ A&K> Actually we do not mean RPN as an initialism but as an abbreviation to be r
 
 "Note that in the sequel": what sequel, what do you mean here? Rewrite.
 
-> Anna, Kyriaki, I changed this to "the following", is that correct?
-
-A&K> We had also fixed independently to something close.
+A&K> We have fixed this.
 
 Section 4:
 
@@ -132,8 +124,6 @@ Section 4:
 The paragraph "In CCB, we can actually distinguish" directly continues the text from the previous paragraph, continue merging the two paragraphs to increase readability.
 
 The sentence "Reversing Petri Nets are Petri net structures" is too long, I can't read it. Rewrite.
-
-> Anna, kyriaki, please have a a look
 
 A&K> Fixed
 
