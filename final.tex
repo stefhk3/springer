@@ -177,21 +177,22 @@ of COST Action IC1405 on Reversible Computation - Extending Horizons of Computin
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Stefan Kuhn\orcidID{0000-0002-5990-4157}\inst{1}, Bogdan Aman\orcidID{0000-0001-7649-8181}\inst{2,3}, Gabriel Ciobanu\orcidID{0000-0002-8166-9456}\inst{2,3},  Anna Philippou\orcidID{0000-0002-1665-9913}\inst{4}, Kyriaki Psara\orcidID{0000-0002-6554-7950}\inst{4}, and  Irek Ulidowski\inst{5}}
+\author{Stefan Kuhn\orcidID{0000-0002-5990-4157}\inst{1}, Bogdan Aman\orcidID{0000-0001-7649-8181}\inst{2,3}, Gabriel Ciobanu\orcidID{0000-0002-8166-9456}\inst{2,3},  Anna Philippou\orcidID{0000-0002-1665-9913}\inst{4}, Kyriaki Psara\orcidID{0000-0002-6554-7950}\inst{4}, and 
+Irek Ulidowski\orcidID{0000-0002-3834-2036}\inst{5}}
 %
 \authorrunning{S. Kuhn et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
 \institute{School of Computer Science and Informatics, De Montfort University, Leicester, UK\\ \email{\scriptsize stefan.kuhn@dmu.ac.uk} \and
-Romanian Academy, Institute of Computer Science, Ia\c si\\
+Romanian Academy, Institute of Computer Science, Ia\c si, Rom\^ania\\
  \and
 A.I.Cuza University, Faculty of Computer Science, Ia\c si, Rom\^ania\\ 
  \email{\scriptsize \{bogdan.aman, gabriel\}@info.uaic.ro }
 \and
-Department of Computer Science, University of Cyprus \\ \email{\scriptsize \{annap,kpsara01\}@cs.ucy.ac.cy}  \and 
-Department of Informatics, University of Leicester\\ 
-\email{\scriptsize iu3@leicester.ac.uk} 
+Department of Computer Science, University of Cyprus, Nicosia, Cyprus \\ \email{\scriptsize \{annap,kpsara01\}@cs.ucy.ac.cy}  \and 
+School of Informatics, University of Leicester, Leicester, UK\\ 
+\email{\scriptsize iu3@le.ac.uk} 
 }
 %
 \maketitle              % typeset the header of the contribution
@@ -218,7 +219,7 @@ focused  on
 reaction rates by modelling and simulating networks of reactions, in order to
 analyse or even predict the common paths through the network.  Reversibility
 was not considered explicitly.  Later on
-reversibility  started  to  be  taken  into  account,  since  it  plays  a  crucial  role  in
+reversibility  started  to  be  taken  into  account,  since  it  plays  a  crucial  r\^ole  in
 many processes, typically by going back to a previous state in the system. 
 Two common types of reversibility 
 are backtracking and causally-consistent reversibility~\cite{danos2004ccsr,Irek2007,LaneseMS10}.
@@ -251,14 +252,16 @@ illustrating examples of the various types of reversibility we refer to~\cite{da
 reaction.
 
 Our case study was selected to be non-trivial, of manageable size, and to allow us to 
-exhibit the crucial features of the formalisms. It is a chemical reaction involving small molecules,
+exhibit the crucial features of the formalisms. It is a chemical reaction that involves small molecules,
 so it is different from biological reactions that involve proteins and other macromolecules. 
 %This could also mean that some aspects of reversibility are not clearly modelled since  too  much
 %detail is abstracted away. 
-Therefore,  new modelling techniques are needed in order to capture reversible behaviour 
-when studying this type of biological systems, %. In this chapter, however, we concentrate on chemical  reactions, 
-a domain that offers
-interesting examples of out-of-causal-order reversibility. %we  have studied chemical  reactions  when studying reversibility in the context of living systems. We have done this using techniques which have mostly been applied to higher-level biological systems. This is justified since chemical reactions involve various forms of reversibility and offer good case
+New modelling techniques may be needed in order to capture fully reversible behaviour of biological systems, however,
+in this chapter we concentrate on chemical  reactions, a domain that offers
+interesting examples of out-of-causal-order reversibility. 
+%we  have studied chemical  reactions  when studying reversibility in the context of living systems. 
+%We have done this using techniques which have mostly been applied to higher-level biological systems. 
+%This is justified since chemical reactions involve various forms of reversibility and offer good case
 %studies  for  the  modelling  of  reversibility. Specifically,  we  can  find  interesting
 %examples  of  the  out-of-causal  order  reversibility  in  many  chemical  reactions,
 %and can 
@@ -308,7 +311,7 @@ and produce resources, and are represented graphically in a similar fashion to t
 in question. %A PN model %, similarly to other formal models, 
 %can be decomposed in order to handle the overall complexity, and the abstraction level of a model 
 %can vary from single molecules, to cells, and to multicellular aggregations.
-Several specialized Petri net classes like qualitative, stochastic, continuous, or
+Several specialised Petri net classes like qualitative, stochastic, continuous, or
 hybrid Petri nets and their coloured counterparts have been used to describe different biochemical 
 systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
 
@@ -334,7 +337,7 @@ reversal by associating transitions with conditions~\cite{RC19}.
 %reversal, for example, changes in temperature. 
 
 
-\subsection{Paper organization} 
+\subsection{Paper organisation} 
 In the next section, we introduce the autoprotolysis of water 
 reaction, which will be modelled using our three formalisms. This is followed by a section 
 introducing the formalisms, their syntax and, informally, their operational semantics. We also 
@@ -393,7 +396,7 @@ electron movements when going from right to left. These are not given in line wi
 
 In this simple reaction, the forward and the reverse step consist of two steps each. The breaking of the old and the forming of the new bond occur simultaneously. This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. Furthermore, the reverse step can be done with a different atom to the one used during the forward step because each of the molecules are in a sense identical and in practice there does not exist a single ``reverse'' path corresponding to a forward one.%it is difficult to identify a  clear forward and reverse path. 
 
-It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative} or \emph{coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``role''. This explains why any proton can be transferred in the reverse reaction and not just the one that was 
+It should be noted that there are two types of bonding modelled here. Firstly, we have the initial bonds where two atoms contribute an electron each. Secondly, the \emph{dative} or \emph{coordinate bonds} are formed where both electrons come from one atom (an oxygen in this case). Both are \emph{covalent bonds}, and once formed they cannot be distinguished. Specifically, in the oxygen with three bonds all bonds are the same and no distinction can be made. If one of the bonds is broken by a deprotonation (as in the autoprotolysis of water) the two electrons are left behind and they form a lone pair. If the broken bond was not previously formed as a dative bond, the electrons changed their ``r\^ole''. This explains why any proton can be transferred in the reverse reaction and not just the one that was 
 involved in the forward path.
 
 \section{Formalisms for Reversible Chemical Reactions}
@@ -1081,7 +1084,7 @@ to model the autoprotolysis of water.
 %a variety of distributed systems other than biochemical reactions.
 %In particular, they have been used successfully for
 %the modelling of a transaction-processing system~\cite{RPNs}, and a novel %antenna selection  algorithm~\cite{RC19}.
-% The modeling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
+% The modelling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
 %The latter introduces a mechanism for controlling reversibility 
 %that may capture environmental or other conditions that determine a transition's
 %reversal, for example, changes in temperature. 
@@ -1127,7 +1130,7 @@ is defined as follows:
 }\end{definition}
 
 A reversing Petri net is built on the basis of a set of \emph{tokens} or \emph{bases}. These
-are organized in a set of token types $A$, where each token type is associated with a set of token instances.
+are organised in a set of token types $A$, where each token type is associated with a set of token instances.
 Token instances correspond to the basic entities that occur in a system and they may occur as 
 stand-alone elements but as computation proceeds they may also merge together to form \emph{bond 
 	instances}. 
@@ -1440,7 +1443,7 @@ However, this is not the case for RPNs since, on the one hand, a transition's co
 on the types of molecules
 that will participate in a transition firing or its reversal and, on the other hand, places impose a form of locality
 for molecules. For instance, in the autoprotolysis example, each place is the location of specific types of molecules,
-e.g., transition $t_3$ modeling the autoprotolysis reaction is only applied on water molecules and its reversal
+e.g., transition $t_3$ modelling the autoprotolysis reaction is only applied on water molecules and its reversal
 only on pairs of a hydronium and a hydroxite molecule, as required.
 
 There are a number of software tools  that can aid simulation and analysis for our formalisms. Regarding the Bonding Calculus, we can simulate various bonding descriptions by
@@ -1456,14 +1459,15 @@ manner using the transformation techniques discussed in~\cite{RPNtoCPN}. This al
 exploit tools such as CPNTools that support traditional models of Petri nets. 
 
 \section{Conclusion}
-We have presented the Calculus of Covalent Bonding (CCB), the Bonding Calculus, and Reversing
+We have presented the Calculus of Covalent Bonding, the Bonding Calculus, and Reversing
 Petri Nets as models of chemical reactions and reversible processes in general. We have shown
-that they can all model the out-of-causal-order reversibility present in such reactions. We have 
-also shown that the two process calculi allow some reactions which do not happen in reality. This is due to 
-the modelling abstracting away from some real-world properties. On the other hand, some 
-reactions are not possible in the process calculi models even though they can happen in reality. This is because 
-the modelling is not general enough. In future work, we plan to build on these formalisms and further apply
-them for modelling and reasoning about  reversible biochemical processes.
+that they can all model the out-of-causal-order reversibility present in such reactions. We have also noted 
+that the two process calculi allow some reactions which do not happen in reality. This is due to 
+the modelling that abstracts away from some real-world properties of chemical atoms and molecules. 
+%On the other hand, some reactions are not possible in the process calculi models even though they can happen in reality. 
+%This is because the modelling is not general enough. 
+In future work, we plan to develop these formalisms further and apply
+them to the modelling and reasoning about reversible biochemical reactions and processes.
 %We have also discussed software packages, which allow simulation  and analysis for these formalisms.
 
 \addcontentsline{toc}{chapter}{Bibliography}
