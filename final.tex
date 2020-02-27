@@ -192,16 +192,17 @@ A.I.Cuza University, Faculty of Computer Science, Ia\c si, Rom\^ania\\
 \and
 Department of Computer Science, University of Cyprus, Nicosia, Cyprus \\ \email{\scriptsize \{annap,kpsara01\}@cs.ucy.ac.cy}  \and 
 School of Informatics, University of Leicester, Leicester, UK\\ 
-\email{\scriptsize iu3@le.ac.uk} 
+\email{\scriptsize irek.ulidowski@leicester.ac.uk} 
 }
 %
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-In this chapter we give an overview of techniques for modelling and reasoning 
-about reversibility of systems, including out-of-causal-order reversibility, as this appears in chemical reactions. We consider the autoprotolysis of water reaction, and model it with the Calculus 
+In this chapter we give an overview of techniques for the modelling and reasoning 
+about reversibility of systems, including out-of-causal-order reversibility, as it 
+appears in chemical reactions. We consider the autoprotolysis of water reaction, and model it with the Calculus 
 of Covalent Bonding, the Bonding Calculus, and Reversing Petri Nets.
-This exercise demonstrates that these formalisms, developed for expressing advanced forms of 
+This exercise demonstrates that the formalisms, developed for expressing advanced forms of 
 reversibility, are able to model autoprotolysis of water very accurately. Characteristics and 
 expressiveness of the three formalisms are discussed and illustrated.
 
@@ -216,7 +217,7 @@ expressiveness of the three formalisms are discussed and illustrated.
 Biological reactions, pathways, and reaction networks have been extensively studied in the literature 
 using various  techniques,  including  process  calculi and Petri nets.  Initial research was mainly 
 focused  on
-reaction rates by modelling and simulating networks of reactions, in order to
+reaction rates by the modelling and simulating networks of reactions, in order to
 analyse or even predict the common paths through the network.  Reversibility
 was not considered explicitly.  Later on
 reversibility  started  to  be  taken  into  account,  since  it  plays  a  crucial  r\^ole  in
@@ -226,7 +227,7 @@ are backtracking and causally-consistent reversibility~\cite{danos2004ccsr,Irek2
 %
 Backtracking executes exactly the inverse order of the 
 forward execution, and causally-consistent reversibility allows undoing effects before causes, 
-but not necessarily in exact inverse order. 
+but not necessarily in the exact inverse order. 
 Beyond backtracking and causally-consistent reversibility, there is a more general form of 
 reversibility, known as out-of-causal-order reversibility~\cite{Irek2012}, 
 which makes it possible to get to states which cannot be reached by forward reactions alone.  Such sequences
@@ -245,10 +246,12 @@ This is a typical example of out-of-causal order reversibility since the bond be
 is undone before its effect, namely the bond from $A$ to $B$ (which is not undone at all). 
 %This is out-of-causal order reversibility, and it enables 
 %the formation of the new compound $AB$, which would not be possible otherwise. 
-The modelling of such reactions is the focus of this work. For motivation, formal definitions and
-illustrating examples of the various types of reversibility we refer to~\cite{danos2004ccsr,Irek2007,LaneseMS10,Irek2012}.
+The modelling of such reactions is the focus of this chapter. For further
+motivation, formal definitions and more illustrating examples of the various types of reversibility 
+we refer the reader to~\cite{danos2004ccsr,Irek2007,LaneseMS10,Irek2012}.
 
-\subsection{Contribution}  This chapter presents and compares three formalisms, the Calculus of Covalent Bonding (CCB) \cite{KUHN201818}, the Bonding Calculus \cite{NaCo18}, and Reversing Petri Nets~\cite{RPNs}, that have been developed during COST Action IC1405. These models are variations of existing formalisms and set out to study reversible computation by allowing systems to reverse at any time leading to previously visited states or even new states without the need of additional forward actions. The contribution of this chapter is a comparative overview of the three formalisms, a discussion of their expressiveness, and a demonstration of their use on a common case study, namely the autoprotolysis of water
+\subsection{Contribution}  This chapter presents and compares three formalisms, the Calculus of Covalent 
+Bonding (CCB) \cite{KU16,KUHN201818}, the Bonding Calculus \cite{NaCo18}, and Reversing Petri Nets~\cite{RPNs}, that have been developed during COST Action IC1405. These models are variations of existing formalisms and set out to study reversible computation by allowing systems to reverse at any time leading to previously visited states or even new states without the need of additional forward actions. The contribution of this chapter is a comparative overview of the three formalisms, a discussion of their expressiveness, and a demonstration of their use on a common case study, namely the autoprotolysis of water
 reaction.
 
 Our case study was selected to be non-trivial, of manageable size, and to allow us to 
@@ -277,24 +280,26 @@ compared to higher-level models.
 
 
 \subsection{Related Work} 
-Process calculi, originally designed for modelling sequential and 
+Process calculi, originally designed for the modelling sequential and 
 concurrent computation, have been applied to biochemical and biological systems. The main 
 instances  are the $\pi$-calculus \cite{Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. Another way to model biochemical reactions is with rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality}, and the BioNetGen Language (BNGL) \cite{pmid19399430}. 
 The formalisms $\kappa$ and BNGL can be used to model interactions between proteins, while this is not
 possible in BIOCHAM. BNGL allows the use of molecule sites having the same name, which is not allowed 
-in $\kappa$.
+in the $\kappa$-calculus.
 
 Most of the formalisms mentioned above do not explicitly represent reversibility. If an action is 
 the reverse of another action performed before, there is no explicit knowledge of that in the model. 
-Reversibility was added to process calculi in
+Reversibility was added explicitly to process calculi in
 RCCS \cite{danos2004ccsr}, CCSK \cite{Irek2007}, and reversible 
 $\pi$ \cite{Lanese_controllingreversibility,Lanese_controlled}. CCSK and RCCS are based on the Calculus of Communicating Systems (CCS) \cite{Milner1980}. They extend CCS by keeping track of past actions 
 and enabling an undo of those. So a reverse action is the reverse execution of a forward action.
 %, which is not the case in other calculi. 
 These calculi support backtracking and causally-consistent reversibility. 
-Out-of-causal-order reversibility was first addressed in CCSK extended with controller processes~\cite{Irek2012}, and in the context of reversible event structures~\cite{Irek2013,irekconcur2013,irekNGC2018}. CCB~\cite{KUHN201818} allows all types of reversibility in the context of chemical reactions and other settings.
-%that we present here enables the modelling of 
-%out-of-causal-order reversibility as well. %In biological and chemical systems such seemingly out-of-causal-order executions are commonly observed. Since CCB models chemical reactions closely, it can generate such behaviour.
+Out-of-causal-order reversibility was first addressed in CCSK extended with controller 
+processes~\cite{Irek2012}, and in the context of reversible event 
+structures~\cite{Irek2013,irekconcur2013,irekNGC2018}. 
+CCB~\cite{KUHN201818} allows all types of reversibility in the context of chemical reactions and in
+other settings.
 
 Petri nets (PNs)~\cite{PNs} are another formalism that has been widely used to model and reason
 about a wide range of applications featuring concurrency and distribution. They are a graphical 
@@ -311,8 +316,8 @@ and produce resources, and are represented graphically in a similar fashion to t
 in question. %A PN model %, similarly to other formal models, 
 %can be decomposed in order to handle the overall complexity, and the abstraction level of a model 
 %can vary from single molecules, to cells, and to multicellular aggregations.
-Several specialised Petri net classes like qualitative, stochastic, continuous, or
-hybrid Petri nets and their coloured counterparts have been used to describe different biochemical 
+Several specialised Petri net classes, such as qualitative, stochastic, continuous, or
+hybrid Petri nets and their coloured counterparts, have been used to describe different biochemical 
 systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
 
 
@@ -323,8 +328,9 @@ one for the forward and one for the reverse version of a reaction. This
 may result in expanded models and less natural and/or less accurate
 models of  reversible behaviour. It is also in contrast to the notion of reversible computation, 
 where the intention is not to return to a state via arbitrary execution but to reverse the effect of already executed transitions. 
-For this reason, the formalism of reversing Petri nets~\cite{RPNs} has been proposed to allow systems to reverse 
-already executed transitions leading to previously visited states or even new ones without the need of additional 
+For this reason, the formalism of reversing Petri nets~\cite{RPNs} has been proposed to allow 
+systems to reverse already executed transitions leading to previously visited states 
+or even new ones without the need of additional 
 forward actions. Reversing Petri nets 
 have also been extended with a mechanism for controlling transition
 reversal by associating transitions with conditions~\cite{RC19}.
@@ -341,8 +347,8 @@ reversal by associating transitions with conditions~\cite{RC19}.
 In the next section, we introduce the autoprotolysis of water 
 reaction, which will be modelled using our three formalisms. This is followed by a section 
 introducing the formalisms, their syntax and, informally, their operational semantics. We also 
-give three models of the autoprotolysis of water using the formalisms. The conclusion contains 
-a comparison of the formalisms and the models of our example reaction, and we also 
+give three models of the autoprotolysis of water using the formalisms. Finally, in Evaluation,
+we compare the formalisms and the models of our example reaction, and we also 
 briefly discuss software support for the three formalisms.
 
 \section{Autoprotolysis of Water}
@@ -1073,7 +1079,7 @@ The obtained system contains again two water molecules of water.
 
 \subsection{Reversing Petri Nets}
 In this subsection we present Reversing Petri Nets~\cite{RPNs} (RPNs, pronounced as `reversing Petri nets'), an extension of Petri nets
-developed for modelling reversing computations, and we employ the formalism
+developed for the modelling reversing computations, and we employ the formalism
 to model the autoprotolysis of water. 
 
 \subsubsection{Definition of RPNs}
@@ -1422,7 +1428,22 @@ atom tokens to illustrate the relevant charges.
 The three presented formalisms can model our example fairly well but, as expected, 
 there are some differences. In order to evaluate each formalism, we consider as first criterion if all 
 chemically valid interactions between the compounds of the reaction can be represented well in 
-our formalisms. CCB shows the linked forming and breaking of bonds. This is due to it being quite close to the chemical concepts and can therefore model this reaction faithfully. RPNs can also express the concerted reaction,
+our formalisms. 
+CCB shows the linked forming and breaking of bonds.
+%
+% what is linked forming and breaking of bonds? Have we defined/explained it before?
+%
+This is due to it being quite close to the chemical concepts and can therefore model this reaction faithfully. 
+%
+% CCB being close to the chemical concepts? Please rephrase
+%
+RPNs can also express the concerted reaction,
+%
+% you mention concerted reaction, why not concerted action as said directly above? Is is the same as
+% "the linked forming and breaking of bonds"?
+%
+% Please rephrase these sentences.
+%
 since a transition enables the simultaneous creation and destruction of bonds. 
 In the Bonding Calculus, this link is not expressed. Each of the formalisms 
 can perform the forward reaction using any of the hydrogens involved. CCB and RPNs can perform 
@@ -1430,8 +1451,8 @@ the reverse reaction by transferring arbitrary hydrogens, whereas the Bonding Ca
 reaction permits only the transfer of exactly those hydrogens that were used in the forward reaction. 
 All models presented use subscripts and enable the tracking of atoms.
 
-The other criterion for assessing the suitability of our formalisms for this type of reaction is 
-to ask if they enable in the produced model any transitions which actually do not occur in reality. 
+The other criterion for assessing the suitability of our formalisms for the modelling of chemical reactions
+is to ask if they enable in the produced model any transitions that actually do not occur in reality. 
 Each formalism does not permit a $H_3O^+$ molecule to be formed directly. CCB allows 
 one reaction which is not realistic: 
 If there are many water molecules and therefore several hydroxide and water molecules at the same time, 
@@ -1463,8 +1484,8 @@ We have presented the Calculus of Covalent Bonding, the Bonding Calculus, and Re
 Petri Nets as models of chemical reactions and reversible processes in general. We have shown
 that they can all model the out-of-causal-order reversibility present in such reactions. We have also noted 
 that the two process calculi allow few reactions which do not happen in reality. This is due to 
-the modelling that abstracts away from some chemical properties of atoms and molecules, for example spacial 
-arrangement and distance between molecules. 
+the modelling that abstracts away from some chemical properties of atoms and molecules such as, for example,
+spacial arrangement and distance between molecules. 
 %On the other hand, some reactions are not possible in the process calculi models even though they can happen in reality. 
 %This is because the modelling is not general enough. 
 In future work, we plan to develop these formalisms further and apply
