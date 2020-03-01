@@ -206,7 +206,7 @@ This exercise demonstrates that the formalisms, developed for expressing advance
 reversibility, are able to model autoprotolysis of water very accurately. Characteristics and 
 expressiveness of the three formalisms are discussed and illustrated.
 
-\keywords{ Reversible Computation \and Reaction Modelling %\and Process Calculi 
+\keywords{ Reversible Computation \and Reaction Modelling
 \and Calculus of Covalent Bonding \and Bonding Calculus \and Reversing Petri Nets }
 \end{abstract}
 %
@@ -244,8 +244,6 @@ $$ A + B + C \rightarrow A+ BC \rightarrow ABC \rightarrow AB + C$$
 \noindent
 This is a typical example of out-of-causal order reversibility since the bond between $B$ and $C$
 is undone before its effect, namely the bond from $A$ to $B$ (which is not undone at all). 
-%This is out-of-causal order reversibility, and it enables 
-%the formation of the new compound $AB$, which would not be possible otherwise. 
 The modelling of such reactions is the focus of this chapter. For further
 motivation, formal definitions and more illustrating examples of the various types of reversibility 
 we refer the reader to~\cite{danos2004ccsr,Irek2007,LaneseMS10,Irek2012}.
@@ -257,30 +255,20 @@ reaction.
 Our case study was selected to be non-trivial, of manageable size, and to allow us to 
 exhibit the crucial features of the formalisms. It is a chemical reaction that involves small molecules,
 so it is different from biological reactions that involve proteins and other macromolecules. 
-%This could also mean that some aspects of reversibility are not clearly modelled since  too  much
-%detail is abstracted away. 
 New modelling techniques may be needed in order to capture fully reversible behaviour of biological systems, however,
 in this chapter we concentrate on chemical  reactions, a domain that offers
 interesting examples of out-of-causal-order reversibility. 
-%we  have studied chemical  reactions  when studying reversibility in the context of living systems. 
-%We have done this using techniques which have mostly been applied to higher-level biological systems. 
-%This is justified since chemical reactions involve various forms of reversibility and offer good case
-%studies  for  the  modelling  of  reversibility. Specifically,  we  can  find  interesting
-%examples  of  the  out-of-causal  order  reversibility  in  many  chemical  reactions,
-%and can 
 
 The discussed formalisms enable us to model the intermediate steps of chemical reactions where 
 some bonds are only ``helping'' to achieve the overall aim of the reaction:  specifically, they 
 are only formed to be
 broken before the end of the reactions.  Thus, the allowed level of detail 
-%we have on
-%chemical  reactions  makes more obvious the use of  reversibility compared to higher level models.  In many cases we have the additional benefit of good
 makes a more accurate depiction of the reversibility possible, and allows a more thorough understanding of the underlying reaction mechanisms 
 compared to higher-level models.
 
 
 \subsection{Related Work} 
-Process calculi, originally designed for the modelling sequential and 
+Process calculi, originally designed for the modelling of sequential and 
 concurrent computation, have been applied to biochemical and biological systems. The main 
 instances  are the $\pi$-calculus \cite{Regev2004}, BioAmbients \cite{RegevBioambients}, the stochastic $\pi$-calculus \cite{PriamiStochasticPi}, beta binders~\cite{betabinders} and bioPEPA \cite{CiocchettaBiopepa}. Another way to model biochemical reactions is with rule-based formalisms such as BIOCHAM \cite{biocham}, the $\kappa$-calculus  \cite{danoscausality}, and the BioNetGen Language (BNGL) \cite{pmid19399430}. 
 The formalisms $\kappa$ and BNGL can be used to model interactions between proteins, while this is not
@@ -293,7 +281,6 @@ Reversibility was added explicitly to process calculi in
 RCCS \cite{danos2004ccsr}, CCSK \cite{Irek2007}, and reversible 
 $\pi$ \cite{Lanese_controllingreversibility,Lanese_controlled}. CCSK and RCCS are based on the Calculus of Communicating Systems (CCS) \cite{Milner1980}. They extend CCS by keeping track of past actions 
 and enabling an undo of those. So a reverse action is the reverse execution of a forward action.
-%, which is not the case in other calculi. 
 These calculi support backtracking and causally-consistent reversibility. 
 Out-of-causal-order reversibility was first addressed in CCSK extended with controller 
 processes~\cite{Irek2012}, and in the context of reversible event 
@@ -313,9 +300,7 @@ processes~\cite{PNbiology,DBLP:journals/bib/Chaouiya07,DBLP:journals/nc/BaldanCM
 Indeed, PNs seem to be a natural framework for representing biochemical systems as they constitute a set of interdependent
 transitions/reactions which consume 
 and produce resources, and are represented graphically in a similar fashion to the systems
-in question. %A PN model %, similarly to other formal models, 
-%can be decomposed in order to handle the overall complexity, and the abstraction level of a model 
-%can vary from single molecules, to cells, and to multicellular aggregations.
+in question.
 Several specialised Petri net classes, such as qualitative, stochastic, continuous, or
 hybrid Petri nets and their coloured counterparts, have been used to describe different biochemical 
 systems~\cite{DBLP:journals/jamia/PelegRA05,DBLP:journals/isb/HofestadtT98,DBLP:journals/fuin/Popova-ZeugmannHK05,DBLP:journals/nc/MatsunoNM11,DBLP:journals/isb/VossHK03}.
@@ -334,22 +319,14 @@ or even new ones without the need of additional
 forward actions. Reversing Petri nets 
 have also been extended with a mechanism for controlling transition
 reversal by associating transitions with conditions~\cite{RC19}.
-%RPNs are a general-purpose model and their expressiveness offers the ability to model 
-%a variety of distributed systems other than biochemical reactions.
-%In particular, they have been used successfully for
-%the modelling of a transaction-processing system~\cite{RPNs}, and a novel antenna selection  algorithm~\cite{RC19}.
-%The latter introduces a mechanism for controlling reversibility 
-%that may capture environmental or other conditions that determine a transition's
-%reversal, for example, changes in temperature. 
 
 
 \subsection{Paper organisation} 
 In the next section, we introduce the autoprotolysis of water 
 reaction, which will be modelled using our three formalisms. This is followed by a section 
 introducing the formalisms, their syntax and, informally, their operational semantics. We also 
-give three models of the autoprotolysis of water using the formalisms. Finally, in Evaluation,
-we compare the formalisms and the models of our example reaction, and we also 
-briefly discuss software support for the three formalisms.
+give three models of the autoprotolysis of water using the formalisms. In Section~\ref{sec:evaluation}, we compare the formalisms and the models of our example reaction, and we also 
+briefly discuss software support for the three formalisms. Finally, Section~\ref{sec:conclusion} concludes the paper.
 
 \section{Autoprotolysis of Water}
 
@@ -370,7 +347,6 @@ interesting aspects to be represented.
 \vspace{-2ex}\end{figure}
 
 To model the reaction we need to understand why it takes place and what causes it.
-% what it is that makes it happen.
 The main reason is that the oxygen in the water molecule is \emph{nucleophilic}, meaning it has the tendency to bond to another atomic nucleus, which would serve as an \emph{electrophile}. This is because oxygen has a high 
 electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell, which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pairs} of two electrons each, which can form new bonds (lone pairs are shown in Fig.~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
 to other atomic nuclei by forming bonds from its lone pairs. Since oxygen attracts electrons, the hydrogen atoms in water
@@ -379,7 +355,6 @@ charge.
 
 The reaction starts when an oxygen in one water molecule is attracted by a hydrogen in another 
 water molecule due to their opposite charges. This results in a \emph{hydrogen bond}. 
-%Due to the nucleophilicity of the oxygen, a bond can form to the hydrogen. 
 This bond is formed out of 
 the electrons of one of the lone pairs of the oxygen. The large curved arrow in Fig.~\ref{fig:autoprotolysis} indicates the movements of the electrons. Since a hydrogen atom cannot have more 
 than one bond, 
@@ -395,7 +370,6 @@ Note that the reaction is reversible: the oxygen that lost a hydrogen can
 pull back one of the hydrogens from the other molecule, the  $\mathrm{H_3O^+}$ molecule. This is the case since the negatively 
 charged oxygen is a strong nucleophile and the hydrogens in the $\mathrm{H_3O^+}$ molecule are 
 all positively charged. Thus, any of~the hydrogens 
-%(not just the one which moved in the first instance) 
 can be removed, making both oxygens formally uncharged, and restoring the two water 
 molecules. In Fig.~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are corresponding
 electron movements when going from right to left. These are not given in line with usual conventions, but can be~inferred.
@@ -436,7 +410,6 @@ which are ranged over by $t,t'$. The empty sequence is denoted by $\epsilon$. We
 We shall also use two sets of auxiliary action labels, namely the set $(\mA) =\{ (a)\ \mid a\in\mA\}$, and its product with the set of keys, namely $(\mA)\Keys$. These labels will be used in the auxiliary rules when defining
 the semantics of CCB. They denote the execution of a weak action, which makes it possible in the SOS rules to force breaking of a bond for those actions only.
 
-%We now define the Calculus of Covalent Bonding. 
 The syntax of CCB is given below where $P$ is a process term:
 
 $$P ::=  S \ \bigm\lvert \ S\bydef P \ \bigm\lvert \ (s;b).P \ \bigm\lvert \ P\lvert Q \ \bigm\lvert \ P\restrict L $$
@@ -492,12 +465,6 @@ which could be executed.
 {P \xrightarrow{a[k]} P' \quad \fresh{k}{t}}
 {(t;b).P \xrightarrow{a[k]} (t;b).P'}
 \\[15pt]
-%\rom{act3}\ Dec 17
-%\Rule
-%{\std{P} \quad \fresh{k}{t,t'}}
-%{(t,b,t';b').P \xrightarrow{b[k]}(t,b[k],t';b').P}
-%\qquad &
-%\\[15pt]
 \rulename{par}\
 \Rule
 {P \xrightarrow{a[k]} P'\quad \fresh{k}{Q}}
@@ -538,25 +505,12 @@ of actions and past actions and $t$ is a sequence of purely past actions.} \labe
 }
 {(s,a[k],s';b).P \xrightarrow{\underline{a}[k]}(s,a,s';b).P}
 \quad &
-%
-% b was previously beta. Since we must apply prom rewrite before we apply any SOS rule, we do not 
-% need a rule with a beta.
-%
-% referees suggested to remove fsh predicates from both act rules. They were there for symmetry reason 
-% with the forward rules but are not used in the reverse.
-%
 \rulename{rev act2}\
 \Rule
 {P \xrightarrow{\underline{a}[k]} P' %\quad \fresh{k}{t}
 }
 {(t;b).P \xrightarrow{\underline{a}[k]} (t;b).P'}
 \\[15pt]
-% Dec 17
-%\rom{rev act3}\
-%\Rule
-%{\std{P}  \quad \fresh{k}{t,t'} }
-%{(t,b[k],t';b').P \xrightarrow{\underline{b}[k]} (t,b,t';b').P'}
-%& \\[25pt]
 \rulename{rev par}\
 \Rule
 {P \xrightarrow{\underline{a}[k]} P'\quad \fresh{k}{Q}}
@@ -593,13 +547,9 @@ The rule \rulename{concert} defines when a pair of concerted actions
 takes place. This enables the linking of forming and breaking of bonds, and therefore a degree 
 of control over 
 the reversing of actions. The modelling in the next section will give examples of the application. 
-%We also have two auxiliary rules \rulename{aux1} and \rulename{aux2} which 
-%define only an auxiliary transition relation needed in the \rulename{concert} rule. The auxiliary rules are only applicable if a weak action is beyond the semicolon, whereas a weak action in the simple prefix is dealt with by standard rules and can therefore not become part of a concerted action. 
 Note that the \rulename{concert} rule uses \emph{lookahead}~\cite{Uli92}. Lookahead is a property 
 of SOS rules, where a variable appears both on the right hand side and on the left hand side of 
 a transition in the premises. for example $P'$ and $Q'$ in \rulename{concert}. 
-%Also note that transitions in \rulename{aux1} and \rulename{aux2} use the auxiliary labels $(b)[k]$ 
-%for all $b \in \mWA$ and $k \in \Keys$. 
 The rule \rulename{concert par} requires that $k$ is fresh in $Q$,
 correspondingly as in \rulename{par}. Moreover, we need to ensure that when we reverse $h$ with the key $l$
 in $P$ we do not leave out any actions with the key $l$ in $Q$ which make up a multiaction 
@@ -612,7 +562,6 @@ in the premises of \rulename{concert act}.
 %
 Overall, the transitions in Figures~\ref{fig:fsos}--\ref{fig:csos} are labelled with $a[k] \in \mAK$, or with 
 $\underline{c}[l] \in \umAK$, or with concerted actions $(a[k], \underline{c}[l])$.
-%\} \in \mathcal{C}$.
 
 \begin{figure}
 \vspace{-1ex}\[
@@ -629,7 +578,7 @@ $\underline{c}[l] \in \umAK$, or with concerted actions $(a[k], \underline{c}[l]
 \rulename{concert}\ 
 \Rule
 {P\xrightarrow{(b)[k]}P' \quad P'\xrightarrow{\underline{a}[l]}P'' \qquad Q\xrightarrow{\alpha[k]}Q' 
-  \quad Q'\xrightarrow{\underline{d}[l]}Q''% %\quad \fresh{k}{Q} 
+  \quad Q'\xrightarrow{\underline{d}[l]}Q''
  }
 {P \paral Q\xrightarrow{\{e[k],\underline{f}[l]\}} P'' \paral Q''} (*)\\[15pt]
 \rulename{concert act}\
@@ -693,8 +642,6 @@ $p$ and $n$ are weak actions.
 $$\begin{array}{lllllll}
 H & \bydef & (h;p).H' & \quad & O & \bydef & (o,o,n).O'
 \end{array}$$
-%We use the general prefixing construct $(s;b).P$ explained above, where $O'$ is a simple 
-%prefix with $n$ being a weak action. The weak action in the sequence, as shown later, is important for rewriting~operations.  
 
 The synchronisation function $\gamma$ is as follows:
 
@@ -731,13 +678,12 @@ Following a general principle in process calculi in the style of CCB we can move
 \end{flalign*}
 %
 Note the $\underline{h_i}$, $\underline{o_j}$, and $\underline{n}$ are not restricted:  this allows us to break bonds via concerted actions involving these actions. We will see an example of this shortly.
-We now leave out the restrictions to improve readability. % in the following description.
+We now leave out the restrictions to improve readability.
 
 Actions $n$ in $O_1$ and $p$ in $H_3$ combine (we use the new key $5$), representing a transfer of a proton from one atom 
 of oxygen ($O_2$ in our model) to another one ($O_1$ in our model). As a hydrogen atom consists of a proton and an electron, and the electron stays in such a transfer, it can either be called a proton transfer or the transfer of a (positively charged) hydrogen atom. We perform the transfer of $H_3$ from $O_2$ to $O_1$. The creation of the bond with key $5$ from $O_1$ to $H_3$ forces a break of the bond with key $3$ (between $h_3$ and
 $o_3$) due to the property~of the operator $(s;b).P$ discussed earlier. These two reactions happen 
 almost simultaneously so we represent them as a pair of \emph{concerted actions}. 
-%In line with the convention in process calculi, where the action performed is written above the transition arrow, we write a pair of reactions above the transition arrow, to express the concerted actions. We enclose them in $\{\}$ to mark concerted actions:
 \begin{flalign*}
 & (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1 \paral 
 (h_3[3];p).H'_3 &&\\
@@ -752,7 +698,6 @@ There are weak bonds between $n$ and $p$ (denoted by key $5$) and \emph{strong} 
 all appropriate $i,j$. Since $H_3$ is weakly bonded to $O_1$ and its strong capability 
 $h_3$ has become available, the bond $5$ gets promoted to the stronger bond, releasing 
 the capability $p$ of $H_3$. We represent this change as a rewrite 
-%denoted by $\Rightarrow$ (which is not a transition) 
 and we obtain the following process:
 \begin{flalign*}
 &( (h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n\boldsymbol{[5]}).O'_1 \paral 
@@ -783,7 +728,6 @@ We show this by again transferring $H_3$. We then execute promotion again:
 \end{flalign*}
 %
 This corresponds to the original process.
-%, which we started with, after moving the restrictions to the outside. Remember that we left out the restrictions only to improve readability. If we re-add them we get:
 Putting back restrictions we obtain 
 %
 \begin{flalign*}
@@ -817,7 +761,6 @@ molecules $a$ and $b$ is denoted by $\{a-^x b\}$.
 
 \begin{figure}
 \vspace{-2ex}\centering
-%\vspace{-3ex}
 \bgroup
 \def\arraystretch{1.3}
 \begin{tabular}{c@{\hspace{2ex}}lll@{\hspace{2ex}}l}
@@ -850,7 +793,6 @@ System & $S$ & $::=$ & $ P \; ||\; L$ . \\
 \egroup
 \vspace{-2ex}\caption{Syntax of the Bonding Calculus}\label{table:syntax}
 \vspace{-2ex}\end{figure}
-%\vspace{-3ex}
 
 A bond prefix $\overline{x}(b)$ is used to indicate the availability of 
 a molecule with name~$b$ to create a new bond with name $x$, while an unbond 
@@ -916,9 +858,7 @@ the same molecules; more details about this restriction are given in
 the example below.
 
 \begin{figure}[t]
-%\vspace{-4ex}
 \begin{center}
-%\vspace{-5ex}
 \begin{tabular}{c}
 \vspace{1ex}
 {\sf (CREATE1)} $\dfrac{P=\overline{x}(b).P'+P'' \quad Q= \overline{x}(a).Q'+Q''}{(P\mid Q)\ || \ L \xrightarrow{} (P' \mid Q') \ ||\ L \uplus \{a-^x b\}}$\\[10pt]
@@ -1024,8 +964,6 @@ that will interact in the next step, and bold the actions to be executed):
 \MolHy_0(H_4) + {\bf \overline{h^+}(H_4)}.\MolHy_2(H_4)$
 \end{center}
 
-%\centerline{$\mid \underline{c}(H_4).\MolHy_0(H_4) + {\bf \overline{h^+}(H_4)}.\MolHy_2(H_4)$}
-
 \begin{center}$\mid\mid \{O_1 -^c H_1, O_1 -^c H_2, O_2 -^c H_3, O_2 -^c H_4\}$
 \end{center}
 
@@ -1084,26 +1022,6 @@ to model the autoprotolysis of water.
 
 \subsubsection{Definition of RPNs}
 
-%RPNs have been extended with a mechanism for controlling transition
-%reversal by associating transitions with conditions~\cite{RC19}.
-%Reversing Petri Nets are a general-purpose model and their expressiveness offers %the ability to model 
-%a variety of distributed systems other than biochemical reactions.
-%In particular, they have been used successfully for
-%the modelling of a transaction-processing system~\cite{RPNs}, and a novel %antenna selection  algorithm~\cite{RC19}.
-% The modelling of the autoprotolysis of water is very close to reality with the exception of being able to reverse any transition at any point during the computation. This has been managed in~\cite{RC19}, an extension of RPNs, that introduces
-%The latter introduces a mechanism for controlling reversibility 
-%that may capture environmental or other conditions that determine a transition's
-%reversal, for example, changes in temperature. 
-%In future work, we plan to exploit recent work that establishes a translation of a subclass of RPNs to coloured Petri nets~\cite{RPNtoCPN} towards the development of a methodology for the analysis of Reversing Petri Nets exploiting available tools.
-%
-%RPNs~\cite{RPNs}  are the first proposal for capturing reversible behaviour directly in the Petri net model
-%and they support reversible computation in all its forms
-%(backtracking, causally-consistent reversibility and out-of-causal-order reversibility).
-%RPNs  are Petri net structures where tokens are distinguished from each 
-%other by an identity/type and are persistent. Furthermore,
-%during transitions tokens can be bonded together, with  the creation of bonds
-%considered to be the effect of a transition, whereas their destruction is the effect of
-%the transition's reversal. 
 We consider
 an extension of reversing Petri nets suitable for describing chemical reactions by allowing multiple tokens of the same type as well as the possibility for 
 transitions to break bonds. Thus, a transition may simultaneously create
@@ -1153,7 +1071,6 @@ circles, transitions by boxes, and bond instances by lines between token instanc
 Before we recall the semantics of RPNs we need to introduce some notation. Note that in 
 what follows we omit the discussion of negative tokens and negative bonds as they are not relevant to our
 case study.  
-%We also restrict  our attention to causal reversibility which allows some simplifications of the exposition and, in particular, of the history function defined below.
 We write 
 $\circ t =   \{x\in P\mid  F(x,t)\neq \emptyset\}$ and  
 $ t\circ = \{x\in P\mid F(t,x)\neq \emptyset\}$
@@ -1233,7 +1150,7 @@ the selected token instances, along with their connected components,
 are relocated to the outgoing places of the transition as specified
 by the outgoing arcs, with bonds created and destructed accordingly. 
 Furthermore,
-the history of the executed transition is increased by one.% Specifically, we define:
+the history of the executed transition is increased by one.
 \begin{definition}{\rm \label{forward}
 		Given a \RPN $(P,T,  A, A_V, B, F)$, a state $\langle M, H\rangle$, and an
 		enabling assignment $U$, we write $\state{M}{H}
@@ -1322,9 +1239,7 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 
 \begin{figure}
         \centering
-        %\subfigure{\includegraphics[width=6.3cm]{model.png}}
         \subfigure{\includegraphics[width=.5cm]{arrowt1.png}}
-        %\subfigure{\includegraphics[width=6.6cm]{aftert12.png}}
         \subfigure{\includegraphics[width=.5cm]{arrowt2.png}}
         \subfigure{\includegraphics[width=10cm]{aftert22.png}}\\\vspace{-0.25cm}
         \subfigure{\includegraphics[width=.5cm]{arrowt3.png}}
@@ -1381,6 +1296,7 @@ W(h_2)=H_3,W(h_3)=H_2,W(h_4)=H_4$.
 
 
 \section{Evaluation}
+\label{sec:evaluation}
 
 We have presented three formalisms which can be used to model chemical reactions. 
 CCB is a reversible version of ACP that employs communication keys to record executed actions.
@@ -1426,30 +1342,11 @@ atom tokens to illustrate the relevant charges.
 
 
 The three formalisms presented can model our example fairly well but, as expected, 
-% I changed this from "presented formalisms", sounds more idiomatic, I think.
 there are some differences. In order to evaluate each formalism, we consider as first criterion if all 
 chemically valid interactions between the compounds of the reaction can be represented well in 
 our formalisms. 
 CCB shows the linked forming and breaking of bonds.
-%
-% what is linked forming and breaking of bonds? Have we defined/explained it before?
-%
-% on p 5 we say "The forming of the new bond and the breaking of the old bond are concerted,..." that's the explanation for me.
-%
-%
-% CCB being close to the chemical concepts? Please rephrase
-%
-% I would leave it out, doesn't really contribute.
-%
 RPNs can also express these concerted actions,
-%
-% you mention concerted reaction, why not concerted action as said directly above? Is is the same as
-% "the linked forming and breaking of bonds"?
-%
-% Please rephrase these sentences.
-%
-% It is. I would make this "these concerted actions", as used before and with these pointing to the previous sentence. "linked forming and breaking of bonds" would be possible, but it would be a bit repetitive. Change if you thinki it's better.
-%
 since a transition enables the simultaneous creation and destruction of bonds. 
 In the Bonding Calculus, this link is not expressed. Each of the formalisms 
 can perform the forward reaction using any of the hydrogens involved. CCB and RPNs can perform 
@@ -1471,36 +1368,224 @@ on the types of molecules
 that will participate in a transition firing or its reversal and, on the other hand, places impose a form of locality
 for molecules. For instance, in the autoprotolysis example, each place is the location of specific types of molecules,
 e.g., transition $t_3$ modelling the autoprotolysis reaction is only applied on water molecules and its reversal
-only on pairs of a hydronium and a hydroxite molecule, as required.
+only on pairs of a hydronium and a hydroxide molecule, as required.
 
 There are a number of software tools  that can aid simulation and analysis for our formalisms. Regarding the Bonding Calculus, we can simulate various bonding descriptions by
 using an existing software platform called UPPAAL (as shown in [1]). For CCB, there 
 is a simulation tool presented in \cite{merevcomp2018}. It allows a much closer form 
 of representation of chemical notation than that possible with a typical programming language.
-	%As in other formalisms, Petri nets are also associated with a wide range of analysis techniques and the associated tool support, such as determining states of equilibrium, conflicting evolutions, and reachable states.
 Reversing Petri nets have been shown to be closely related to Coloured Petri Nets, as a subset 
 of the former model has been encoded into the latter~\cite{RPNtoCPN}. 
-	 %As future goal we plan on implementing
 Thus, an algorithmic translation can be implemented that transforms RPNs to CPNs in an automated
 manner using the transformation techniques discussed in~\cite{RPNtoCPN}. This allows RPNs to 
 exploit tools such as CPNTools that support traditional models of Petri nets. 
 
 \section{Conclusion}
+\label{sec:conclusion}
 We have presented the Calculus of Covalent Bonding, the Bonding Calculus, and Reversing
 Petri Nets as models of chemical reactions and reversible processes in general. We have shown
 that they can all model the out-of-causal-order reversibility present in such reactions. We have also noted 
 that the two process calculi allow few reactions which do not happen in reality. This is due to 
 the modelling that abstracts away from some chemical properties of atoms and molecules such as, for example,
 spacial arrangement and distance between molecules. 
-%On the other hand, some reactions are not possible in the process calculi models even though they can happen in reality. 
-%This is because the modelling is not general enough. 
 In future work, we plan to develop these formalisms further and apply
 them to the modelling and reasoning about reversible biochemical reactions and processes.
-%We have also discussed software packages, which allow simulation  and analysis for these formalisms.
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
-\bibliography{springer}{}
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{NaCo18}
+Aman, B., Ciobanu, G.: Bonding calculus. Natural Computing  \textbf{17}(4),
+  823--832 (2018)
+
+\bibitem{DBLP:journals/nc/BaldanCMS10}
+Baldan, P., Cocco, N., Marin, A., Simeoni, M.: Petri nets for modelling
+  metabolic pathways: a survey. Natural Computing  \textbf{9}(4),  955--989
+  (2010)
+
+\bibitem{RPNtoCPN}
+Barylska, K., Gogoli\'{n}ska, A., Mikulski, {\L}., Philippou, A., Pi{\c
+  a}tkowski, M., Psara, K.: Reversing computations modelled by coloured {P}etri
+  nets. In: Proceedings of ATAED 2018. {CEUR} Workshop Proceedings, vol.~2115,
+  pp. 91--111 (2018)
+
+\bibitem{PNbiology}
+Bl{\"a}tke, M.A., Heiner, M., Marwan, W.: Petri nets in systems biology.
+  Technical Report, Otto-von-Guericke University Magdeburg  (2011)
+
+\bibitem{DBLP:journals/bib/Chaouiya07}
+Chaouiya, C.: Petri net modelling of biological networks. Briefings in
+  Bioinformatics  \textbf{8}(4),  210--219 (2007)
+
+\bibitem{CiocchettaBiopepa}
+Ciocchetta, F., Hillston, J.: Bio-{PEPA}: A framework for the modelling and
+  analysis of biological systems. Theoretical Computer Science
+  \textbf{410}(33-34),  3065--3084 (2009)
+
+\bibitem{danoscausality}
+Danos, V., Feret, J., Fontana, W., Harmer, R., Krivine, J.: Rule-based
+  modelling of cellular signalling. In: Caires, L., Vasconcelos, V.T. (eds.)
+  CONCUR 2007 - Concurrency Theory, Lecture Notes in Computer Science,
+  vol.~4703, pp. 17--41. Springer (2007)
+
+\bibitem{danos2004ccsr}
+Danos, V., Krivine, J.: Reversible communicating systems. In: Gardner, P.,
+  Yoshida, N. (eds.) CONCUR 2004 - Concurrency Theory, Lecture Notes in
+  Computer Science, vol.~3170, pp. 292--307. Springer (2004)
+
+\bibitem{pmid19399430}
+Faeder, J.R., Blinov, M.L., Hlavacek, W.S.: {{R}ule-based modeling of
+  biochemical systems with {B}io{N}et{G}en}. Methods in Molecular Biology
+  \textbf{500},  113--167 (2009)
+
+\bibitem{biocham}
+Fages, F., Soliman, S., Chabrier-Rivier, N.: Modelling and querying interaction
+  networks in the biochemical abstract machine {BIOCHAM}. Journal of Biological
+  Physics and Chemistry  \textbf{4},  64--73 (2004)
+
+\bibitem{ACPBook}
+Fokkink, W.: Introduction to Process Algebra. Springer (2000)
+
+\bibitem{DBLP:journals/jsamas/HofestadtH94}
+Hofest{\"{a}}dt, R.: A {P}etri net application of metabolic processes. Journal
+  of System Analysis, Modeling and Simulation  \textbf{16},  113--122 (1994)
+
+\bibitem{DBLP:journals/isb/HofestadtT98}
+Hofest{\"{a}}dt, R., Thelen, S.: Quantitative modeling of biochemical networks.
+  In Silico Biology  \textbf{1}(1),  39--53 (1998)
+
+\bibitem{merevcomp2018}
+Kuhn, S.: Simulation of base excision repair in the calculus of covalent
+  bonding. In: Karri, J., Ulidowski, I. (eds.) Reversible Computation, 10th
+  International Conference, RC 2018, Lecture Notes in Computer Science, vol.
+  11106, pp. 123--129. Springer (2018)
+
+\bibitem{KU16}
+Kuhn, S., Ulidowski, I.: A calculus for local reversibility. In: Devitt, S.,
+  Lanese, I. (eds.) Reversible Computation, 8th International Conference, RC
+  2016, Lecture Notes in Computer Science, vol.~9720, pp. 20--35. Springer
+  (2016)
+
+\bibitem{KUHN201818}
+Kuhn, S., Ulidowski, I.: Local reversibility in a calculus of covalent bonding.
+  Science of Computer Programming  \textbf{151}(Supplement C),  18--47 (2018)
+
+\bibitem{Lanese_controllingreversibility}
+Lanese, I., Mezzina, C.A., Schmitt, A., Stefani, J.B.: Controlling
+  reversibility in higher-order pi. In: Katoen, J.P., K{\"o}nig, B. (eds.)
+  CONCUR 2011 - Concurrency Theory, Lecture Notes in Computer Science,
+  vol.~6901, pp. 297--311. Springer (2011)
+
+\bibitem{Lanese_controlled}
+Lanese, I., Mezzina, C.A., Stefani, J.B.: Controlled reversibility and
+  compensations. In: Gl{\"u}ck, R., Yokoyama, T. (eds.) Reversible Computation,
+  4th International Workshop, RC 2012, Lecture Notes in Computer Science,
+  vol.~7581, pp. 233--240. Springer (2013)
+
+\bibitem{LaneseMS10}
+Lanese, I., Mezzina, C.A., Stefani, J.B.: Reversing higher-order pi. In:
+  Gastin, P., Laroussinie, F. (eds.) CONCUR 2010 - Concurrency Theory. Lecture
+  Notes in Computer Science, vol.~6269, pp. 478--493. Springer (2010)
+
+\bibitem{DBLP:journals/nc/MatsunoNM11}
+Matsuno, H., Nagasaki, M., Miyano, S.: Hybrid {P}etri net based modeling for
+  biological pathway simulation. Natural Computing  \textbf{10}(3),  1099--1120
+  (2011)
+
+\bibitem{Milner1980}
+Milner, R.: A Calculus of Communicating Systems, Lecture Notes in Computer
+  Science, vol.~92. Springer (1980)
+
+\bibitem{DBLP:journals/jamia/PelegRA05}
+Peleg, M., Rubin, D.L., Altman, R.B.: Using {P}etri net tools to study
+  properties and dynamics of biological systems. {Journal of the American
+  Medical Informatics Association}  \textbf{12}(2),  181--199 (2005)
+
+\bibitem{RPNs}
+Philippou, A., Psara, K.: Reversible computation in petri nets. In: Kari, J.,
+  Ulidowski, I. (eds.) Reversible Computation - 10th International Conference,
+  {RC} 2018, Leicester, UK, September 12-14, 2018, Proceedings. Lecture Notes
+  in Computer Science, vol. 11106, pp. 84--101. Springer (2018)
+
+\bibitem{RC19}
+Philippou, A., Psara, K., Siljak, H.: Controlling reversibility in reversing
+  {P}etri nets with application to wireless communications. In: Thomsen, M.K.,
+  Soeken, M. (eds.) Reversible Computation - 11th International Conference,
+  {RC} 2019. Lecture Notes in Computer Science, vol. 11497, pp. 238--245.
+  Springer (2019)
+
+\bibitem{Irek2007}
+Phillips, I., Ulidowski, I.: Reversing algebraic process calculi. The Journal
+  of Logic and Algebraic Programming  \textbf{73}(1-2),  70--96 (2007)
+
+\bibitem{irekconcur2013}
+Phillips, I., Ulidowski, I.: Reversibility and asymmetric conflict in event
+  structures. In: D'Argenio, P.R., Melgratti, H. (eds.) CONCUR 2013 -
+  Concurrency Theory, Lecture Notes in Computer Science, vol.~8052, pp.
+  303--318. Springer (2013)
+
+\bibitem{Irek2013}
+Phillips, I., Ulidowski, I., Yuen, S.: Modelling of bonding with processes and
+  events. In: Dueck, G.W., Miller, D.M. (eds.) Reversible Computation, 5th
+  International Conference, RC 2013, Lecture Notes in Computer Science,
+  vol.~7948, pp. 141--154. Springer (2013)
+
+\bibitem{Irek2012}
+Phillips, I., Ulidowski, I., Yuen, S.: A reversible process calculus and the
+  modelling of the {ERK} signalling pathway. In: Gl{\"u}ck, R., Yokoyama, T.
+  (eds.) Reversible Computation, 4th International Workshop, RC 2012, Lecture
+  Notes in Computer Science, vol.~7581, pp. 218--232. Springer (2013)
+
+\bibitem{DBLP:journals/fuin/Popova-ZeugmannHK05}
+Popova{-}Zeugmann, L., Heiner, M., Koch, I.: Time {P}etri nets for modelling
+  and analysis of biochemical networks. Fundamenta Informaticae
+  \textbf{67}(1-3),  149--162 (2005)
+
+\bibitem{PriamiStochasticPi}
+Priami, C.: Stochastic $\pi$-calculus. The Computer Journal  \textbf{38}(7),
+  578--589 (1995)
+
+\bibitem{betabinders}
+Priami, C., Quaglia, P.: Beta binders for biological interactions. In: Danos,
+  V., Schachter, V. (eds.) Computational Methods in Systems Biology. pp.
+  20--33. Springer (2005)
+
+\bibitem{DBLP:conf/ismb/ReddyML93}
+Reddy, V.N., Mavrovouniotis, M.L., Liebman, M.N.: Petri net representations in
+  metabolic pathways. In: Proceedings of the 1st International Conference on
+  Intelligent Systems for Molecular Biology. pp. 328--336. {AAAI} (1993)
+
+\bibitem{RegevBioambients}
+Regev, A., Panina, E.M., Silverman, W., Cardelli, L., Shapiro, E.: Bioambients:
+  an abstraction for biological compartments. Theoretical Computer Science
+  \textbf{325}(1),  141--167 (2004)
+
+\bibitem{Regev2004}
+Regev, A., Shapiro, E.: The $\pi$-calculus as an abstraction for biomolecular
+  systems. In: Ciobanu, G., Rozenberg, G. (eds.) Modelling in Molecular
+  Biology. pp. 219--266. Springer (2004)
+
+\bibitem{PNs}
+Reisig, W.: Understanding Petri Nets - Modeling Techniques, Analysis Methods,
+  Case Studies. Springer (2013)
+
+\bibitem{Uli92}
+Ulidowski, I.: Equivalences on observable processes. In: Proceedings of the 7th
+  Annual IEEE Symposium on Logic in Computer Science. pp. 148--159. IEEE (1992)
+
+\bibitem{irekNGC2018}
+Ulidowski, I., Phillips, I., Yuen, S.: Reversing event structures. New
+  Generation Comput.  \textbf{36}(3),  281--306 (2018)
+
+\bibitem{DBLP:journals/isb/VossHK03}
+Voss, K., Heiner, M., Koch, I.: Steady state analysis of metabolic pathways
+  using {P}etri nets. In Silico Biology  \textbf{3}(3),  367--387 (2003)
+
+\end{thebibliography}
 \bibliographystyle{splncs04}
 
 \end{document}
