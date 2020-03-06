@@ -332,7 +332,7 @@ briefly discuss software support for the three formalisms. Finally, Section~\ref
 
 We consider a chemical reaction that transfers a hydrogen atom between two water molecules. This
 reaction is known as the \emph{autoprotolysis of water} and is shown 
-in Fig.~\ref{fig:autoprotolysis}. There, $O$ indicates an oxygen atom and $H$ a hydrogen atom. The lines indicate bonds. Positive and negative charges on atoms are shown by $\oplus$ and $\ominus$
+in Figure~\ref{fig:autoprotolysis}. There, $O$ indicates an oxygen atom and $H$ a hydrogen atom. The lines indicate bonds. Positive and negative charges on atoms are shown by $\oplus$ and $\ominus$
 respectively. The meaning of the curved arrows and the dots will be explained in the next paragraphs.
 The reaction is reversible and it takes place at a relatively 
 low rate, making pure water slightly conductive. We have chosen this reaction 
@@ -348,7 +348,7 @@ interesting aspects to be represented.
 
 To model the reaction we need to understand why it takes place and what causes it.
 The main reason is that the oxygen in the water molecule is \emph{nucleophilic}, meaning it has the tendency to bond to another atomic nucleus, which would serve as an \emph{electrophile}. This is because oxygen has a high 
-electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell, which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pairs} of two electrons each, which can form new bonds (lone pairs are shown in Fig.~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
+electro-negativity, therefore it attracts electrons and has an abundance of electrons around it. The electrons around the atomic nucleus are arranged on electron shells, where only those in the outer shell participate in bonding. Oxygen has four electrons in its outer shell, which are not involved in the initial bonding with hydrogen atoms. These electrons form two \emph{lone pairs} of two electrons each, which can form new bonds (lone pairs are shown in Figure~\ref{fig:autoprotolysis} by pairs of dots). All this makes oxygen nucleophilic: it tends to connect 
 to other atomic nuclei by forming bonds from its lone pairs. Since oxygen attracts electrons, the hydrogen atoms in water
 have a positive partial charge and oxygen has a negative partial 
 charge. 
@@ -356,14 +356,14 @@ charge.
 The reaction starts when an oxygen in one water molecule is attracted by a hydrogen in another 
 water molecule due to their opposite charges. This results in a \emph{hydrogen bond}. 
 This bond is formed out of 
-the electrons of one of the lone pairs of the oxygen. The large curved arrow in Fig.~\ref{fig:autoprotolysis} indicates the movements of the electrons. Since a hydrogen atom cannot have more 
+the electrons of one of the lone pairs of the oxygen. The large curved arrow in Figure~\ref{fig:autoprotolysis} indicates the movements of the electrons. Since a hydrogen atom cannot have more 
 than one bond, 
 the creation of a new bond is compensated by breaking the existing hydrogen-oxygen bond (indicated by the small curved arrow). When this happens, the two electrons, which formed the original hydrogen-oxygen bond, remain with the oxygen. Since a hydrogen contains %consists of 
 one electron and one proton, it is only the proton that is transferred, so the process can be called a proton transfer as well as a hydrogen transfer. The forming of the new bond and the breaking of the old bond are \emph{concerted}, meaning that %namely
 they happen together without a stable 
 intermediate configuration. As a result we have reached the state where one oxygen atom
 has three bonds to hydrogen atoms and is positively charged, represented on the right side of the reaction in %of
- Fig.~\ref{fig:autoprotolysis}. This molecule is called \emph{hydronium} and is written as $\mathrm{H_3O^+}$. The other oxygen atom bonds to only one hydrogen and is negatively charged, having an 
+ Figure~\ref{fig:autoprotolysis}. This molecule is called \emph{hydronium} and is written as $\mathrm{H_3O^+}$. The other oxygen atom bonds to only one hydrogen and is negatively charged, having an 
 electron in surplus. This molecule is called a \emph{hydroxide} and is written as $\mathrm{OH^-}$. 
 
 Note that the reaction is reversible: the oxygen that lost a hydrogen can 
@@ -371,7 +371,7 @@ pull back one of the hydrogens from the other molecule, the  $\mathrm{H_3O^+}$ m
 charged oxygen is a strong nucleophile and the hydrogens in the $\mathrm{H_3O^+}$ molecule are 
 all positively charged. Thus, any of~the hydrogens 
 can be removed, making both oxygens formally uncharged, and restoring the two water 
-molecules. In Fig.~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are corresponding
+molecules. In Figure~\ref{fig:autoprotolysis} the curved arrows are given for the reaction going from left to right. Since the reaction is reversible (indicated by the double arrow) there are corresponding
 electron movements when going from right to left. These are not given in line with usual conventions, but can be~inferred.
 
 In this simple reaction, the forward and the reverse step consist of two steps each. The breaking of the old and the forming of the new bond occur simultaneously. This means that there is no strict causality of actions, since none of them can be called the cause of the overall reaction. Furthermore, the reverse step can be done with a different atom to the one used during the forward step because each of the molecules are in a sense identical and in practice there does not exist a single ``reverse'' path corresponding to a forward one.%it is difficult to identify a  clear forward and reverse path. 
@@ -429,7 +429,7 @@ a single action, then the action is a strong action and the operator
 is the prefixing operator of CCS \cite{Milner1980}.
 We omit trailing $\Nil$s so, for example, $(s).\Nil$ is written as $(s)$. The new feature of the operator $(s;b).P$ is the execution of the weak action $b$, which
 can happen only after all the actions in $s$ have taken place. Performing $b$ then forces
-undoing one of the past actions in $s$ (by the \rulename{concert} rule in Fig.~\ref{fig:csos}). 
+undoing one of the past actions in $s$ (by the \rulename{concert} rule in Figure~\ref{fig:csos}). 
 If a $(s;b)$ operator is followed by another sequence of actions, where all actions in $s$ have already taken place, then there is a non-deterministic choice of either doing $b$ or progressing 
 to the next sequence of actions (see \rulename{act1} and \rulename{act2}).
 
@@ -445,7 +445,7 @@ the synchronisation algebra used, it also blocks communication. If $\gamma(a,b)=
 cannot communicate in $(a.P\paral b.Q)\setminus c$.
 
 The set $\Proc$ of \emph{process terms} is ranged over by $P,Q$ and $R$. 
-In the setting of CCB these terms are simply called \emph{processes}. We define the semantics of our calculus using SOS rules (Figures~\ref{fig:fsos}--\ref{fig:csos}) and rewrite rules (Fig.~\ref{fig:reduction}).
+In the setting of CCB these terms are simply called \emph{processes}. We define the semantics of our calculus using SOS rules (Figures~\ref{fig:fsos}--\ref{fig:csos}) and rewrite rules (Figure~\ref{fig:reduction}).
 
 We use some predicates and functions, which are formally defined in \cite{KUHN201818}. Informally, a process $P$ is standard, written $\std{P}$, if it contains no past actions (hence no keys). A key $n$ is fresh in $Q$, written $\freshpred{n}(Q)$, if $Q$ contains no past action with the key $n$. Function $\mathsf{k}$ returns the keys in a sequence of actions, 
 whereas $\mathsf{keys}$ returns the keys in a process, and $\mathsf{fn}$ gives the actions of a process 
@@ -616,7 +616,7 @@ Recall that $t \in \mAK^*$, and $b \in \mathcal{WA}$.} \label{fig:csos}
 \label{fig:reduction}
 \end{figure}
 
-Next, we recall the main new rewrite rules for a reduction relation for CCB in Fig.~\ref{fig:reduction}.
+Next, we recall the main new rewrite rules for a reduction relation for CCB in Figure~\ref{fig:reduction}.
 All the rules can be found in~\cite{KU16,KUHN201818} but here we only give rules for {\em promotion} 
 of actions. These are \rulename{prom}, \rulename{move-r}, and \rulename{move-l} which  
 promote weak bonds (here~$b$) to strong bonds (here $a$).
@@ -661,7 +661,7 @@ by the following process, where the key $1$ shows that $h_1$ of $H_1$ has bonded
 $o_1$ of $O_1$ (correspondingly for key $2$). The restriction $\setminus\{h_1,h_2,o_1,o_2\} $ ensures that these actions cannot happen on their own, but only together with their partners, forming a bond.
 $$ ((h_1[1];p).H'_1 \paral (h_2[2];p).H'_2 \paral (o_1[1],o_2[2],n).O'_1)
   \setminus\{h_1,h_2,o_1,o_2\} $$
-The system of two water molecules in Fig.~\ref{fig:autoprotolysis} is represented 
+The system of two water molecules in Figure~\ref{fig:autoprotolysis} is represented 
 by the parallel composition of two water processes, where the restriction $\setminus\{n,p\}$ represses actions $n,p$ from taking place separately
 by forcing them to combine into bonds (according to $\gamma$).
 %
@@ -693,7 +693,7 @@ almost simultaneously so we represent them as a pair of \emph{concerted actions}
 (\boldsymbol{h_3};p\boldsymbol{[5]}).H'_3 &&\\
 &\paral (h_4[4];p).H'_4  \paral (\boldsymbol{o_3},o_4[4],n).O'_2&&
 \end{flalign*}
-We have now arrived at the state on the right hand side in Fig.~\ref{fig:autoprotolysis}.
+We have now arrived at the state on the right hand side in Figure~\ref{fig:autoprotolysis}.
 There are weak bonds between $n$ and $p$ (denoted by key $5$) and \emph{strong} bonds between $h_i$ and $o_j$ for
 all appropriate $i,j$. Since $H_3$ is weakly bonded to $O_1$ and its strong capability 
 $h_3$ has become available, the bond $5$ gets promoted to the stronger bond, releasing 
@@ -751,7 +751,7 @@ illustrate its expressiveness by modelling the autoprotolysis of water.
 
 The abstraction ``processes as interactions'' from process calculi is used in the Bonding Calculus, but processes are not able to communicate values in order to interact. Just like in the BNGL \cite{pmid19399430}, the Bonding Calculus allows the use of molecule sites having the same name, while this is not possible in the $\kappa$-calculus. While the $\kappa$-calculus describes molecules as a set of sites and uses rules to manipulate these sites between two or more molecules, in the  Bonding Calculus a molecule is described by the sequence of operations it can perform on its sites (including also non-deterministic choices), regardless of the form of the other molecules. This allows to use the compositionality of the process calculus.
 
-The syntax of the Bonding Calculus syntax is presented in Fig.~\ref{table:syntax}. 
+The syntax of the Bonding Calculus syntax is presented in Figure~\ref{table:syntax}. 
 Let us consider the set~$\mathbb{N}$ of natural numbers, the set 
 $\mN=\{x,x^+,x^-,\dots\}$ of bond names, the set $\mM=\{a,b,\dots\}$ of 
 molecules and the set $\mP=\{P,Q,\ldots\}$ of processes. A multiset over 
@@ -889,7 +889,7 @@ Q)\ || \ L  \xrightarrow{} Q\ || \ L}$\\[10pt]
 \vspace{-4ex}
 \end{figure}
 
-The operational semantics of the Bonding Calculus is given in Fig.~\ref{table:semantics}. The rules {\sf (CREATE1)} and {\sf (CREATE2)} describe the creation of a 
+The operational semantics of the Bonding Calculus is given in Figure~\ref{table:semantics}. The rules {\sf (CREATE1)} and {\sf (CREATE2)} describe the creation of a 
 new bond $\{a-^x b\}$, while the rules {\sf (REMOVE1)} and {\sf (REMOVE2)} 
 describe the breaking of a bond $\{a-^x b\}$. If there exist two bonds 
 $\{a-^x b\}$ in~$L$, then any of these bonds is broken. The rule 
@@ -1252,7 +1252,7 @@ by the incoming arcs of the transition, with bonds created and destructed accord
 
 
 \noindent
-\textbf{The autoprotolysis of water in RPNs } Fig.~\ref{RPNmodel} shows the graphical representation of the forming of a water molecule as a RPN.
+\textbf{The autoprotolysis of water in RPNs } Figure~\ref{RPNmodel} shows the graphical representation of the forming of a water molecule as a RPN.
 In this model, we assume two token types, $H$ for hydrogen
 and $O$ for oxygen. They are instantiated via four token instances of $H$ ($H_1$, $H_2$, $H_3$, and $H_4$) and two token instances of
 $O$, ($O_1$ and $O_2$). The net consists of five places and three transitions and the edges between
@@ -1277,7 +1277,7 @@ The reversibility semantics of RPNs ensures that  reversing the transition $t_3$
 of  two water molecules placed at $y$, while the use of variables allows the formation of water molecules consisting
 of different bonds between the hydrogen and oxygen instances. 
 
-The first net in Fig.~\ref{execution}  shows the system after the execution of transition $t_1$ with enabling assignment $U(h)=H_1$, $U(o)=O_1$. Note
+The first net in Figure~\ref{execution}  shows the system after the execution of transition $t_1$ with enabling assignment $U(h)=H_1$, $U(o)=O_1$. Note
 that the term $[1]$ written over transition $t_1$ captures that at this point $H(t_1)=1$ 
 since the transition has been executed once.
 This notation is generally used for histories in the graphical representation with occasional
